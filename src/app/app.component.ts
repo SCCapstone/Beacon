@@ -3,26 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-
-
-/**
-**  This is where we will call each individual components to show up on the page.
-**                             ** NOTICE: ** 
-**  Each Component (componets here refers to the pages ) should be 
-**  imported to the app.
-**/
-
-
-//Homepage
 import { HomePage } from '../pages/home/home';
-//Import List Page
 import { ListPage } from '../pages/list/list';
-//Import Create Page
-import { CreatePage } from '../pages/create/create';
-//Import Edit Profile Page
-import { EditPage } from '../pages/edit/edit';
-//Import View Page
-import { ViewPage } from '../pages/view/view';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +14,6 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
@@ -41,12 +22,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Create Page', component: CreatePage },
-      { title: 'Edit Profile', component: EditPage },
-      { title: 'View Posts', component: ViewPage },
-
-
+      { title: 'List', component: ListPage }
     ];
 
   }
