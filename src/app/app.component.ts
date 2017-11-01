@@ -1,169 +1,68 @@
 import { Component, ViewChild } from '@angular/core';
-
-import { Events, MenuController, Nav, Platform } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { Storage } from '@ionic/storage';
 
-import { AboutPage } from '../pages/about/about';
-import { AccountPage } from '../pages/account/account';
-import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
-import { TabsPage } from '../pages/tabs-page/tabs-page';
-import { TutorialPage } from '../pages/tutorial/tutorial';
-import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
-import { SupportPage } from '../pages/support/support';
 
-import { ConferenceData } from '../providers/conference-data';
-import { UserData } from '../providers/user-data';
+/**
+**  This is where we will call each individual components to show up on the page.
+**                             ** NOTICE: ** 
+**  Each Component (componets here refers to the pages ) should be 
+**  imported to the app.
+**/
 
-export interface PageInterface {
-  title: string;
-  name: string;
-  component: any;
-  icon: string;
-  logsOut?: boolean;
-  index?: number;
-  tabName?: string;
-  tabComponent?: any;
-}
+
+//Homepage
+import { HomePage } from '../pages/home/home';
+//Import List Page
+import { ListPage } from '../pages/list/list';
+//Import Create Page
+import { CreatePage } from '../pages/create/create';
+//Import Edit Profile Page
+import { EditPage } from '../pages/edit/edit';
+//Import View Page
+import { ViewPage } from '../pages/view/view';
 
 @Component({
-  templateUrl: 'app.template.html'
+  templateUrl: 'app.html'
 })
-export class ConferenceApp {
-  // the root nav is a child of the root app component
-  // @ViewChild(Nav) gets a reference to the app's root nav
+export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // List of pages that can be navigated to from the left menu
-  // the left menu only works after login
-  // the login page disables the left menu
-  appPages: PageInterface[] = [
-    { title: 'Feed', name: 'TabsPage', component: TabsPage, tabComponent: SchedulePage, index: 0, icon: 'calendar' },
-    { title: 'Speakers', name: 'TabsPage', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-    { title: 'Map', name: 'TabsPage', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', name: 'TabsPage', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
-  ];
-  loggedInPages: PageInterface[] = [
-    { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
-    { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true }
-  ];
-  loggedOutPages: PageInterface[] = [
-    { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
-    { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
-  ];
-  rootPage: any;
+  rootPage: any = HomePage;
 
-  constructor(
-    public events: Events,
-    public userData: UserData,
-    public menu: MenuController,
-    public platform: Platform,
-    public confData: ConferenceData,
-    public storage: Storage,
-    public splashScreen: SplashScreen
-  ) {
 
-    // Check if the user has already seen the tutorial
-    this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
-        } else {
-          this.rootPage = TutorialPage;
-        }
-        this.platformReady()
-      });
+  pages: Array<{title: string, component: any}>;
 
-    // load the conference data
-    confData.load();
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeApp();
 
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
-    this.enableMenu(true);
+    // used for an example of ngFor and navigation
+    this.pages = [
+      { title: 'Home', component: HomePage },
+      { title: 'List', component: ListPage },
+      { title: 'Create Page', component: CreatePage },
+      { title: 'Edit Profile', component: EditPage },
+      { title: 'View Posts', component: ViewPage },
 
-    this.listenToLoginEvents();
+
+    ];
+
   }
 
-  openPage(page: PageInterface) {
-    let params = {};
-
-    // the nav component was found using @ViewChild(Nav)
-    // setRoot on the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
-    if (page.index) {
-      params = { tabIndex: page.index };
-    }
-
-    // If we are already on tabs just change the selected tab
-    // don't setRoot again, this maintains the history stack of the
-    // tabs even if changing them from the menu
-    if (this.nav.getActiveChildNavs().length && page.index != undefined) {
-      this.nav.getActiveChildNavs()[0].select(page.index);
-    } else {
-      // Set the root of the nav with params if it's a tab index
-      this.nav.setRoot(page.name, params).catch((err: any) => {
-        console.log(`Didn't set nav root: ${err}`);
-      });
-    }
-
-    if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
-      this.userData.logout();
-    }
-  }
-
-  openTutorial() {
-    this.nav.setRoot(TutorialPage);
-  }
-
-  listenToLoginEvents() {
-    this.events.subscribe('user:login', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:signup', () => {
-      this.enableMenu(true);
-    });
-
-    this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
-    });
-  }
-
-  enableMenu(loggedIn: boolean) {
-    this.menu.enable(loggedIn, 'loggedInMenu');
-    this.menu.enable(!loggedIn, 'loggedOutMenu');
-  }
-
-  platformReady() {
-    // Call any initial plugins when ready
+  initializeApp() {
     this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  isActive(page: PageInterface) {
-    let childNav = this.nav.getActiveChildNavs()[0];
-
-    // Tabs are a special case because they have their own navigation
-    if (childNav) {
-      if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
-      }
-      return;
-    }
-
-    if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-      return 'primary';
-    }
-    return;
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.nav.setRoot(page.component);
   }
 }
