@@ -24,10 +24,11 @@ $ ionic cordova run ios
 
 Substitute ios for android if not on a Mac.
 
+## Firebaseβ
 
 This is the Ionic Documentation for adding Firebase as a Database provider. It seems like there are some issues that still havent been figure out. It says its in Beta Stage. 
 
-Firebaseβ
+
 Improve this doc
 
 This plugin is still in beta stage and may not work as expected. Please submit any issues to the plugin repo.
