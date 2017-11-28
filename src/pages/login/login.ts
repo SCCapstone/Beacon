@@ -1,36 +1,25 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { NavController } from 'ionic-angular';
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
-import { UserData } from '../../providers/user-data';
-
-import { UserOptions } from '../../interfaces/user-options';
-
-import { TabsPage } from '../tabs-page/tabs-page';
-import { SignupPage } from '../signup/signup';
-
-
+@IonicPage()
 @Component({
-  selector: 'page-user',
-  templateUrl: 'login.html'
+  selector: 'page-login',
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
-  submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData) { }
-
-  onLogin(form: NgForm) {
-    this.submitted = true;
-
-    if (form.valid) {
-      this.userData.login(this.login.username);
-      this.navCtrl.push(TabsPage);
-    }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  onSignup() {
-    this.navCtrl.push(SignupPage);
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
   }
+
 }
