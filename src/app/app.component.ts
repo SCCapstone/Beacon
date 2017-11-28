@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
+import { FeedPage } from '../pages/feed/feed'; // added by Ryan
+
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +28,8 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
       {title: 'Login', component: LoginPage }, // added by Amanda- trying to add login page to side menu
-      {title: 'Organization Profile', component: OrgProfilePage } // added by Amanda
+      {title: 'Organization Profile', component: OrgProfilePage }, // added by Amanda
+      {title: 'Beacon Feed', component: FeedPage } // added by Ryan
     ];
 
   }
