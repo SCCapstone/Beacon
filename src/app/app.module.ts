@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login'; // added by Amanda
+import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,7 +17,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    LoginPage //addded by Amanda
+    LoginPage, //addded by Amanda
+    OrgProfilePage //added by Amanda
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     ListPage,
-    LoginPage //added by Amanda
+    LoginPage, //added by Amanda
+    OrgProfilePage //added by Amanda
   ],
   providers: [
     StatusBar,
