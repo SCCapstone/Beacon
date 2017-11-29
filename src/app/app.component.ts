@@ -13,7 +13,7 @@ import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp { //this is template for the root component that is set in module.ts
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
@@ -30,6 +30,7 @@ export class MyApp {
       {title: 'Login', component: LoginPage }, // added by Amanda- trying to add login page to side menu
       {title: 'Organization Profile', component: OrgProfilePage }, // added by Amanda
       {title: 'Beacon Feed', component: FeedPage } // added by Ryan
+      
     ];
 
   }
@@ -43,7 +44,7 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
+  openPage(page) { //used in app.html's menu
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
