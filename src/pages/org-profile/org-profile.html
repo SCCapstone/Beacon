@@ -55,8 +55,8 @@
     <ion-input type="password" placeholder="enter text here"></ion-input>
   </ion-item>
 
-<button ion-button round>Submit</button>
+<button ion-button round [navPush]="listPage">Submit</button>
 
-<button ion-button round>Cancle</button>
+<button ion-button round [navPush]="homePage">Cancel</button>
 
 </ion-content>
