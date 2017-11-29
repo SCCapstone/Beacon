@@ -78,7 +78,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/home/home.html"*/'<ion-content padding>\n  <h3>Welcome to Beacon</h3>\n\n  <p>\n    This app is for emergency situations.\n  </p>\n  \n  <button [navPush]="loginPage">Login</button>\n  \n  <button [navPush]="orgProfile">Signup</button>\n  \n  \n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/home/home.html"*/'<ion-content padding>\n  <h3>Welcome to Beacon</h3>\n\n  <p>\n    This app is for emergency situations.\n  </p>\n  \n  <button ion-button round [navPush]="loginPage">Login</button>\n  \n  <button ion-button round [navPush]="orgProfile">Signup</button>\n  \n  \n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
 ], HomePage);
