@@ -21,7 +21,7 @@ export class ListPage {
  
   loadMap(){
  
-    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+    let latLng = new google.maps.LatLng(34.007,-81.0348);
  
     let mapOptions = {
       center: latLng,

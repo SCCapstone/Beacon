@@ -294,7 +294,7 @@ var ListPage = (function () {
         this.loadMap();
     };
     ListPage.prototype.loadMap = function () {
-        var latLng = new google.maps.LatLng(-34.9290, 138.6010);
+        var latLng = new google.maps.LatLng(34.007, -81.0348);
         var mapOptions = {
             center: latLng,
             zoom: 15,
