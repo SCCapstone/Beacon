@@ -25679,6 +25679,15 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.ios page-list .scroll, .md page-list .scroll {
+  height: 100%;
+}
+
+.ios page-list #map, .md page-list #map {
+  width: 100%;
+  height: 100%;
+}
+
 page-login .invalid {
   border-bottom: 1px solid #FF6153;
 }

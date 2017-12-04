@@ -48,7 +48,7 @@ var MyApp = /** @class */ (function () {
         this.pages = [
             { title: 'Home', component: HomePage },
             { title: 'List', component: ListPage },
-            { title: 'Login', component: LoginPage },
+            { title: 'Map', component: LoginPage },
             { title: 'Organization Profile', component: OrgProfilePage },
             { title: 'Beacon Feed', component: FeedPage } // added by Ryan
         ];
