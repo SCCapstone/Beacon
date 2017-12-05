@@ -10,7 +10,12 @@ and linking between pages.
 You can also test right in the simulator using the cordova commands from the previous chapter. For example, to test in the iOS simulator, run:
 
 $ ionic cordova build ios
+
 $ ionic cordova emulate ios
+
+![alt text](https://raw.githubusercontent.com/SCCapstone/Beacon/master/Screen%20Shot%202017-12-05%20at%208.47.23%20AM.png?token=AWYG4rDGwnpEtWJGUJbs1TRRzVJP9be-ks5aMA7LwA%3D%3D)
+
+
 
 ## Angularfire2
 
