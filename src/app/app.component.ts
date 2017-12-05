@@ -76,7 +76,7 @@ this.pages = [
   { title: 'Home', component: HomePage },
 
   //Homepage List Link
-  { title: 'List', component: ListPage },
+  { title: 'Map', component: ListPage },
 
   ////Homepage Organization Profile Link
   {title: 'Organization Profile', component: OrgProfilePage },
