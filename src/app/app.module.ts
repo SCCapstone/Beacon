@@ -7,23 +7,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-<<<<<<< HEAD
 import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
-=======
-import { OrgProfilePage } from '../pages/org-profile/org-profile';
-import { FeedPage } from '../pages/feed/feed';
+
 
 import { AuthProvider } from '../providers/auth/auth';
->>>>>>> master
+
 
  // Initialize Firebase
   var config = {

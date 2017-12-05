@@ -22,8 +22,9 @@ postContent
 arrData = []
 
 
-
+//
   constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase) {
+  	//
   	this.fdb.list("/posts/").valueChanges().subscribe(_data => {
 		this.arrData = _data;
 

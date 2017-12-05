@@ -49,18 +49,9 @@ export class MyApp { //this is template for the root component that is set in mo
 //added this
  pages: Array<{title: string, component: any}>;
 
-
+ public zone:NgZone;
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      {title: 'Login', component: LoginPage }, // added by Amanda- trying to add login page to side menu
-      {title: 'Organization Profile', component: OrgProfilePage }, // added by Amanda
-      {title: 'Beacon Feed', component: FeedPage }, // added by Ryan
-      {title: 'Create Post', component: CreatePostPage } 
-    ];
-
-  public zone:NgZone;
+    
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
