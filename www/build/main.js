@@ -228,11 +228,11 @@ webpackEmptyAsyncContext.id = 150;
 
 var map = {
 	"../pages/feed/feed.module": [
-		426,
+		427,
 		5
 	],
 	"../pages/login/login.module": [
-		427,
+		426,
 		2
 	],
 	"../pages/org-profile/org-profile.module": [
@@ -289,18 +289,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ListPage = (function () {
     function ListPage(navCtrl) {
         this.navCtrl = navCtrl;
+        this.name = "";
     }
     ListPage.prototype.ionViewDidLoad = function () {
-        this.loadMap();
+        this.initializeMap();
     };
-    ListPage.prototype.loadMap = function () {
-        var latLng = new google.maps.LatLng(34.007, -81.0348);
+    ListPage.prototype.initializeMap = function () {
+        var letLng = new google.maps.LatLng(34.007, -81.034);
         var mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            center: letLng,
+            zoom: 7,
+            mapTypeId: google.maps.MapTypeId.HYBRID
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+        this.addMarker();
+    };
+    ListPage.prototype.addMarker = function () {
+        var marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: { lat: 34.007, lng: -81.034 },
+            title: 'Hospital'
+        });
+        var content = "<h1>Hospital</h1>";
+        this.addInfoWindow(marker, content);
+    };
+    ListPage.prototype.addInfoWindow = function (marker, content) {
+        var _this = this;
+        var infoWindow = new google.maps.InfoWindow({
+            content: content
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            _this.name = marker.title;
+            infoWindow.open(_this.map, marker);
+        });
     };
     return ListPage;
 }());
@@ -384,8 +406,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/org-profile/org-profile.module#OrgProfilePageModule', name: 'OrgProfilePage', segment: 'org-profile', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
