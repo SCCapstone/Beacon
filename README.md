@@ -7,7 +7,7 @@ Login authentication using firebase, reset password option, signup option,
 and linking between pages.
 
 ## Simulator testing
-You can also test right in the simulator using the cordova commands from the previous chapter. For example, to test in the iOS simulator, run:
+To test in the iOS simulator, run:
 
 $ ionic cordova build ios
 
