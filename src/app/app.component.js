@@ -47,7 +47,7 @@ var MyApp = /** @class */ (function () {
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Home', component: HomePage },
-            { title: 'List', component: ListPage },
+            { title: 'Map', component: ListPage },
             { title: 'Login', component: LoginPage },
             { title: 'Organization Profile', component: OrgProfilePage },
             { title: 'Beacon Feed', component: FeedPage } // added by Ryan
