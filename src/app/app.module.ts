@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+<<<<<<< HEAD
 import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
@@ -15,6 +18,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
+=======
+import { OrgProfilePage } from '../pages/org-profile/org-profile';
+import { FeedPage } from '../pages/feed/feed';
+
+import { AuthProvider } from '../providers/auth/auth';
+>>>>>>> master
 
  // Initialize Firebase
   var config = {
@@ -38,7 +47,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
     FeedPage,
     CreatePostPage //added by Ryan
   ],
-  imports: [
+    imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
@@ -57,7 +66,8 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}

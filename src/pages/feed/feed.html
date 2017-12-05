@@ -7,7 +7,8 @@
 
 <ion-header>
 
-  <ion-navbar>
+<ion-navbar color="red">
+
   	 <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -19,6 +20,7 @@
 
 <ion-content padding>
 
+
 	<h1 align="center"> Beacon Feed 
   <button (click) = "btnCreateClicked()" ion-button outline icon-only>
       <ion-icon name='create' is-active="false"></ion-icon>
@@ -29,14 +31,21 @@
   <ion-item>
     <ion-avatar item-start>
       <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image"> 
+	<h1 align="center"> Beacon Feed </h1>
+<ion-card>
+
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image">
     </ion-avatar>
     <h2>Marty McFly</h2>
     <p>November 5, 1955</p>
   </ion-item>
 
+  <ion-icon name="cafe" item-start></ion-icon>
+
   <ion-card-content>
     <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-
   </ion-card-content>
 
   <ion-row>
@@ -60,6 +69,9 @@
   </ion-row>
 
 </ion-card>
+
+<ion-card>
+
 
 
 

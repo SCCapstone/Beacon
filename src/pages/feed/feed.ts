@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
 import { CreatePostPage } from '../create-post/create-post';
 
+
 /**
  * Generated class for the FeedPage page.
  *
@@ -16,6 +17,7 @@ import { CreatePostPage } from '../create-post/create-post';
   templateUrl: 'feed.html',
 })
 export class FeedPage {
+
   
 
 //firebase
@@ -40,7 +42,6 @@ btnCreateClicked(){
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedPage');
-
   }
 
 }

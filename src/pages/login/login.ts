@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { FeedPage } from '../feed/feed';
 /**
  * Generated class for the LoginPage page.
@@ -9,23 +7,83 @@ import { FeedPage } from '../feed/feed';
  * Ionic pages and navigation.
  */
 
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Loading,
+  LoadingController,
+  AlertController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as firebase from 'firebase';
+import {AngularFireDatabase} from 'angularfire2/database';
+import { HomePage } from '../home/home';
+import { AuthProvider } from '../../providers/auth/auth';
+import { EmailValidator } from '../../validators/email';
+
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
   feedPage = FeedPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+
+  public loginForm:FormGroup;
+
+
+  public loading:Loading;
+
+
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController, public formBuilder: FormBuilder,
+    public authProvider: AuthProvider) {
+
+    this.loginForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  loginUser(){
+    if (!this.loginForm.valid){
+      console.log(this.loginForm.value);
+    } else {
+      this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+      .then( authData => {
+        this.loading.dismiss().then( () => {
+          this.navCtrl.setRoot(HomePage);
+        });
+      }, error => {
+        this.loading.dismiss().then( () => {
+          let alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
+
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
+    }
   }
 
-btnAddClicked(){
-	//this.fdb.list("/myItems/").push(this.myInput);//pushing data to database
-	this.navCtrl.setRoot(FeedPage);//sets the root page to list page, ryan
-}
+  goToSignup(){
+    this.navCtrl.push('SignupPage');
+
+  }
+
+  goToResetPassword(){
+    this.navCtrl.push('PasswordResetPage');
+  }
+
 
 }
