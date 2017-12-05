@@ -8,7 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
-
+import { CreatePostPage } from '../pages/create-post/create-post';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +35,8 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
     ListPage,
     LoginPage, //addded by Amanda
     OrgProfilePage, //added by Amanda
-    FeedPage, //added by Ryan
+    FeedPage,
+    CreatePostPage //added by Ryan
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,8 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
     ListPage,
     LoginPage, //added by Amanda
     OrgProfilePage, //added by Amanda
-    FeedPage, //added by Ryan
+    FeedPage,
+    CreatePostPage //added by Ryan
   ],
   providers: [
     StatusBar,
