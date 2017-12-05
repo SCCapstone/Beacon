@@ -6,6 +6,12 @@ Test and working, this version of Beacon includes:
 Login authentication using firebase, reset password option, signup option,
 and linking between pages.
 
+## Simulator testing
+You can also test right in the simulator using the cordova commands from the previous chapter. For example, to test in the iOS simulator, run:
+
+$ ionic cordova build ios
+$ ionic cordova emulate ios
+
 ## Angularfire2
 
 If you run into some ionic/firebase dependency issues try:
