@@ -37,7 +37,8 @@
     "rxjs": "5.4.3",
     "sass-fonts": "^1.0.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-sms-plugin": "~0.1.11"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
