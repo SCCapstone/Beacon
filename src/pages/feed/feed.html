@@ -1,12 +1,11 @@
 <!--
-  Generated template for the FeedPage page.
+  Created by Ryan Roe for Beacon Capstone Project
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 
 <ion-header>
-
 <ion-navbar color="red">
 
   	 <button ion-button menuToggle>
@@ -14,7 +13,6 @@
     </button>
     <ion-title>Feed</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -27,22 +25,33 @@
     </button>
   </h1>
 
-<ion-card>
-  <ion-item>
+
+
+   
+
+
+
+ <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
+  <ion-card>
+<!--html template for the title, username, avatar, and date-->
+     <ion-item>
     <ion-avatar item-start>
       <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image">
     </ion-avatar>
-    <h2>Marty McFly</h2>
+    <h2> {{item.title}}</h2>
+    <h2>Marty McFly
+    </h2>
     <p>November 5, 1955</p>
   </ion-item>
+<!--creates the card content using two way data linking for an async for loop-->
+    <ion-card-content>
 
-  <ion-icon name="cafe" item-start></ion-icon>
-
-  <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-  </ion-card-content>
-
-  <ion-row>
+      <a href="#">{{item.name}}</a>
+      
+      <p>{{item.message}}</p>
+    </ion-card-content>
+<!--Creates the likes, comments, and time since post-->
+    <ion-row>
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
@@ -62,14 +71,8 @@
     </ion-col>
   </ion-row>
 
-</ion-card>
-
-
-
-
-
-
-
+  </ion-card>
+  </div>
 
 
 </ion-content>

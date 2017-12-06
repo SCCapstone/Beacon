@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {OrgProfilePage} from '../org-profile/org-profile';
-import {LoginPage} from '../login/login';
+//import {LoginPage} from '../login/login';
 
 // We import the authentication provider to test the log-out function.
 import { AuthProvider } from '../../providers/auth/auth';

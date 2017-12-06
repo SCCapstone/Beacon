@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FeedPage } from '../feed/feed';
 /**
  * Generated class for the LoginPage page.
  *
@@ -15,8 +14,8 @@ import {
   LoadingController,
   AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as firebase from 'firebase';
-import {AngularFireDatabase} from 'angularfire2/database';
+//import * as firebase from 'firebase';
+//import {AngularFireDatabase} from 'angularfire2/database';
 import { HomePage } from '../home/home';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -28,8 +27,6 @@ import { EmailValidator } from '../../validators/email';
 })
 export class LoginPage {
 
-  feedPage = FeedPage;
-
 
   public loginForm:FormGroup;
 
@@ -37,7 +34,7 @@ export class LoginPage {
   public loading:Loading;
 
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
     public authProvider: AuthProvider) {
 
