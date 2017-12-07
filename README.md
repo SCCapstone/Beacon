@@ -6,6 +6,9 @@ Test and working, this version of Beacon includes:
 Login authentication using firebase, reset password option, signup option,
 and linking between pages.
 
+## *Ionic View Testing*
+To easily test the app on a phone without running an emulator, download the Ionic View app provided by Ionic on the App Store or Google Play Store. Use the Public share code 72ee79b7. We have an sms function on 1a090745.
+
 ## Simulator testing
 To test in the iOS simulator, run:
 
