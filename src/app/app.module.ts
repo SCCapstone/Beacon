@@ -60,7 +60,8 @@ import { AuthProvider } from '../providers/auth/auth';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    CreatePostPage
+    CreatePostPage,
+    
   ]
 })
 export class AppModule {}

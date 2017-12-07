@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
+import { FeedPage } from '../feed/feed';
 /**
  * Generated class for the CreatePostPage page.
  * Created by Ryan Roe for Beacon Capstone Project
@@ -34,10 +35,7 @@ user: Observable<firebase.User>;
 
 itemsRef: AngularFireList<any>;
   items: Observable<any[]>;
-
- titlesRef: AngularFireList<any>;
- titles: Observable<any[]>;
-
+userEmail: Observable<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController) {
   	//
   	this.fdb.list("/posts/").valueChanges().subscribe(_data => {
@@ -45,34 +43,25 @@ itemsRef: AngularFireList<any>;
 
 		console.log(this.arrData);
   })
-  	// need to figure out how to retrieve current logged in user's email
-	//this.user = firebase.auth().currentuser;//afAuth.authState;
-
-
 
   	this.itemsRef = fdb.list('messages');
     this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
-	//this.items = this.fdb.list('/messages');
-	//fdb.list<items>('/messages').valueChanges().subscribe(console.log);
-/*
- this.user = afAuth.authState;*/
-}
 
-/*this is another way to send data to db without predefining reference
-createPost(postTitle: string , postContent: string): void { 
-	this.fdb.list("/posts/").push(this.postTitle);//pushing data to database
-	this.fdb.list("/posts/").push(this.postContent);
-}*/
+/****Attempting to access logged in user's email
+ //this.userEmail = firebase.auth().currentUser;
+ //this.userEmail = MyApp.user.email; */
+}
 
 //Sends the post information to database
  chatSend(theirMessage: string, theirTitle: string) {
  	const item = {
  		message: theirMessage,
  		title: theirTitle,
- 		timestamp: Date.now()
+ 		timestamp: Date.now(),
+    //userEmail: this.userEmail attempting retrieve logged in user's information
  	}
     this.itemsRef.push(item); //name: this.user});
-    //this.msgVal = ''; // attempt at clearing input in the future
+    this.navCtrl.setRoot(FeedPage);
   
   }
 
@@ -91,21 +80,15 @@ createPost(postTitle: string , postContent: string): void {
     console.log('ionViewDidLoad CreatePostPage');
   }
 
+/* created to view the logged in user's email...which is not working.
  doAlert() {
     let alert = this.alertCtrl.create({
         title: 'New Friend!',
-        subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!' + this.user,
+        subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!' + this.userEmail,
         buttons: ['Ok']
       });
 
     alert.present();
- }
-
-/*setPostContent(){
-let item of items 
-}
- getPostContent(){
- 	return this.item
  }*/
 
 }

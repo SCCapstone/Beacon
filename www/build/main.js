@@ -1,80 +1,13 @@
 webpackJsonp([7],{
 
-/***/ 148:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var AuthProvider = (function () {
-    function AuthProvider() {
-    }
-    /**
-     * loginUser takes in an email and password and signs the user into the application.
-     */
-    AuthProvider.prototype.loginUser = function (email, password) {
-        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signInWithEmailAndPassword(email, password);
-    };
-    /**
-     * signupUser takes in an email and password and does 3 things:
-     * 1. It creates the new user.
-     * 2. It signs the user into the application.
-     * 3. It creates a database node for the user to store the userProfile, which starts with just
-     *    the email address.
-     */
-    AuthProvider.prototype.signupUser = function (email, password) {
-        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().createUserWithEmailAndPassword(email, password).then(function (newUser) {
-            __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.database().ref('/userProfile').child(newUser.uid).set({
-                email: email
-            });
-        });
-    };
-    /**
-     * resetPassword takes the email address as a string and sends the email with the reset password
-     * link.
-     */
-    AuthProvider.prototype.resetPassword = function (email) {
-        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().sendPasswordResetEmail(email);
-    };
-    /**
-     * logoutUser doesn't take any parameters, it looks into the authentication object and signs out
-     * the currently logged in user.
-     */
-    AuthProvider.prototype.logoutUser = function () {
-        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signOut();
-    };
-    return AuthProvider;
-}());
-AuthProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [])
-], AuthProvider);
-
-//# sourceMappingURL=auth.js.map
-
-/***/ }),
-
-/***/ 149:
+/***/ 150:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(85);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -117,15 +50,16 @@ HomePage = __decorate([
 
 /***/ }),
 
-/***/ 150:
+/***/ 151:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(253);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__feed_feed__ = __webpack_require__(86);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -139,6 +73,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 //import { AngularFireDatabase } from "angularfire2/database";
  //apparently AngularFire has been outdated
+
 
 /**
  * Generated class for the CreatePostPage page.
@@ -161,29 +96,21 @@ var CreatePostPage = (function () {
             _this.arrData = _data;
             console.log(_this.arrData);
         });
-        // need to figure out how to retrieve current logged in user's email
-        //this.user = firebase.auth().currentuser;//afAuth.authState;
         this.itemsRef = fdb.list('messages');
         this.items = this.itemsRef.valueChanges(); //There are properties, such as valueChanges, that return an RxJS Observable. 
-        //this.items = this.fdb.list('/messages');
-        //fdb.list<items>('/messages').valueChanges().subscribe(console.log);
-        /*
-         this.user = afAuth.authState;*/
+        /****Attempting to access logged in user's email
+         //this.userEmail = firebase.auth().currentUser;
+         //this.userEmail = MyApp.user.email; */
     }
-    /*this is another way to send data to db without predefining reference
-    createPost(postTitle: string , postContent: string): void {
-        this.fdb.list("/posts/").push(this.postTitle);//pushing data to database
-        this.fdb.list("/posts/").push(this.postContent);
-    }*/
     //Sends the post information to database
     CreatePostPage.prototype.chatSend = function (theirMessage, theirTitle) {
         var item = {
             message: theirMessage,
             title: theirTitle,
-            timestamp: Date.now()
+            timestamp: Date.now(),
         };
         this.itemsRef.push(item); //name: this.user});
-        //this.msgVal = ''; // attempt at clearing input in the future
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__feed_feed__["a" /* FeedPage */]);
     };
     //functions for future adaptation
     CreatePostPage.prototype.updateItem = function (key, newText) {
@@ -198,81 +125,16 @@ var CreatePostPage = (function () {
     CreatePostPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad CreatePostPage');
     };
-    CreatePostPage.prototype.doAlert = function () {
-        var alert = this.alertCtrl.create({
-            title: 'New Friend!',
-            subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!' + this.user,
-            buttons: ['Ok']
-        });
-        alert.present();
-    };
     return CreatePostPage;
 }());
 CreatePostPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-create-post',template:/*ion-inline-start:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n<ion-header>\n\n  <ion-navbar color="red">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <ion-list>\n    <ion-item>\n      <ion-label fixed>Title</ion-label>\n      <ion-input type="text" [(ngModel)]="postTitle"></ion-input> <!--puts data into variable that is references in .ts ryan-->\n    </ion-item>\n\n    <ion-item>\n      <ion-label fixed>Content</ion-label>\n      <ion-input type="text" [(ngModel)]="postContent"></ion-input>\n    </ion-item>\n  </ion-list>\n\n  <!--<button ion-button block (click)="createPost( postTitle, postContent)">\n    Create Post\n  </button>-->\n<button ion-button block (click)="chatSend( postContent, postTitle)">\n    Create New Post\n</button>\n\n<!--testing to find the username/email of current logged in user\n<button ion-button block (click)="doAlert()">Basic Alert to test username</button>\n\n<p> getPostContent()</p>\n\n-->\n</ion-content>'/*ion-inline-end:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/,
+        selector: 'page-create-post',template:/*ion-inline-start:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n<ion-header>\n\n  <ion-navbar color="red">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <ion-list>\n    <ion-item>\n      <ion-label fixed>Title</ion-label>\n      <ion-input type="text" [(ngModel)]="postTitle"></ion-input> <!--puts data into variable that is references in .ts ryan-->\n    </ion-item>\n\n    <ion-item>\n      <ion-label fixed>Content</ion-label>\n      <ion-input type="text" [(ngModel)]="postContent"></ion-input>\n    </ion-item>\n  </ion-list>\n\n\n<button ion-button block (click)="chatSend( postContent, postTitle)">\n    Create New Post\n</button>\n\n<!-- Test for username Ryan\n<button ion-button block (click)="doAlert()">Basic Alert to test username</button>\n\n<p> getPostContent()</p>\n-->\n\n</ion-content>'/*ion-inline-end:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], CreatePostPage);
 
-var _a, _b, _c, _d, _e;
 //# sourceMappingURL=create-post.js.map
-
-/***/ }),
-
-/***/ 151:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_post_create_post__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(110);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
- //apparently AngularFire has been outdated
-/**
- * Generated class for the FeedPage page.
- * Created by Ryan Roe for Beacon Capstone Project
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var FeedPage = (function () {
-    function FeedPage(navCtrl, navParams, fdb) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.fdb = fdb;
-        this.itemsRef = fdb.list('messages');
-        this.items = this.itemsRef.valueChanges();
-    }
-    FeedPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad FeedPage');
-    };
-    FeedPage.prototype.btnCreateClicked = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__create_post_create_post__["a" /* CreatePostPage */]);
-    };
-    return FeedPage;
-}());
-FeedPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-feed',template:/*ion-inline-start:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="red">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Feed</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n\n	<h1 align="center"> Beacon Feed \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only>\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h1>\n\n\n\n   \n\n\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>Marty McFly\n    </h2>\n    <p>November 5, 1955</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>12 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>4 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        11h ago\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/,
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object])
-], FeedPage);
-
-var _a, _b, _c;
-//# sourceMappingURL=feed.js.map
 
 /***/ }),
 
@@ -351,11 +213,11 @@ var map = {
 		5
 	],
 	"../pages/login/login.module": [
-		484,
+		485,
 		2
 	],
 	"../pages/org-profile/org-profile.module": [
-		485,
+		484,
 		4
 	],
 	"../pages/password-reset/password-reset.module": [
@@ -485,15 +347,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(481);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_list_list__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_org_profile_org_profile__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feed_feed__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feed_feed__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_angularfire2__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2_database__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2_database__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2_auth__ = __webpack_require__(253);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_auth_auth__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__providers_auth_auth__ = __webpack_require__(85);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -545,8 +407,8 @@ AppModule = __decorate([
                 links: [
                     { loadChildren: '../pages/create-post/create-post.module#CreatePostPageModule', name: 'CreatePostPage', segment: 'create-post', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/org-profile/org-profile.module#OrgProfilePageModule', name: 'OrgProfilePage', segment: 'org-profile', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] }
@@ -570,7 +432,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
             __WEBPACK_IMPORTED_MODULE_14__providers_auth_auth__["a" /* AuthProvider */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__["a" /* CreatePostPage */]
+            __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__["a" /* CreatePostPage */],
         ]
     })
 ], AppModule);
@@ -590,10 +452,10 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(255);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_list_list__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_org_profile_org_profile__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feed_feed__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feed_feed__ = __webpack_require__(86);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -663,6 +525,7 @@ var MyApp = (function () {
                 }
                 else {
                     _this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */];
+                    var email = user.email;
                 }
             });
         });
@@ -691,6 +554,131 @@ MyApp = __decorate([
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 85:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AuthProvider = (function () {
+    function AuthProvider() {
+    }
+    /**
+     * loginUser takes in an email and password and signs the user into the application.
+     */
+    AuthProvider.prototype.loginUser = function (email, password) {
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signInWithEmailAndPassword(email, password);
+    };
+    /**
+     * signupUser takes in an email and password and does 3 things:
+     * 1. It creates the new user.
+     * 2. It signs the user into the application.
+     * 3. It creates a database node for the user to store the userProfile, which starts with just
+     *    the email address.
+     */
+    AuthProvider.prototype.signupUser = function (email, password) {
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().createUserWithEmailAndPassword(email, password).then(function (newUser) {
+            __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.database().ref('/userProfile').child(newUser.uid).set({
+                email: email
+            });
+        });
+    };
+    /**
+     * resetPassword takes the email address as a string and sends the email with the reset password
+     * link.
+     */
+    AuthProvider.prototype.resetPassword = function (email) {
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().sendPasswordResetEmail(email);
+    };
+    /**
+     * logoutUser doesn't take any parameters, it looks into the authentication object and signs out
+     * the currently logged in user.
+     */
+    AuthProvider.prototype.logoutUser = function () {
+        return __WEBPACK_IMPORTED_MODULE_1_firebase___default.a.auth().signOut();
+    };
+    return AuthProvider;
+}());
+AuthProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [])
+], AuthProvider);
+
+//# sourceMappingURL=auth.js.map
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_post_create_post__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(85);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+ //apparently AngularFire has been outdated
+
+/**
+ * Generated class for the FeedPage page.
+ * Created by Ryan Roe for Beacon Capstone Project
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var FeedPage = (function () {
+    function FeedPage(navCtrl, navParams, fdb, authProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.fdb = fdb;
+        this.authProvider = authProvider;
+        this.itemsRef = fdb.list('messages');
+        this.items = this.itemsRef.valueChanges();
+    }
+    FeedPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad FeedPage');
+    };
+    FeedPage.prototype.btnCreateClicked = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__create_post_create_post__["a" /* CreatePostPage */]);
+    };
+    return FeedPage;
+}());
+FeedPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-feed',template:/*ion-inline-start:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="red">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title> Beacon Feed</ion-title>\n  </ion-navbar>\n  <h3 align="right"> New Post \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only>\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h3>\n</ion-header>\n\n\n<ion-content padding>\n\n\n	\n   \n\n\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>United Red Cross\n    </h2>\n    <p>{{item.timestamp  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>0 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        <!--11h ago-->\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
+], FeedPage);
+
+//# sourceMappingURL=feed.js.map
 
 /***/ })
 

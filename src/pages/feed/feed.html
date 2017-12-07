@@ -11,22 +11,20 @@
   	 <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Feed</ion-title>
+    <ion-title> Beacon Feed</ion-title>
   </ion-navbar>
+  <h3 align="right"> New Post 
+  <button (click) = "btnCreateClicked()" ion-button outline icon-only>
+      <ion-icon name='create' is-active="false"></ion-icon>
+    </button>
+  </h3>
 </ion-header>
 
 
 <ion-content padding>
 
 
-	<h1 align="center"> Beacon Feed 
-  <button (click) = "btnCreateClicked()" ion-button outline icon-only>
-      <ion-icon name='create' is-active="false"></ion-icon>
-    </button>
-  </h1>
-
-
-
+	
    
 
 
@@ -36,12 +34,12 @@
 <!--html template for the title, username, avatar, and date-->
      <ion-item>
     <ion-avatar item-start>
-      <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image">
+      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">
     </ion-avatar>
     <h2> {{item.title}}</h2>
-    <h2>Marty McFly
+    <h2>United Red Cross
     </h2>
-    <p>November 5, 1955</p>
+    <p>{{item.timestamp  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
   </ion-item>
 <!--creates the card content using two way data linking for an async for loop-->
     <ion-card-content>
@@ -55,18 +53,18 @@
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
+        <div>0 Likes</div>
       </button>
     </ion-col>
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
+        <div>0 Comments</div>
       </button>
     </ion-col>
     <ion-col center text-center>
       <ion-note>
-        11h ago
+        <!--11h ago-->
       </ion-note>
     </ion-col>
   </ion-row>

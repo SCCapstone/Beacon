@@ -109,6 +109,8 @@ this.pages = [
           this.rootPage = 'LoginPage';
         } else {
           this.rootPage = HomePage;
+         
+          var email = user.email;
         }
       });
     });
