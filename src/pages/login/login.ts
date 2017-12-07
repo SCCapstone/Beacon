@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
+/**
+ * Generated class for the LoginPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
 import {
   IonicPage,
   NavController,
+  NavParams,
   Loading,
   LoadingController,
   AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as firebase from 'firebase';
-import {AngularFireDatabase} from 'angularfire2/database';
+//import * as firebase from 'firebase';
+//import {AngularFireDatabase} from 'angularfire2/database';
 import { HomePage } from '../home/home';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -18,13 +26,15 @@ import { EmailValidator } from '../../validators/email';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
+
   public loginForm:FormGroup;
 
 
   public loading:Loading;
 
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
     public authProvider: AuthProvider) {
 
@@ -65,10 +75,12 @@ export class LoginPage {
 
   goToSignup(){
     this.navCtrl.push('SignupPage');
+
   }
 
   goToResetPassword(){
     this.navCtrl.push('PasswordResetPage');
   }
+
 
 }

@@ -1,0 +1,40 @@
+<!--
+  Created by Ryan Roe for Beacon Capstone Project
+
+-->
+<ion-header>
+
+  <ion-navbar color="red">
+    <ion-title> CreatePost </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Title</ion-label>
+      <ion-input type="text" [(ngModel)]="postTitle"></ion-input> <!--puts data into variable that is references in .ts ryan-->
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Content</ion-label>
+      <ion-input type="text" [(ngModel)]="postContent"></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+<button ion-button block (click)="chatSend( postContent, postTitle)">
+    Create New Post
+</button>
+
+<!-- Test for username Ryan
+<button ion-button block (click)="doAlert()">Basic Alert to test username</button>
+
+<p> getPostContent()</p>
+-->
+
+</ion-content>

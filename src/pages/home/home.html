@@ -11,23 +11,22 @@
 
 <ion-content padding>
 
+  <h3>Welcome to Beacon</h3>
+ 
+  	
+		<img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> 
+  <p>
+    This app is for emergency situations.
+  </p>
+  
+
+
 
   <button ion-button color="positive" block (click)="logMeOut()">
     Log Out
   </button>
-
-  <ion-card>
-    <ion-item>
-      <ion-label stacked>Message</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button icon-left clear item-right (click)="sendMessage()">
-        <ion-icon name="checkmark"></ion-icon>
-        Send
-      </button>
-    </ion-item>
-  </ion-card>
-
+  <button ion-button icon-left clear item-right (click)="sendMessage()">
+      <ion-icon name="checkmark"></ion-icon>
+      Send Message
+  </button>
 </ion-content>

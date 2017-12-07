@@ -6,16 +6,25 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
+//import { AngularFireModule } from "angularfire2" 
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { OrgProfilePage } from '../pages/org-profile/org-profile';
-import { FeedPage } from '../pages/feed/feed';
+
+//import { LoginPage } from '../pages/login/login'; // added by Amanda
+import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
+import { FeedPage } from '../pages/feed/feed'; // added by Ryan
+//import { CreatePostPage } from '../pages/create-post/create-post';
+
+
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+
+
+export class MyApp { //this is template for the root component that is set in module.ts
+
 
 // This lets us access our pages as children from the Home
 @ViewChild(Nav) nav: Nav;
@@ -42,7 +51,10 @@ export class MyApp {
 //added this
  pages: Array<{title: string, component: any}>;
 
-  public zone:NgZone;
+ public zone:NgZone;
+    // used for an example of ngFor and navigation
+    
+
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
@@ -50,14 +62,24 @@ export class MyApp {
     this.zone = new NgZone({});
 
   //Generated config variable for firebase access
-    const config = {
+    /*const config = {
     apiKey: "AIzaSyAnokPlPIbzJupEnZAymrxVPokY_pz0vTg",
     authDomain: "beacon-7f513.firebaseapp.com",
     databaseURL: "https://beacon-7f513.firebaseio.com",
     projectId: "beacon-7f513",
     storageBucket: "beacon-7f513.appspot.com",
     messagingSenderId: "28347407856"
-    };
+    };*/
+
+    //Initialize Firebase
+ const config = {
+    apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
+    authDomain: "ionicdbtest1.firebaseapp.com",
+    databaseURL: "https://ionicdbtest1.firebaseio.com",
+    projectId: "ionicdbtest1",
+    storageBucket: "ionicdbtest1.appspot.com",
+    messagingSenderId: "207415494381"
+  };
 
 // used for an example of ngFor and navigation
 this.pages = [
@@ -78,6 +100,7 @@ this.pages = [
 
     //initialize Firebase with app
     firebase.initializeApp(config);
+ //AngularFireModule.initializeApp(config)
 
     //keeps track of auth changes
     firebase.auth().onAuthStateChanged( user => {
@@ -86,6 +109,8 @@ this.pages = [
           this.rootPage = 'LoginPage';
         } else {
           this.rootPage = HomePage;
+         
+          var email = user.email;
         }
       });
     });
@@ -97,6 +122,7 @@ this.pages = [
       splashScreen.hide();
     });
   }
+
   openPage(page) { //used in app.html's menu
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

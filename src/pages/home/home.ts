@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {OrgProfilePage} from '../org-profile/org-profile';
+//import {LoginPage} from '../login/login';
 // We import the authentication provider to test the log-out function.
 import { AuthProvider } from '../../providers/auth/auth';
-import { SMS } from '@ionic-native/sms'
+import { SMS } from '@ionic-native/sms';
 
 @Component({
   selector: 'page-home',
@@ -22,6 +24,7 @@ export class HomePage {
     });
   }
   sendMessage(){
-    this.sms.send('5136808228','Hello');
+    this.sms.send('5136808228','Need Help');
   }
+
 }
