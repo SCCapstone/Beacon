@@ -4,6 +4,7 @@
 Test and working, this version of Beacon includes:
 
 Login authentication using firebase, reset password option, signup option, sms texting option: please download binary below: 
+
 https://github.com/SCCapstone/Beacon/releases/download/1.0/Beacon-release.zip
 
 ## Simulator testing
