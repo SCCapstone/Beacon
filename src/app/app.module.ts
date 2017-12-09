@@ -1,22 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
-
-
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { CreatePostPage } from '../pages/create-post/create-post';
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
- // Initialize Firebase
+import { AuthProvider } from '../providers/auth/auth';
+
+
+
   var config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
     authDomain: "ionicdbtest1.firebaseapp.com",
@@ -33,29 +35,33 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
     MyApp, //sets root component
     HomePage,
     ListPage,
-    LoginPage, //addded by Amanda
     OrgProfilePage, //added by Amanda
-    FeedPage, //added by Ryan
+    FeedPage,
+    CreatePostPage //added by Ryan
   ],
-  imports: [
+    imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(config)//need to get config from firebase online)
+    AngularFireDatabaseModule,//added by ryan for angularfire2
+   AngularFireModule.initializeApp(config),//ryan, for angularfire2
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
     HomePage,
     ListPage,
-    LoginPage, //added by Amanda
     OrgProfilePage, //added by Amanda
-    FeedPage, //added by Ryan
+    FeedPage,
+    CreatePostPage //added by Ryan
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
+    CreatePostPage,
+    
   ]
 })
 export class AppModule {}

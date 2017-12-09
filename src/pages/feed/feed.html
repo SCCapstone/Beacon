@@ -1,74 +1,76 @@
 <!--
-  Generated template for the FeedPage page.
+  Created by Ryan Roe for Beacon Capstone Project
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 
 <ion-header>
+<ion-navbar color="red">
 
-  <ion-navbar>
   	 <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Feed</ion-title>
+    <ion-title> Beacon Feed</ion-title>
   </ion-navbar>
-
+  <h3 align="right"> New Post 
+  <button (click) = "btnCreateClicked()" ion-button outline icon-only>
+      <ion-icon name='create' is-active="false"></ion-icon>
+    </button>
+  </h3>
 </ion-header>
 
 
 <ion-content padding>
 
-	<h1 align="center"> Beacon Feed </h1>
 
-<ion-item>
-	<ion-input [(ngModel)] = "myInput"></ion-input> <!--puts data into variable myInput, you can reference in feed.ts-->
-</ion-item>
-	<button (click) = "btnAddClicked()" ion-button> Add </button><!--created a function upon button click, you can create function in feed.ts-->
+	
+   
 
 
 
-<ion-card>
-  <ion-item>
+ <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
+  <ion-card>
+<!--html template for the title, username, avatar, and date-->
+     <ion-item>
     <ion-avatar item-start>
-      <img src="assets/imgs/silhouette_default.jpg" alt="Stock Profile Image"> 
+      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">
     </ion-avatar>
-    <h2>Marty McFly</h2>
-    <p>November 5, 1955</p>
+    <h2> {{item.title}}</h2>
+    <h2>United Red Cross
+    </h2>
+    <p>{{item.timestamp  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
   </ion-item>
+<!--creates the card content using two way data linking for an async for loop-->
+    <ion-card-content>
 
-  <ion-icon name="cafe" item-start></ion-icon>
-
-  <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-
-  </ion-card-content>
-
-  <ion-row>
+      <a href="#">{{item.name}}</a>
+      
+      <p>{{item.message}}</p>
+    </ion-card-content>
+<!--Creates the likes, comments, and time since post-->
+    <ion-row>
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>12 Likes</div>
+        <div>0 Likes</div>
       </button>
     </ion-col>
     <ion-col>
       <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
-        <div>4 Comments</div>
+        <div>0 Comments</div>
       </button>
     </ion-col>
     <ion-col center text-center>
       <ion-note>
-        11h ago
+        <!--11h ago-->
       </ion-note>
     </ion-col>
   </ion-row>
 
-</ion-card>
-
-
-
-
+  </ion-card>
+  </div>
 
 
 </ion-content>

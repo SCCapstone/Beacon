@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Pipe } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireDatabase } from "angularfire2/database";
 
+import { CreatePostPage } from '../create-post/create-post';
+import {LoginPage} from '../login/login';
+
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { Observable } from 'rxjs/Observable';
+import { AuthProvider } from '../../providers/auth/auth';
+import firebase from 'firebase';
 /**
  * Generated class for the FeedPage page.
- *
+ * Created by Ryan Roe for Beacon Capstone Project
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
@@ -16,29 +22,26 @@ import { AngularFireDatabase } from "angularfire2/database";
 })
 export class FeedPage {
 
- // constructor(public navCtrl: NavController, public navParams: NavParams) {}
-  
 
-//firebase
 
-arrData = []
-myInput
+itemsRef: AngularFireList<any>;
+items: Observable<any[]>;
 
-constructor(public navCtrl: NavController, private fdb: AngularFireDatabase) { 
-	this.fdb.list("/myItems/").valueChanges().subscribe(_data => {
-		this.arrData = _data;
 
-	console.log(this.arrData);
-	})
-	
+
+constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, public authProvider: AuthProvider) { 
+
+  	this.itemsRef = fdb.list('messages');
+    this.items = this.itemsRef.valueChanges();
   }
 
-btnAddClicked(){
-	this.fdb.list("/myItems/").push(this.myInput);//pushing data to database
-}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FeedPage');
   }
+
+btnCreateClicked(){
+	this.navCtrl.push(CreatePostPage);
+}
 
 }

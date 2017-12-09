@@ -1,48 +1,125 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { Nav } from 'ionic-angular';
+
+import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import firebase from 'firebase';
+//import { AngularFireModule } from "angularfire2" 
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { LoginPage } from '../pages/login/login'; // added by Amanda
+
+//import { LoginPage } from '../pages/login/login'; // added by Amanda
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
+//import { CreatePostPage } from '../pages/create-post/create-post';
 
 
 
 @Component({
   templateUrl: 'app.html'
 })
+
+
 export class MyApp { //this is template for the root component that is set in module.ts
-  @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+// This lets us access our pages as children from the Home
+@ViewChild(Nav) nav: Nav;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  /**
+  **********************************************************************
+  ** rootPage: any; => this is a NavController which is the base class
+  ** for navigation controller components like Nav and Tab.
+  ** https://ionicframework.com/docs/api/navigation/NavController/
+  ** Ahmed
+  *************************************************************************
+  **/
+  rootPage:any;
+ /**
+  **********************************************************************
+  **  Angular 2 implements its own special zone called NgZone.
+  **  This special zone extends the basic functionality of a zone to
+  **  facilitate change detection
+  **  https://www.joshmorony.com/understanding-zones-and-change-detection-in-ionic-2-angular-2/
+  **  Ahmed
+  **********************************************************************
+  **/
 
+//added this
+ pages: Array<{title: string, component: any}>;
+
+ public zone:NgZone;
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      {title: 'Login', component: LoginPage }, // added by Amanda- trying to add login page to side menu
-      {title: 'Organization Profile', component: OrgProfilePage }, // added by Amanda
-      {title: 'Beacon Feed', component: FeedPage } // added by Ryan
-      
-    ];
+    
 
-  }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+
+    //Angular’s change detection is triggered
+    this.zone = new NgZone({});
+
+  //Generated config variable for firebase access
+    /*const config = {
+    apiKey: "AIzaSyAnokPlPIbzJupEnZAymrxVPokY_pz0vTg",
+    authDomain: "beacon-7f513.firebaseapp.com",
+    databaseURL: "https://beacon-7f513.firebaseio.com",
+    projectId: "beacon-7f513",
+    storageBucket: "beacon-7f513.appspot.com",
+    messagingSenderId: "28347407856"
+    };*/
+
+    //Initialize Firebase
+ const config = {
+    apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
+    authDomain: "ionicdbtest1.firebaseapp.com",
+    databaseURL: "https://ionicdbtest1.firebaseio.com",
+    projectId: "ionicdbtest1",
+    storageBucket: "ionicdbtest1.appspot.com",
+    messagingSenderId: "207415494381"
+  };
+
+// used for an example of ngFor and navigation
+this.pages = [
+
+  //Homepage Nav Link
+  { title: 'Home', component: HomePage },
+
+  //Homepage List Link
+  { title: 'Map', component: ListPage },
+
+  ////Homepage Organization Profile Link
+  {title: 'Organization Profile', component: OrgProfilePage },
+
+  //Homepage Beacon Feed Link
+  {title: 'Beacon Feed', component: FeedPage }
+
+];
+
+    //initialize Firebase with app
+    firebase.initializeApp(config);
+ //AngularFireModule.initializeApp(config)
+
+    //keeps track of auth changes
+    firebase.auth().onAuthStateChanged( user => {
+      this.zone.run( () => {
+        if (!user) {
+          this.rootPage = 'LoginPage';
+        } else {
+          this.rootPage = HomePage;
+         
+          var email = user.email;
+        }
+      });
+    });
+
+    platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      statusBar.styleDefault();
+      splashScreen.hide();
     });
   }
 

@@ -1,6 +1,23 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+/**********************************************************************
+**
+**
+**       Sass Variables
+** Sass Variables allow you to define a value once and use it
+** in multiple places. Variables begin with dollar signs and
+** are set like CSS properties. You can change the value of
+** the variable in one place, and all instances where it is
+** used will be changed, too. For example, if you wanted to set
+** the same height for two different selectors, you could create
+** a variable called $control-height:
+**
+************************************************************************
+**
+**
+**/
+
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
@@ -38,8 +55,12 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  red:       #e57373,
+  blue: #64b5f6 
 );
+
+
 
 
 // App iOS Variables
@@ -71,6 +92,8 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
+
+
 
 
 // Ionicons

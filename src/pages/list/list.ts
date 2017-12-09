@@ -1,37 +1,48 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
+ 
+declare var google;
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  name: string = "";
+  constructor(public navCtrl: NavController) {
   }
-
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
-      item: item
+  ionViewDidLoad() {
+    this.initializeMap();
+  }
+  initializeMap() {
+    let letLng = new google.maps.LatLng(34.007, -81.034);
+    let mapOptions = {
+      center: letLng,
+      zoom: 7,
+      mapTypeId: google.maps.MapTypeId.HYBRID
+    }
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker();
+  }
+  addMarker() {
+    let marker = new google.maps.Marker({
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: { lat: 34.007, lng: -81.034 },
+      title: 'Hospital'
+    })
+    let content = `<h1>Hospital</h1>`;
+    this.addInfoWindow(marker, content);
+  }
+  addInfoWindow(marker, content) {
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
     });
+    google.maps.event.addListener(marker, 'click', () => {
+      this.name = marker.title;
+      infoWindow.open(this.map, marker)
+    })
   }
 }
