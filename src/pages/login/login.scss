@@ -13,13 +13,9 @@ page-login {
 
 $font-stack:    Helvetica, sans-serif;
 
-
-
-
-
 .login { @include border-radius(20px);
 
-  font: 100% $font-stack
+  font: 100% $font-stack;
 
 }
 
@@ -81,11 +77,21 @@ h1 {
   font-style: italic;
   text-shadow: 1px 1px 0 #f2f2f2, 2px 2px 0 #f2f2f2;
 }
+/*input-forms */
+.input-form {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-bottom: 5px;
+}
 
 /* $Button */
 .btn{
   display: inline-block;
-  margin: 15px 15px 0;
+  /* margin: 15px 15px 0; */
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
   @include fontsize(26);
   text-decoration: none;
   outline: none;
