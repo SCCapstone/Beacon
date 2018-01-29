@@ -1,15 +1,31 @@
 
+<<<<<<< HEAD
 ## Beacon
+=======
+# Beacon    <img src= "https://raw.githubusercontent.com/SCCapstone/Beacon/master/beacon_logo.png?token=AWYG4tXLFZnE0PjhcOSPiPLnjY8L4O-xks5aLzPAwA%3D%3D" width="75">
+>>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
 
-Test and working, this version of Beacon includes:
+## Tested and working, Built for osx platform
+
+### Instructions for Viewing on osx
+
+#### executable is under
+
+platforms/osx/build/MyApp
+
+this version of Beacon includes:
 
 Login authentication using firebase, reset password option, signup option,
 and linking between pages.
 
+<<<<<<< HEAD
 ## *Ionic View Testing*
 To easily test the app on a phone without running an emulator, download the Ionic View app provided by Ionic on the App Store or Google Play Store. Use the Public share code 72ee79b7. We have an sms function on 1a090745.
 
 ## Simulator testing
+=======
+## Beacon Simulator Testing :octocat:
+>>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
 To test in the iOS simulator, run:
 
 $ ionic cordova build ios
@@ -54,6 +70,55 @@ It should return Sass 3.5.1.
 
 see sass documentation: http://sass-lang.com/
 
+<<<<<<< HEAD
+=======
+## Building Ionic App
+
+### Make sure you upgrade node
+
+sudo npm install n -g
+
+https://stackoverflow.com/questions/10075990/upgrading-node-js-to-latest-version
+
+
+### How To Add Platforms
+
+* $ cordova platform add ios
+* $ cordova platform add android
+
+### OS X Platform Guide - How to run Beacon on OSX
+
+* $ cordova platform add osx
+
+* $ cordova prepare
+
+* $ cordova run
+
+reference: http://cordova.apache.org/docs/en/latest/guide/platforms/osx/index.html
+
+### iOS platform requirements :iphone: (ipa) - How to run Beacon on an iPhone
+
+Installing cocoapods
+
+* sudo gem install cocoapods
+https://guides.cocoapods.org/using/getting-started.html
+
+* run 'pod setup'
+
+### To check your current set of platforms:
+
+* $ cordova platform ls
+
+
+### To Install pre-requisites for building
+
+To check if you satisfy requirements for building the platform:
+
+$ cordova requirements
+
+
+
+>>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
 ## Please Note: To insert your firebase credentials
 
 Follow this path to get to app.component.ts
