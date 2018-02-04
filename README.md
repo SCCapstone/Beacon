@@ -16,6 +16,7 @@ Files to note:
 * test-config
 * "page".spec.ts
   * specific testing for each page  
+* "e2e" 
   
 To run the unit tests, while in the root directory run the command:
 
