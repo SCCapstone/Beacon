@@ -19,14 +19,14 @@ import { AuthProvider } from '../providers/auth/auth';
 
 
 
-  var config = {
+/*  var config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
     authDomain: "ionicdbtest1.firebaseapp.com",
     databaseURL: "https://ionicdbtest1.firebaseio.com",
     projectId: "ionicdbtest1",
     storageBucket: "ionicdbtest1.appspot.com",
     messagingSenderId: "207415494381"
-  };
+  };*/
 
 
 //this is the root module, it controls the rest of the app
@@ -43,7 +43,7 @@ import { AuthProvider } from '../providers/auth/auth';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,//added by ryan for angularfire2
-   AngularFireModule.initializeApp(config),//ryan, for angularfire2
+//   AngularFireModule.initializeApp(config),//ryan, for angularfire2
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
