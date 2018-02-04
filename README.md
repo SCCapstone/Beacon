@@ -1,4 +1,4 @@
-## Unit Testing by Sarah and Ryan
+## Unit Testing by Sarah and Ryan and Behavioral Testing by Khory
 
 
 If code does not work, try reinstalling necessary dependencies for Karma, Jasmine, and Protractor
@@ -18,9 +18,11 @@ Files to note:
   * specific testing for each page  
   
 To run the unit tests, while in the root directory run the command:
+
 "npm run test"
 
 To run the behavioral tests, while in the roof directory run the command:
+
 "protractor"
 
 ## Beacon
