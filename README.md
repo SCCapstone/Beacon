@@ -3,17 +3,26 @@
 
 If code does not work, try reinstalling necessary dependencies for Karma, Jasmine, and Protractor
 
-You can try "sudo npm install" initially and it should install necessary dependencies.
+You can try "sudo npm install" initially and it should install necessary dependencies:
 
 "npm install --save-dev angular2-template-loader html-loader jasmine jasmine-spec-reporter karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter karma-sourcemap-loader karma-webpack karma-coverage-istanbul-reporter istanbul-instrumenter-loader null-loader protractor ts-loader ts-node @types/jasmine @types/node"  
+
+"npm install protractor --save-dev
+npm install -g webdriver-manager
+webdriver-manager update"
 
 Files to note:  
 
 * test-config
 * "page".spec.ts
   * specific testing for each page  
-    
-npm run test
+  
+To run the unit tests, while in the root directory run the command:
+"npm run test"
+
+To run the behavioral tests, while in the roof directory run the command:
+"protractor"
+
 ## Beacon
 
 Test and working, this version of Beacon includes:
