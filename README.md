@@ -1,9 +1,35 @@
+## Unit Testing by Sarah and Ryan and Behavioral Testing by Khory
 
-<<<<<<< HEAD
+
+If code does not work, try reinstalling necessary dependencies for Karma, Jasmine, and Protractor
+
+You can try "sudo npm install" initially and it should install necessary dependencies:
+
+"npm install --save-dev angular2-template-loader html-loader jasmine jasmine-spec-reporter karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter karma-sourcemap-loader karma-webpack karma-coverage-istanbul-reporter istanbul-instrumenter-loader null-loader protractor ts-loader ts-node @types/jasmine @types/node"  
+
+"npm install protractor --save-dev
+npm install -g webdriver-manager
+webdriver-manager update"
+
+Files to note:  
+
+* test-config
+* "page".spec.ts
+  * specific testing for each page  
+* "e2e" 
+  
+To run the unit tests, while in the root directory run the command:
+
+"npm run test"
+
+To run the behavioral tests, while in the roof directory run the command:
+
+"protractor"
+
+
 ## Beacon
-=======
-# Beacon    <img src= "https://raw.githubusercontent.com/SCCapstone/Beacon/master/beacon_logo.png?token=AWYG4tXLFZnE0PjhcOSPiPLnjY8L4O-xks5aLzPAwA%3D%3D" width="75">
->>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
+
+
 
 ## Tested and working, Built for osx platform
 
@@ -15,27 +41,21 @@ platforms/osx/build/MyApp
 
 this version of Beacon includes:
 
-Login authentication using firebase, reset password option, signup option,
-and linking between pages.
+Login authentication using firebase, reset password option, signup option, sms texting option: please download binary below:   
+*What does this link do?* - Ryan Roe  
+https://github.com/SCCapstone/Beacon/releases/download/1.0/Beacon-release.zip
 
-<<<<<<< HEAD
+
 ## *Ionic View Testing*
 To easily test the app on a phone without running an emulator, download the Ionic View app provided by Ionic on the App Store or Google Play Store. Use the Public share code 72ee79b7. We have an sms function on 1a090745.
 
 ## Simulator testing
-=======
-## Beacon Simulator Testing :octocat:
->>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
+
 To test in the iOS simulator, run:
 
 $ ionic cordova build ios
 
 $ ionic cordova emulate ios
-
-![alt text](https://raw.githubusercontent.com/SCCapstone/Beacon/master/Screen%20Shot%202017-12-05%20at%208.47.23%20AM.png?token=AWYG4rDGwnpEtWJGUJbs1TRRzVJP9be-ks5aMA7LwA%3D%3D)
-
-## iPhone X
-<img src= "https://raw.githubusercontent.com/SCCapstone/Beacon/master/Simulator%20Screen%20Shot%20-%20iPhone%20X%20-%202017-12-05%20at%2008.53.05.png?token=AWYG4gWLjdWN2aQB_IG1Jwd1qcn1Fd8Jks5aMB1EwA%3D%3D" width="370">
 
 
 ## Angularfire2
@@ -70,8 +90,6 @@ It should return Sass 3.5.1.
 
 see sass documentation: http://sass-lang.com/
 
-<<<<<<< HEAD
-=======
 ## Building Ionic App
 
 ### Make sure you upgrade node
@@ -117,8 +135,6 @@ To check if you satisfy requirements for building the platform:
 $ cordova requirements
 
 
-
->>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
 ## Please Note: To insert your firebase credentials
 
 Follow this path to get to app.component.ts

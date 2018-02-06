@@ -61,16 +61,6 @@ export class MyApp { //this is template for the root component that is set in mo
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
 
-  //Generated config variable for firebase access
-    /*const config = {
-    apiKey: "AIzaSyAnokPlPIbzJupEnZAymrxVPokY_pz0vTg",
-    authDomain: "beacon-7f513.firebaseapp.com",
-    databaseURL: "https://beacon-7f513.firebaseio.com",
-    projectId: "beacon-7f513",
-    storageBucket: "beacon-7f513.appspot.com",
-    messagingSenderId: "28347407856"
-    };*/
-
     //Initialize Firebase
  const config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
@@ -80,6 +70,8 @@ export class MyApp { //this is template for the root component that is set in mo
     storageBucket: "ionicdbtest1.appspot.com",
     messagingSenderId: "207415494381"
   };
+
+
 
 // used for an example of ngFor and navigation
 this.pages = [
