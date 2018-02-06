@@ -41,11 +41,6 @@ $ ionic cordova build ios
 
 $ ionic cordova emulate ios
 
-![alt text](https://raw.githubusercontent.com/SCCapstone/Beacon/master/Screen%20Shot%202017-12-05%20at%208.47.23%20AM.png?token=AWYG4rDGwnpEtWJGUJbs1TRRzVJP9be-ks5aMA7LwA%3D%3D)
-
-## iPhone X
-<img src= "https://raw.githubusercontent.com/SCCapstone/Beacon/master/Simulator%20Screen%20Shot%20-%20iPhone%20X%20-%202017-12-05%20at%2008.53.05.png?token=AWYG4gWLjdWN2aQB_IG1Jwd1qcn1Fd8Jks5aMB1EwA%3D%3D" width="370">
-
 
 ## Angularfire2
 
