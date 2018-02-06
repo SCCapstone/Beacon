@@ -6,7 +6,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
-//import { AngularFireModule } from "angularfire2" 
+import { AngularFireModule } from "angularfire2" //ryan
+
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -65,8 +66,7 @@ export class MyApp { //this is template for the root component that is set in mo
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
 
-    //Initialize Firebase
- const config = {
+const config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
     authDomain: "ionicdbtest1.firebaseapp.com",
     databaseURL: "https://ionicdbtest1.firebaseio.com",
@@ -74,7 +74,6 @@ export class MyApp { //this is template for the root component that is set in mo
     storageBucket: "ionicdbtest1.appspot.com",
     messagingSenderId: "207415494381"
   };
-
 
 // used for an example of ngFor and navigation
 this.pages = [
@@ -95,6 +94,7 @@ this.pages = [
 
     //initialize Firebase with app
     firebase.initializeApp(config);
+   // AngularFireModule.initializeApp(config)
  //AngularFireModule.initializeApp(config)
 
     //keeps track of auth changes

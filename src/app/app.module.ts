@@ -17,7 +17,15 @@ import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to impor
 
 import { AuthProvider } from '../providers/auth/auth';
 
-//import {config} from './app.component'; //importing firebase config
+    //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
+ const config = {
+    apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
+    authDomain: "ionicdbtest1.firebaseapp.com",
+    databaseURL: "https://ionicdbtest1.firebaseio.com",
+    projectId: "ionicdbtest1",
+    storageBucket: "ionicdbtest1.appspot.com",
+    messagingSenderId: "207415494381"
+  };
 
 //this is the root module, it controls the rest of the app
 @NgModule({
@@ -33,7 +41,8 @@ import { AuthProvider } from '../providers/auth/auth';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,//added by ryan for angularfire2
-   AngularFireModule.initializeApp(MyApp.config),//ryan, for angularfire2, necessary to populate feed
+    //Firebase.initializeApp(config);
+   AngularFireModule.initializeApp(config),//ryan, for angularfire2, necessary to populate feed
     AngularFireAuthModule //added by Ahmed for authentication system
   ],
   bootstrap: [IonicApp],
