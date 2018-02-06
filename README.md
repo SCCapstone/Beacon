@@ -31,7 +31,7 @@ To run the behavioral tests, while in the roof directory run the command:
 Test and working, this version of Beacon includes:
 
 Login authentication using firebase, reset password option, signup option, sms texting option: please download binary below: 
-
+*What does this link do?* - Ryan Roe
 https://github.com/SCCapstone/Beacon/releases/download/1.0/Beacon-release.zip
 
 ## Simulator testing
