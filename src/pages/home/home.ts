@@ -2,10 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {OrgProfilePage} from '../org-profile/org-profile';
 //import {LoginPage} from '../login/login';
-
-
-
-813e45b7f33c72b4a10dfd8723a84412b0d77c8f
 // We import the authentication provider to test the log-out function.
 import { AuthProvider } from '../../providers/auth/auth';
 import { SMS } from '@ionic-native/sms';

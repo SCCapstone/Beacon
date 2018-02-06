@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SMS } from '@ionic-native/sms'
-import { MyApp } from './app.component';
+import { MyApp } from './app.component'; //this imports the firebase config which is part of the exported class in app.component.ts
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
@@ -13,21 +13,11 @@ import { CreatePostPage } from '../pages/create-post/create-post';
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
 
 import { AuthProvider } from '../providers/auth/auth';
 
-
-
-/*  var config = {
-    apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
-    authDomain: "ionicdbtest1.firebaseapp.com",
-    databaseURL: "https://ionicdbtest1.firebaseio.com",
-    projectId: "ionicdbtest1",
-    storageBucket: "ionicdbtest1.appspot.com",
-    messagingSenderId: "207415494381"
-  };*/
-
+//import {config} from './app.component'; //importing firebase config
 
 //this is the root module, it controls the rest of the app
 @NgModule({
@@ -43,8 +33,8 @@ import { AuthProvider } from '../providers/auth/auth';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,//added by ryan for angularfire2
-//   AngularFireModule.initializeApp(config),//ryan, for angularfire2
-    AngularFireAuthModule
+   AngularFireModule.initializeApp(MyApp.config),//ryan, for angularfire2, necessary to populate feed
+    AngularFireAuthModule //added by Ahmed for authentication system
   ],
   bootstrap: [IonicApp],
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
@@ -61,11 +51,7 @@ import { AuthProvider } from '../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     CreatePostPage,
-<<<<<<< HEAD
-    
-=======
     SMS
->>>>>>> 813e45b7f33c72b4a10dfd8723a84412b0d77c8f
   ]
 })
 export class AppModule {}

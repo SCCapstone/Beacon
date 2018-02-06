@@ -29,6 +29,10 @@ export class MyApp { //this is template for the root component that is set in mo
 // This lets us access our pages as children from the Home
 @ViewChild(Nav) nav: Nav;
 
+
+
+
+
   /**
   **********************************************************************
   ** rootPage: any; => this is a NavController which is the base class
@@ -70,7 +74,6 @@ export class MyApp { //this is template for the root component that is set in mo
     storageBucket: "ionicdbtest1.appspot.com",
     messagingSenderId: "207415494381"
   };
-
 
 
 // used for an example of ngFor and navigation
