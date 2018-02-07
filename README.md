@@ -42,12 +42,12 @@ platforms/osx/build/MyApp
 this version of Beacon includes:
 
 Login authentication using firebase, reset password option, signup option, sms texting option: please download binary below:   
-*What does this link do?* - Ryan Roe  
+*This link is for what was necessary to turn in at the end of CSCE490, and is not entirely helpful now.* - Ryan Roe  
 https://github.com/SCCapstone/Beacon/releases/download/1.0/Beacon-release.zip
 
 
 ## *Ionic View Testing*
-To easily test the app on a phone without running an emulator, download the Ionic View app provided by Ionic on the App Store or Google Play Store. Use the Public share code 72ee79b7. We have an sms function on 1a090745.
+To easily test the app on a phone without running an emulator, download the Ionic View app provided by Ionic on the App Store or Google Play Store. Use the Public share code *9421b88b*. We have an sms function on 1a090745.  
 
 ## Simulator testing
 
