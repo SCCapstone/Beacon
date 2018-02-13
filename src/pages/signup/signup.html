@@ -16,6 +16,7 @@
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
     </ion-item>
+
     <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
       <p>Please enter a valid email.</p>
     </ion-item>
@@ -27,6 +28,17 @@
     </ion-item>
     <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
       <p>Your password needs more than 6 characters.</p>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label stacked>Repeat Password</ion-label>
+      <ion-input formControlName="password2" type="password" placeholder="Your password"
+        [class.invalid]="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid  && signupForm.controls.password2.dirty">
+      <p>Your passwords do not match.</p>
     </ion-item>
 
     <button ion-button block type="submit">

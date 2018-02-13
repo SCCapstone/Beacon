@@ -3,7 +3,9 @@ import { IonicPage, NavController, LoadingController, Loading, AlertController }
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
+import { PasswordValidator } from '../../validators/password';
 import { HomePage } from '../home/home';
+
 
 @IonicPage()
 @Component({
@@ -19,7 +21,8 @@ export class SignupPage {
     
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
     });
   
   }
