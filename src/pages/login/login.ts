@@ -44,6 +44,31 @@ export class LoginPage {
     });
   }
 
+facebookLogin(){
+
+    this.authProvider.facebookLogin().then( authData => {
+        this.loading.dismiss().then( () => {
+          this.navCtrl.setRoot(HomePage);
+        });
+      }, error => {
+        this.loading.dismiss().then( () => {
+          let alert = this.alertCtrl.create({
+            message: "Error loading facebook login",
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
+
+      this.loading = this.loadingCtrl.create();
+      this.loading.present();
+  }
+  
   loginUser(){
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
