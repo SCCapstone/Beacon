@@ -11,6 +11,8 @@ import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by A
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
 import { UserTypePage } from '../pages/user-type/user-type'; //Amanda
+import { IndvSignUpPage } from '../pages/indv-sign-up/indv-sign-up'; //Amanda
+
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
