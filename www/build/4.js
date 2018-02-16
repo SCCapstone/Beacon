@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 484:
+/***/ 488:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrgProfilePageModule", function() { return OrgProfilePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserTypePageModule", function() { return UserTypePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__org_profile__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_type__ = __webpack_require__(308);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var OrgProfilePageModule = (function () {
-    function OrgProfilePageModule() {
+var UserTypePageModule = (function () {
+    function UserTypePageModule() {
     }
-    return OrgProfilePageModule;
+    return UserTypePageModule;
 }());
-OrgProfilePageModule = __decorate([
+UserTypePageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__org_profile__["a" /* OrgProfilePage */],
+            __WEBPACK_IMPORTED_MODULE_2__user_type__["a" /* UserTypePage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__org_profile__["a" /* OrgProfilePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__user_type__["a" /* UserTypePage */]),
         ],
     })
-], OrgProfilePageModule);
+], UserTypePageModule);
 
-//# sourceMappingURL=org-profile.module.js.map
+//# sourceMappingURL=user-type.module.js.map
 
 /***/ })
 

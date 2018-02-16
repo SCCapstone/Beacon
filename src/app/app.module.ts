@@ -10,6 +10,7 @@ import { ListPage } from '../pages/list/list';
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
+import { UserTypePage } from '../pages/user-type/user-type'; //Amanda
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
@@ -37,7 +38,10 @@ import { AuthProvider } from '../providers/auth/auth';
     ListPage,
     OrgProfilePage, //added by Amanda
     FeedPage,
-    CreatePostPage //added by Ryan
+    CreatePostPage, //added by Ryan
+
+
+    UserTypePage //amanda
   ],
     imports: [
     BrowserModule,
