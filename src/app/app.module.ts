@@ -20,6 +20,8 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import { Facebook } from '@ionic-native/facebook'
 
+import { Geolocation} from '@ionic-native/geolocation';
+
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
  const config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
