@@ -15,14 +15,9 @@ export class AuthProvider {
    * pseudo in app browser if the application is not downloaded. It asks for permissions and then 
    * logs the user in if successfull 
    */
-  facebookLogin(): Promise<any> {
-    return this.facebook.login(['email'])
-      .then( response => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider
-          .credential(response.authResponse.accessToken);
-
-        return firebase.auth().signInWithCredential(facebookCredential);
-      });
+  facebookLogin(facebookCredential): Promise<any> {
+    return firebase.auth().signInWithCredential(facebookCredential);
+      
   }  
 
   /**

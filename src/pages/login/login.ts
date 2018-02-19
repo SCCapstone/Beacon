@@ -21,6 +21,7 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 
 import { SignupChoicePage } from '../signup-choice/signup-choice';
+import { Facebook } from '@ionic-native/facebook';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -37,7 +38,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
-    public authProvider: AuthProvider) {
+    public authProvider: AuthProvider, public facebook: Facebook) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -47,27 +48,32 @@ export class LoginPage {
 
 facebookLogin(){
 
-    this.authProvider.facebookLogin().then( authData => {
-        this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage);
-        });
-      }, error => {
-        this.loading.dismiss().then( () => {
-          let alert = this.alertCtrl.create({
-            message: "Error loading facebook login",
-            buttons: [
-              {
-                text: "Ok",
-                role: 'cancel'
-              }
-            ]
+    this.facebook.login(['email'])
+      .then( response => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);  
+      this.authProvider.facebookLogin(facebookCredential).then( authData => {
+          this.loading.dismiss().then( () => {
+            this.navCtrl.setRoot(HomePage);
           });
-          alert.present();
+        }, error => {
+          this.loading.dismiss().then( () => {
+            let alert = this.alertCtrl.create({
+              message: "Error loading facebook login",
+              buttons: [
+                {
+                  text: "Ok",
+                  role: 'cancel'
+                }
+              ]
+            });
+            alert.present();
+          });
         });
-      });
 
-      this.loading = this.loadingCtrl.create();
-      this.loading.present();
+        this.loading = this.loadingCtrl.create();
+        this.loading.present();
+      });
   }
   
   loginUser(){
