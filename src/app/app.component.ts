@@ -16,6 +16,7 @@ import { ListPage } from '../pages/list/list';
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 //import { CreatePostPage } from '../pages/create-post/create-post';
+import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 
 
 
@@ -85,7 +86,7 @@ this.pages = [
   { title: 'Map', component: ListPage },
 
   ////Homepage Organization Profile Link
-  {title: 'Organization Profile', component: OrgProfilePage },
+  //{title: 'Organization Profile', component: OrgProfilePage },
 
   //Homepage Beacon Feed Link
   {title: 'Beacon Feed', component: FeedPage }

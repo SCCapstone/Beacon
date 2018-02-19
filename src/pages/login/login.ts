@@ -20,6 +20,7 @@ import { HomePage } from '../home/home';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 
+import { SignupChoicePage } from '../signup-choice/signup-choice';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -99,7 +100,7 @@ facebookLogin(){
   }
 
   goToSignup(){
-    this.navCtrl.push('SignupPage');
+    this.navCtrl.push('SignupChoicePage');
 
   }
 

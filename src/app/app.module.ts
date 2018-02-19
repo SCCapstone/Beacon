@@ -10,6 +10,7 @@ import { ListPage } from '../pages/list/list';
 import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
+import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 
 import { AngularFireModule } from "angularfire2" //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
@@ -35,7 +36,7 @@ import { Facebook } from '@ionic-native/facebook'
     MyApp, //sets root component
     HomePage,
     ListPage,
-    OrgProfilePage, //added by Amanda
+    //OrgProfilePage, //added by Amanda
     FeedPage,
     CreatePostPage //added by Ryan
   ],
@@ -52,9 +53,9 @@ import { Facebook } from '@ionic-native/facebook'
     MyApp,
     HomePage,
     ListPage,
-    OrgProfilePage, //added by Amanda
+    // OrgProfilePage, //added by Amanda
     FeedPage,
-    CreatePostPage //added by Ryan
+    CreatePostPage, //added by Ryan
   ],
   providers: [
     StatusBar,
