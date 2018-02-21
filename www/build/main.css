@@ -30789,3 +30789,7 @@ page-signup .invalid {
 page-signup .error-message .item-inner {
   border-bottom: 0 !important;
 }
+
+ion-header {
+  color: #e57373;
+}
