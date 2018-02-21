@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="red">
     <ion-title>Account type:</ion-title>
   </ion-navbar>
 
@@ -14,9 +14,19 @@
 
 
 <ion-content padding>
+
+  <p>Choose this if you are an
+        <strong>individual entity</strong> 
+      in search of posts from organizations. 
+    </p>
+
 	<button ion-button block type="submit" (click)="goToOrganizationSignupPage()">
 	Organization account
     </button>
+      <p>Choose this if you are an
+        <strong>organization or non-profit</strong> desiring to
+        <strong>provide aid, support, and relief</strong> to local people.
+      </p>
     <button ion-button block type="submit" (click)="goToPersonalSignupPage()">
      Personal account
     </button>
