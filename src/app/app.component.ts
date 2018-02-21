@@ -18,6 +18,8 @@ import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 //import { CreatePostPage } from '../pages/create-post/create-post';
 import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 
+import { AuthProvider } from '../providers/auth/auth';
+
 
 
 @Component({
@@ -62,7 +64,7 @@ export class MyApp { //this is template for the root component that is set in mo
     
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public authProvider: AuthProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
@@ -79,17 +81,18 @@ const config = {
 // used for an example of ngFor and navigation
 this.pages = [
 
+  //Homepage Beacon Feed Link
+  {title: 'Beacon Feed', component: FeedPage },
   //Homepage Nav Link
-  { title: 'Home', component: HomePage },
+  //{ title: 'Home', component: HomePage },
 
   //Homepage List Link
-  { title: 'Map', component: ListPage },
+  { title: 'Map', component: ListPage }
 
   ////Homepage Organization Profile Link
   //{title: 'Organization Profile', component: OrgProfilePage },
 
-  //Homepage Beacon Feed Link
-  {title: 'Beacon Feed', component: FeedPage }
+  
 
 ];
 
@@ -104,7 +107,7 @@ this.pages = [
         if (!user) {
           this.rootPage = 'LoginPage';
         } else {
-          this.rootPage = HomePage;
+          this.rootPage = FeedPage;
          
           var email = user.email;
         }
@@ -123,5 +126,11 @@ this.pages = [
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logMeOut() {
+    this.authProvider.logoutUser().then( () => {
+      this.nav.setRoot('LoginPage');
+    });
   }
 }

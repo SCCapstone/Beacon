@@ -16,7 +16,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import * as firebase from 'firebase';
 //import {AngularFireDatabase} from 'angularfire2/database';
-import { HomePage } from '../home/home';
+import { FeedPage } from '../feed/feed';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 
@@ -54,7 +54,7 @@ facebookLogin(){
           .credential(response.authResponse.accessToken);  
       this.authProvider.facebookLogin(facebookCredential).then( authData => {
           this.loading.dismiss().then( () => {
-            this.navCtrl.setRoot(HomePage);
+            this.navCtrl.setRoot(FeedPage);
           });
         }, error => {
           this.loading.dismiss().then( () => {
@@ -83,7 +83,7 @@ facebookLogin(){
       this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then( authData => {
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(FeedPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {

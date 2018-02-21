@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
-import { HomePage } from '../home/home';
+import { FeedPage } from '../feed/feed';
 
 
 @IonicPage()
@@ -34,7 +34,7 @@ export class SignupPage {
       this.authProvider.signupUser(this.signupForm.value.email, this.signupForm.value.password)
       .then(() => {
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(FeedPage);
         });
       }, (error) => {
         this.loading.dismiss().then( () => {
