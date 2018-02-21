@@ -17,8 +17,7 @@ import {LocationProvider} from '../../providers/location/location';
 export class OrgProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private locationProvider : LocationProvider) {
-  	this.orgmessage = this.locationProvider.username;
-  	//this.orgmessage = this.locationProvider.usersLocation.lat;
+  	
   }
 
   ionViewDidLoad() {

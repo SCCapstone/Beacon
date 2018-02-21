@@ -30,7 +30,7 @@ arrData = []
 postData =[]
 createPostMessage : any = "original messsage";
 testingPostsArr : any = [];
-
+locationprovidermessage;
 //msglat = LocationProvider.lat;
 //msglon = LocationProvider.lon;
 //second firebase messaging try variable
