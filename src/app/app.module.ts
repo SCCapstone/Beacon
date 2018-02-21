@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -16,6 +17,8 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
 import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
 
 import { AuthProvider } from '../providers/auth/auth';
+import { LocationProvider } from '../providers/location/location';
+import { Geolocation } from '@ionic-native/geolocation';
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
  const config = {
@@ -39,13 +42,14 @@ import { AuthProvider } from '../providers/auth/auth';
   ],
     imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,//added by ryan for angularfire2
     //Firebase.initializeApp(config);
    AngularFireModule.initializeApp(config),//ryan, for angularfire2, necessary to populate feed
     AngularFireAuthModule //added by Ahmed for authentication system
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [IonicApp], 
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
     HomePage,
@@ -60,7 +64,9 @@ import { AuthProvider } from '../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     CreatePostPage,
-    SMS
+    SMS,
+    LocationProvider, //adding providers into bootstrap means that one instance is created for all components
+    Geolocation
   ]
 })
 export class AppModule {}

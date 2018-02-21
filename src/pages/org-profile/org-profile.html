@@ -15,6 +15,23 @@
 
 
 <ion-content padding>
+
+<ion-list>
+  <ion-item>
+    {{locationProvider.message}}
+  </ion-item>
+</ion-list>    
+
+<ion-list>
+  <ion-item>
+    This list is working
+  </ion-item>
+</ion-list>   
+<ion-list>
+  <ion-item>
+    {{orgmessage}}
+  </ion-item>
+</ion-list>   
   <ion-item>
     <ion-label color="primary">Organization Name*</ion-label>
     <ion-input type="email" placeholder="enter text here"></ion-input>
@@ -57,6 +74,6 @@
 
 <button ion-button round>Submit</button>
 
-<button ion-button round>Cancle</button>
+<button ion-button round>Cancel</button>
 
 </ion-content>
