@@ -30761,35 +30761,35 @@ page-reset-password .error-message .item-inner {
   border-bottom: 0 !important;
 }
 
-page-signup form {
+ion-header {
+  color: #e57373;
+}
+
+page-user-signup form {
   margin-bottom: 32px;
 }
 
-page-signup form button {
+page-user-signup form button {
   margin-top: 20px;
 }
 
-page-signup p {
+page-user-signup p {
   font-size: 0.8em;
   color: #d2d2d2;
 }
 
-page-signup ion-label {
+page-user-signup ion-label {
   margin-left: 5px;
 }
 
-page-signup ion-input {
+page-user-signup ion-input {
   padding: 5px;
 }
 
-page-signup .invalid {
+page-user-signup .invalid {
   border-bottom: 1px solid #FF6153;
 }
 
-page-signup .error-message .item-inner {
+page-user-signup .error-message .item-inner {
   border-bottom: 0 !important;
-}
-
-ion-header {
-  color: #e57373;
 }

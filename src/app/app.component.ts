@@ -8,18 +8,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 import { AngularFireModule } from "angularfire2" //ryan
 
-
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 //import { LoginPage } from '../pages/login/login'; // added by Amanda
-import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
+import { OrgSignupPage } from '../pages/org-signup/org-signup'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 //import { CreatePostPage } from '../pages/create-post/create-post';
 import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 
 import { AuthProvider } from '../providers/auth/auth';
-
+import { UserSignupPage } from '../pages/user-signup/user-signup';
 
 
 @Component({
@@ -83,8 +81,6 @@ this.pages = [
 
   //Homepage Beacon Feed Link
   {title: 'Beacon Feed', component: FeedPage },
-  //Homepage Nav Link
-  //{ title: 'Home', component: HomePage },
 
   //Homepage List Link
   { title: 'Map', component: ListPage }

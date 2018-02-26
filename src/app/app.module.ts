@@ -6,13 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SMS } from '@ionic-native/sms'
 import { MyApp } from './app.component'; //this imports the firebase config which is part of the exported class in app.component.ts
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { OrgProfilePage } from '../pages/org-profile/org-profile'; // added by Amanda
+import { OrgSignupPage } from '../pages/org-signup/org-signup'; // added by Amanda
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
 import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
-
+import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
 import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
@@ -55,7 +54,6 @@ import { Facebook } from '@ionic-native/facebook';
   bootstrap: [IonicApp], 
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
-    HomePage,
     ListPage,
     // OrgProfilePage, //added by Amanda
     FeedPage,

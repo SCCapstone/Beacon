@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 485:
+/***/ 493:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(500);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,7 +41,7 @@ LoginPageModule = __decorate([
 
 /***/ }),
 
-/***/ 491:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65,18 +65,18 @@ var EmailValidator = (function () {
 
 /***/ }),
 
-/***/ 492:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feed_feed__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_email__ = __webpack_require__(491);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_facebook__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feed_feed__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_email__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_facebook__ = __webpack_require__(155);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,7 +182,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/login/login.html"*/'<ion-header>\n\n  <ion-navbar color="secondary">\n\n    <ion-title>\n\nWelcome To Beacon\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="login">\n\n  <img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> \n\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Email</ion-label>\n\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">\n\n<!---<button ion-button round [navPush]="listPage">Login</button>-->\n\n<!--<button (click) = "btnAddClicked()" ion-button> Login </button>-->\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Password</ion-label>\n\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">\n\n      <p>Your password needs more than 6 characters.</p>\n\n    </ion-item>\n<!--\nLOGIN\n-->\n    <button ion-button block type="submit" class="btn">\n      Login\n    </button>\n\n  </form>\n<!--\nCREATE NEW ACCOUNT BUTTON\n-->\n  <button ion-button block type (click)="goToSignup()" class="btn">\n    Create a new account\n  </button>\n\n  <button ion-button block type (click)="goToResetPassword()" class="btn">\n    I forgot my password\n  </button>\n\n  <button ion-button block type (click)="facebookLogin()" class="btn">\n    Login With Facebook\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/login/login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"/Users/khorykotowski/Documents/GitHub/Beacon/src/pages/login/login.html"*/'<ion-header>\n\n  <ion-navbar color="secondary">\n\n    <ion-title>\n\nWelcome To Beacon\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="login">\n\n  <img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> \n\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Email</ion-label>\n\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">\n\n<!---<button ion-button round [navPush]="listPage">Login</button>-->\n\n<!--<button (click) = "btnAddClicked()" ion-button> Login </button>-->\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Password</ion-label>\n\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">\n\n      <p>Your password needs more than 6 characters.</p>\n\n    </ion-item>\n<!--\nLOGIN\n-->\n    <button ion-button block type="submit" class="btn">\n      Login\n    </button>\n\n  </form>\n<!--\nCREATE NEW ACCOUNT BUTTON\n-->\n  <button ion-button block type (click)="goToSignup()" class="btn">\n    Create a new account\n  </button>\n\n  <button ion-button block type (click)="goToResetPassword()" class="btn">\n    I forgot my password\n  </button>\n\n  <button ion-button block type (click)="facebookLogin()" class="btn">\n    Login With Facebook\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/khorykotowski/Documents/GitHub/Beacon/src/pages/login/login.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],

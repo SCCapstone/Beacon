@@ -30,7 +30,7 @@ export class SignupChoicePage {
 
   goToOrganizationSignupPage()
   {
-  	this.navCtrl.push('OrgProfilePage');
+  	this.navCtrl.push('OrgSignupPage');
   }
 
 }
