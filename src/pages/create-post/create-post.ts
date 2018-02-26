@@ -67,7 +67,7 @@ userEmail: Observable<any>;
 }
 
 //Sends the post information to database
- chatSend(theirMessage: string, theirTitle: string, theirLocation: string, theirImage: string, theirUser : string, 
+ chatSend(theirMessage: string, theirTitle: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string, 
   theirUserName: string) {
  	const item = {
  		message: theirMessage, //works
@@ -78,6 +78,7 @@ userEmail: Observable<any>;
     //username: theirUserName,
    // location: theirLocation,
    // image: theirImage
+   // userImage : userImageSrc
  	 }
     this.itemsRef.push(item);
     this.navCtrl.setRoot(FeedPage); 

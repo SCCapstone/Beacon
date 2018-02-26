@@ -34,10 +34,11 @@ export class AuthProvider {
    * 3. It creates a database node for the user to store the userProfile, which starts with just
    *    the email address.
    */
-  signupUser(email: string, password: string): Promise<any> {
+  signupUser(email: string, password: string, phone: string): Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(email, password).then((newUser) => {
       firebase.database().ref('/userProfile').child(newUser.uid).set({
-          email: email
+          email: email,
+          userPhone: phone
       });
     });
   }
