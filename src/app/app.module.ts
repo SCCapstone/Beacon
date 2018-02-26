@@ -36,7 +36,6 @@ import { Facebook } from '@ionic-native/facebook';
 @NgModule({
   declarations: [
     MyApp, //sets root component
-    HomePage,
     ListPage,
     //OrgProfilePage, //added by Amanda
     FeedPage,

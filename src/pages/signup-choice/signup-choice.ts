@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SignupPage } from '../signup/signup';
+import { UserSignupPage } from '../user-signup/user-signup';
 
 /**
  * Generated class for the SignupChoicePage page.
@@ -25,7 +25,7 @@ export class SignupChoicePage {
 
   goToPersonalSignupPage()
   {
-  	this.navCtrl.push('SignupPage');
+  	this.navCtrl.push('UserSignupPage');
   }
 
   goToOrganizationSignupPage()
