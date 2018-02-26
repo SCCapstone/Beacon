@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, Loading, AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -15,10 +15,11 @@ import { FeedPage } from '../feed/feed';
 export class UserSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, 
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public loadingCtrl: LoadingController, 
   public alertCtrl: AlertController, public formBuilder: FormBuilder, 
   public authProvider: AuthProvider) {
-    
+    this.menuCtrl.enable(false, 'navMenu');
+
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],

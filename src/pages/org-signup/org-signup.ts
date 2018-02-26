@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import {LocationProvider} from '../../providers/location/location';
 
 /**
@@ -16,8 +16,9 @@ import {LocationProvider} from '../../providers/location/location';
 })
 export class OrgSignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private locationProvider : LocationProvider) {
-  	
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private locationProvider : LocationProvider) {
+  	this.menuCtrl.enable(false, 'navMenu');
+
   }
 
   ionViewDidLoad() {

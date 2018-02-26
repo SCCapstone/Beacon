@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { UserSignupPage } from '../user-signup/user-signup';
 
 /**
@@ -16,7 +16,8 @@ import { UserSignupPage } from '../user-signup/user-signup';
 })
 export class SignupChoicePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
+    this.menuCtrl.enable(false, 'navMenu');
   }
 
   ionViewDidLoad() {

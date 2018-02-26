@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -47,9 +47,10 @@ userEmail: Observable<any>;
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
     
+    this.menuCtrl.enable(false, 'navMenu');
   	this.fdb.list("/posts/").valueChanges().subscribe(_data => {
 		this.arrData = _data;
 

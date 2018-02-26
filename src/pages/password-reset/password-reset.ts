@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, Loading, LoadingController, MenuController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -13,10 +13,11 @@ export class PasswordResetPage {
   public resetPasswordForm:FormGroup;
   public loading:Loading;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, 
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public alertCtrl: AlertController, 
     public formBuilder: FormBuilder, public authProvider: AuthProvider,
     public loadingCtrl: LoadingController) {
-
+    
+    this.menuCtrl.enable(false, 'navMenu');
     this.resetPasswordForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])]
     });

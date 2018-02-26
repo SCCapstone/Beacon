@@ -1,5 +1,5 @@
 import { Component, Pipe } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController} from 'ionic-angular';
 
 import { CreatePostPage } from '../create-post/create-post';
 import {LoginPage} from '../login/login';
@@ -36,9 +36,10 @@ public loadedPostList:Array<any>; //So we dont have to call data twice from fire
 public postRef:firebase.database.Reference;//Is to store the list of posts we’re pulling from Firebase.
 //public loading:Loading;
 
-constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
+constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 	public authProvider: AuthProvider, public loadingCtrl: LoadingController) { 
 
+	this.menuCtrl.enable(true, 'navMenu');
   	//this.itemsRef = fdb.list('/messages');
     //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
 

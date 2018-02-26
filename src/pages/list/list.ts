@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
  
 declare var google;
 
@@ -11,7 +11,8 @@ export class ListPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   name: string = "";
-  constructor(public navCtrl: NavController) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController) {
+    this.menuCtrl.enable(true, 'navMenu');
   }
   ionViewDidLoad() {
     this.initializeMap();

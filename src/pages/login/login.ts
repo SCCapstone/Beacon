@@ -12,7 +12,9 @@ import {
   NavParams,
   Loading,
   LoadingController,
-  AlertController } from 'ionic-angular';
+  AlertController,
+  MenuController
+   } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import * as firebase from 'firebase';
 //import {AngularFireDatabase} from 'angularfire2/database';
@@ -36,10 +38,11 @@ export class LoginPage {
   public loading:Loading;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
     public authProvider: AuthProvider, public facebook: Facebook) {
 
+    this.menuCtrl.enable(false, 'navMenu');
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
