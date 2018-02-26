@@ -17,9 +17,9 @@ Welcome To Beacon
 
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
-    <ion-item class = "input-form">
+    <ion-item class="input-form">
 
-      <ion-label stacked>Email</ion-label>
+      <ion-label stacked color="primary">Email</ion-label>
 
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
@@ -40,7 +40,7 @@ Welcome To Beacon
 
     <ion-item class = "input-form">
 
-      <ion-label stacked>Password</ion-label>
+      <ion-label stacked color="primary">Password</ion-label>
 
       <ion-input formControlName="password" type="password" placeholder="Your password"
         [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>
