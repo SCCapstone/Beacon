@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,6 +18,8 @@ import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
 import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
 
 import { AuthProvider } from '../providers/auth/auth';
+import { LocationProvider } from '../providers/location/location';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { Facebook } from '@ionic-native/facebook'
 
@@ -44,13 +47,14 @@ import { Geolocation} from '@ionic-native/geolocation';
   ],
     imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,//added by ryan for angularfire2
     //Firebase.initializeApp(config);
    AngularFireModule.initializeApp(config),//ryan, for angularfire2, necessary to populate feed
     AngularFireAuthModule //added by Ahmed for authentication system
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [IonicApp], 
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
     HomePage,
@@ -66,6 +70,8 @@ import { Geolocation} from '@ionic-native/geolocation';
     AuthProvider,
     CreatePostPage,
     SMS,
+    LocationProvider, //adding providers into bootstrap means that one instance is created for all components
+    Geolocation,
     Facebook
   ]
 })

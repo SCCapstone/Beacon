@@ -7,70 +7,82 @@
 
 <ion-header>
 <ion-navbar color="secondary">
-
+    <ion-grid>
+      <ion-row>
+        <ion-title> Beacon Feed</ion-title>
+      </ion-row>
+      <ion-row>
+        <ion-col width-10>
   	 <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title> Beacon Feed</ion-title>
+  </ion-col>
+    <ion-col width-80>
+     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+     </ion-col>
+     <ion-col width-10>
+         <h3 align="right"> New Post 
+          <button (click) = "btnCreateClicked()" ion-button outline icon-only>
+         <ion-icon name='create' is-active="false"></ion-icon>
+       </button>
+     </h3>
+  </ion-col>
+
+   </ion-row>
+   </ion-grid>
   </ion-navbar>
-  <h3 align="right"> New Post 
-  <button (click) = "btnCreateClicked()" ion-button outline icon-only>
-      <ion-icon name='create' is-active="false"></ion-icon>
-    </button>
-  </h3>
 </ion-header>
 
 
-<ion-content padding>
-
-
-	
-   
+<ion-content>
 
 
 
- <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
-  <ion-card>
+
 <!--html template for the title, username, avatar, and date-->
-     <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">
-    </ion-avatar>
-    <h2> {{item.title}}</h2>
-    <h2>United Red Cross
-    </h2>
-    <p>{{item.timestamp  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
-  </ion-item>
-<!--creates the card content using two way data linking for an async for loop-->
-    <ion-card-content>
 
-      <a href="#">{{item.name}}</a>
-      
-      <p>{{item.message}}</p>
-    </ion-card-content>
-<!--Creates the likes, comments, and time since post-->
+ <div class="chat-container" *ngFor=" let item of postList "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
+    <ion-card>
+      <!--Avatar image, title, and timestamp-->
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">
+        </ion-avatar>
+        <h2>{{item.title}}</h2>
+        <h2>United Red Cross</h2>
+        <p>{{item.timestamp  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p> <span> </span> <p>{{item.PostType}}</p>
+      </ion-item>
+
+      <!--creates the card content using two way data linking for an async for loop-->
+      <ion-card-content>
+        <a href="#">{{item.name}}</a>
+        <p>{{item.message}}</p>
+      </ion-card-content>
+      <!--Creates the likes, comments, and time since post-->
     <ion-row>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>0 Likes</div>
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left clear small>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>0 Likes</div>
+        </button>
+      </ion-col>
+
+      <ion-col>
+        <button ion-button icon-left clear small>
         <ion-icon name="text"></ion-icon>
         <div>0 Comments</div>
-      </button>
-    </ion-col>
-    <ion-col center text-center>
-      <ion-note>
-        <!--11h ago-->
-      </ion-note>
-    </ion-col>
-  </ion-row>
+        </button>
+      </ion-col>
+
+      <ion-col center text-center>
+        <ion-note>
+          <!--11h ago-->
+        </ion-note>
+      </ion-col>
+    </ion-row>
 
   </ion-card>
-  </div>
 
+  </div>
 
 </ion-content>

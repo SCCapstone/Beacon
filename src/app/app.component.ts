@@ -96,10 +96,8 @@ this.pages = [
 
 ];
 
-    //initialize Firebase with app
+    //initialize Firebase with app, angularfiremodule is initialized in module.
     firebase.initializeApp(config);
-   // AngularFireModule.initializeApp(config)
- //AngularFireModule.initializeApp(config)
 
     //keeps track of auth changes
     firebase.auth().onAuthStateChanged( user => {
