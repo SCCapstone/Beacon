@@ -16,10 +16,12 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import * as firebase from 'firebase';
 //import {AngularFireDatabase} from 'angularfire2/database';
-import { HomePage } from '../home/home';
+import { FeedPage } from '../feed/feed';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 
+import { SignupChoicePage } from '../signup-choice/signup-choice';
+import { Facebook } from '@ionic-native/facebook';
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -36,7 +38,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
-    public authProvider: AuthProvider) {
+    public authProvider: AuthProvider, public facebook: Facebook) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -44,6 +46,36 @@ export class LoginPage {
     });
   }
 
+facebookLogin(){
+
+    this.facebook.login(['email'])
+      .then( response => {
+        const facebookCredential = firebase.auth.FacebookAuthProvider
+          .credential(response.authResponse.accessToken);  
+      this.authProvider.facebookLogin(facebookCredential).then( authData => {
+          this.loading.dismiss().then( () => {
+            this.navCtrl.setRoot(FeedPage);
+          });
+        }, error => {
+          this.loading.dismiss().then( () => {
+            let alert = this.alertCtrl.create({
+              message: "Error loading facebook login",
+              buttons: [
+                {
+                  text: "Ok",
+                  role: 'cancel'
+                }
+              ]
+            });
+            alert.present();
+          });
+        });
+
+        this.loading = this.loadingCtrl.create();
+        this.loading.present();
+      });
+  }
+  
   loginUser(){
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
@@ -51,7 +83,7 @@ export class LoginPage {
       this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then( authData => {
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(FeedPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -74,7 +106,7 @@ export class LoginPage {
   }
 
   goToSignup(){
-    this.navCtrl.push('SignupPage');
+    this.navCtrl.push('SignupChoicePage');
 
   }
 

@@ -1,5 +1,5 @@
 <ion-header>
-<ion-navbar color="red">
+<ion-navbar color="secondary">
     <ion-title>
       Create an Account
     </ion-title>
@@ -11,11 +11,41 @@
   <img src="http://placehold.it/300x100">
   <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
 
+<!--Amanda -->
+
+   <ion-item>
+      <ion-label stacked>Name</ion-label>
+      <ion-input  placeholder="Your Name"></ion-input>
+    </ion-item>
+
+<!-- Khory -->
     <ion-item>
       <ion-label stacked>Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
     </ion-item>
+
+<!--Amanda -->
+
+   <ion-item>
+      <ion-label stacked> Repeat Email</ion-label>
+      <ion-input  placeholder="Your email address"></ion-input>
+    </ion-item>
+
+<!--Amanda -->
+
+   <ion-item>
+      <ion-label stacked>Phone Numeber</ion-label>
+      <ion-input  placeholder="555-555-5555"></ion-input>
+    </ion-item>
+
+   <ion-item>
+      <ion-label stacked>Repeat Phone Number</ion-label>
+      <ion-input  placeholder="555-555-5555"></ion-input>
+    </ion-item>
+
+
+<!-- Khory -->
     <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
       <p>Please enter a valid email.</p>
     </ion-item>
@@ -29,8 +59,23 @@
       <p>Your password needs more than 6 characters.</p>
     </ion-item>
 
-    <button ion-button block type="submit">
-      Create an Account
+
+    <ion-item>
+      <ion-label stacked>Repeat Password</ion-label>
+      <ion-input formControlName="password2" type="password" placeholder="Your password"
+        [class.invalid]="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">
+      </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid  && signupForm.controls.password2.dirty">
+      <p>Your passwords do not match.</p>
+    </ion-item>
+
+    <button ion-button block type="Submit">
+      Sign up 
+    </button>
+
+    <button ion-button block type="Submit">
+      Cancel
     </button>
 
   </form>
