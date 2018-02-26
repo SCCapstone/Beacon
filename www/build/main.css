@@ -30617,10 +30617,10 @@ h1 {
   outline: none;
   color: #fff;
   font-weight: bold;
-  background-color: #318BA6;
+  background-color: #8BC9B3;
   border-radius: 3px;
-  -webkit-box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #318BA6;
-  box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #318BA6;
+  -webkit-box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #8BC9B3;
+  box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #8BC9B3;
   border: none;
   -webkit-transition: -webkit-box-shadow .3s;
   transition: -webkit-box-shadow .3s;

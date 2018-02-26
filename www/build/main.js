@@ -79,7 +79,7 @@ var CreatePostPage = (function () {
 }());
 CreatePostPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-create-post',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n<ion-header>\n\n  <ion-navbar color="red">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <ion-list>\n    <ion-item>\n      <ion-label fixed>Title</ion-label>\n      <ion-input type="text" [(ngModel)]="postTitle"></ion-input> <!--puts data into variable that is references in .ts ryan-->\n    </ion-item>\n\n    <ion-item>\n      <ion-label fixed>Content</ion-label>\n      <ion-input type="text" [(ngModel)]="postContent"></ion-input>\n    </ion-item>\n  </ion-list>\n\n\n<button ion-button block (click)="chatSend( postContent, postTitle)">\n    Create New Post\n</button>\n\n<!-- Test for username Ryan\n<button ion-button block (click)="doAlert()">Basic Alert to test username</button>\n\n<p> getPostContent()</p>\n-->\n\n</ion-content>'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/,
+        selector: 'page-create-post',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n<ion-header>\n\n  <ion-navbar color="secondary">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n  <ion-list>\n    <ion-item>\n      <ion-label fixed>Title</ion-label>\n      <ion-input type="text" [(ngModel)]="postTitle"></ion-input> <!--puts data into variable that is references in .ts ryan-->\n    </ion-item>\n\n    <ion-item>\n      <ion-label fixed>Content</ion-label>\n      <ion-input type="text" [(ngModel)]="postContent"></ion-input>\n    </ion-item>\n  </ion-list>\n\n\n<button ion-button block (click)="chatSend( postContent, postTitle)">\n    Create New Post\n</button>\n\n<!-- Test for username Ryan\n<button ion-button block (click)="doAlert()">Basic Alert to test username</button>\n\n<p> getPostContent()</p>\n-->\n\n</ion-content>'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], CreatePostPage);
@@ -110,11 +110,11 @@ webpackEmptyAsyncContext.id = 160;
 
 var map = {
 	"../pages/create-post/create-post.module": [
-		484,
+		483,
 		7
 	],
 	"../pages/feed/feed.module": [
-		483,
+		484,
 		6
 	],
 	"../pages/login/login.module": [
@@ -126,7 +126,7 @@ var map = {
 		5
 	],
 	"../pages/password-reset/password-reset.module": [
-		487,
+		488,
 		1
 	],
 	"../pages/signup-choice/signup-choice.module": [
@@ -134,7 +134,7 @@ var map = {
 		4
 	],
 	"../pages/signup/signup.module": [
-		488,
+		487,
 		0
 	],
 	"../pages/welcome/welcome.module": [
@@ -317,12 +317,12 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
                 links: [
-                    { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/create-post/create-post.module#CreatePostPageModule', name: 'CreatePostPage', segment: 'create-post', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/org-profile/org-profile.module#OrgProfilePageModule', name: 'OrgProfilePage', segment: 'org-profile', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup-choice/signup-choice.module#SignupChoicePageModule', name: 'SignupChoicePage', segment: 'signup-choice', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] }
                 ]
@@ -513,7 +513,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/home/home.html"*/'<ion-header>\n<ion-navbar color="red">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Beacon\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n\n  <h3>Welcome to Beacon</h3>\n \n  	\n		<img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> \n  <p>\n    This app is for emergency situations.\n  </p>\n  \n\n\n\n  <button ion-button color="positive" block (click)="logMeOut()">\n    Log Out\n  </button>\n\n\n\n  <button ion-button icon-left clear item-right (click)="sendMessage()">\n      <ion-icon name="checkmark"></ion-icon>\n      Send Message\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/home/home.html"*/'<ion-header>\n<ion-navbar color="secondary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Beacon\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n\n  <h3>Welcome to Beacon</h3>\n \n  	\n		<img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> \n  <p>\n    This app is for emergency situations.\n  </p>\n  \n\n\n\n  <button ion-button color="positive" block (click)="logMeOut()">\n    Log Out\n  </button>\n\n\n\n  <button ion-button icon-left clear item-right (click)="sendMessage()">\n      <ion-icon name="checkmark"></ion-icon>\n      Send Message\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__ionic_native_sms__["a" /* SMS */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */]])
 ], HomePage);
@@ -649,7 +649,7 @@ var FeedPage = (function () {
 }());
 FeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-feed',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="red">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title> Beacon Feed</ion-title>\n  </ion-navbar>\n  <h3 align="right"> New Post \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only>\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h3>\n</ion-header>\n\n\n<ion-content padding>\n\n\n	\n   \n\n\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>United Red Cross\n    </h2>\n    <p>{{item.timestamp  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>0 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        <!--11h ago-->\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/,
+        selector: 'page-feed',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="secondary">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title> Beacon Feed</ion-title>\n  </ion-navbar>\n  <h3 align="right"> New Post \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only>\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h3>\n</ion-header>\n\n\n<ion-content padding>\n\n\n	\n   \n\n\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>United Red Cross\n    </h2>\n    <p>{{item.timestamp  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>0 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        <!--11h ago-->\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
 ], FeedPage);
