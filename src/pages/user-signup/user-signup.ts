@@ -21,6 +21,7 @@ export class UserSignupPage {
     this.menuCtrl.enable(false, 'navMenu');
 
     this.signupForm = formBuilder.group({
+      name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])],
@@ -33,7 +34,7 @@ export class UserSignupPage {
     if (!this.signupForm.valid){
       console.log(this.signupForm.value);
     } else {
-      this.authProvider.signupUser(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.phone)
+      this.authProvider.signupUser(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.phone)
       .then(() => {
         this.loading.dismiss().then( () => {
           this.navCtrl.setRoot(FeedPage);
