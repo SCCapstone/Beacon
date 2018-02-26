@@ -7,8 +7,8 @@ webpackJsonp([2],{
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(490);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(492);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -41,7 +41,7 @@ LoginPageModule = __decorate([
 
 /***/ }),
 
-/***/ 489:
+/***/ 491:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65,17 +65,18 @@ var EmailValidator = (function () {
 
 /***/ }),
 
-/***/ 490:
+/***/ 492:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_email__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feed_feed__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_email__ = __webpack_require__(491);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_facebook__ = __webpack_require__(150);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,19 +100,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams, loadingCtrl, alertCtrl, formBuilder, authProvider) {
+    function LoginPage(navCtrl, navParams, loadingCtrl, alertCtrl, formBuilder, authProvider, facebook) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.formBuilder = formBuilder;
         this.authProvider = authProvider;
+        this.facebook = facebook;
         this.loginForm = formBuilder.group({
             email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_5__validators_email__["a" /* EmailValidator */].isValid])],
             password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])]
         });
     }
+    LoginPage.prototype.facebookLogin = function () {
+        var _this = this;
+        this.facebook.login(['email'])
+            .then(function (response) {
+            var facebookCredential = firebase.auth.FacebookAuthProvider
+                .credential(response.authResponse.accessToken);
+            _this.authProvider.facebookLogin(facebookCredential).then(function (authData) {
+                _this.loading.dismiss().then(function () {
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feed_feed__["a" /* FeedPage */]);
+                });
+            }, function (error) {
+                _this.loading.dismiss().then(function () {
+                    var alert = _this.alertCtrl.create({
+                        message: "Error loading facebook login",
+                        buttons: [
+                            {
+                                text: "Ok",
+                                role: 'cancel'
+                            }
+                        ]
+                    });
+                    alert.present();
+                });
+            });
+            _this.loading = _this.loadingCtrl.create();
+            _this.loading.present();
+        });
+    };
     LoginPage.prototype.loginUser = function () {
         var _this = this;
         if (!this.loginForm.valid) {
@@ -121,7 +152,7 @@ var LoginPage = (function () {
             this.authProvider.loginUser(this.loginForm.value.email, this.loginForm.value.password)
                 .then(function (authData) {
                 _this.loading.dismiss().then(function () {
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__feed_feed__["a" /* FeedPage */]);
                 });
             }, function (error) {
                 _this.loading.dismiss().then(function () {
@@ -142,7 +173,7 @@ var LoginPage = (function () {
         }
     };
     LoginPage.prototype.goToSignup = function () {
-        this.navCtrl.push('SignupPage');
+        this.navCtrl.push('SignupChoicePage');
     };
     LoginPage.prototype.goToResetPassword = function () {
         this.navCtrl.push('PasswordResetPage');
@@ -151,11 +182,11 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/login/login.html"*/'<ion-header>\n\n  <ion-navbar color="red">\n\n    <ion-title>\n\nWelcome To Beacon\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="login">\n\n  <img src="https://raw.githubusercontent.com/SCCapstone/Beacon/master/beacon_logo.png?token=AWYG4tXLFZnE0PjhcOSPiPLnjY8L4O-xks5aLzPAwA%3D%3D">\n\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n\n    <ion-item>\n\n      <ion-label stacked>Email</ion-label>\n\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">\n\n<!---<button ion-button round [navPush]="listPage">Login</button>-->\n\n<!--<button (click) = "btnAddClicked()" ion-button> Login </button>-->\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label stacked>Password</ion-label>\n\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">\n\n      <p>Your password needs more than 6 characters.</p>\n\n    </ion-item>\n<!--\nLOGIN\n-->\n    <button ion-button block type="submit" class="btn">\n      Login\n    </button>\n\n  </form>\n<!--\nCREATE NEW ACCOUNT BUTTON\n-->\n  <button ion-button block type (click)="goToSignup()" class="btn">\n    Create a new account\n  </button>\n\n  <button ion-button block type (click)="goToResetPassword()" class="btn">\n    I forgot my password\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/ryanroe/Documents/GitHub/Beacon/src/pages/login/login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/login/login.html"*/'<ion-header>\n\n  <ion-navbar color="secondary">\n\n    <ion-title>\n\nWelcome To Beacon\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding class="login">\n\n  <img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> \n\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Email</ion-label>\n\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">\n\n<!---<button ion-button round [navPush]="listPage">Login</button>-->\n\n<!--<button (click) = "btnAddClicked()" ion-button> Login </button>-->\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n    <ion-item class = "input-form">\n\n      <ion-label stacked>Password</ion-label>\n\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message"\n      *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">\n\n      <p>Your password needs more than 6 characters.</p>\n\n    </ion-item>\n<!--\nLOGIN\n-->\n    <button ion-button block type="submit" class="btn">\n      Login\n    </button>\n\n  </form>\n<!--\nCREATE NEW ACCOUNT BUTTON\n-->\n  <button ion-button block type (click)="goToSignup()" class="btn">\n    Create a new account\n  </button>\n\n  <button ion-button block type (click)="goToResetPassword()" class="btn">\n    I forgot my password\n  </button>\n\n  <button ion-button block type (click)="facebookLogin()" class="btn">\n    Login With Facebook\n  </button>\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/login/login.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
-        __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
+        __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_facebook__["a" /* Facebook */]])
 ], LoginPage);
 
 //# sourceMappingURL=login.js.map

@@ -1,0 +1,34 @@
+<!--
+  Generated template for the SignupChoicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>Account type:</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <p>Choose this if you are an
+    <strong>individual entity</strong> 
+    in search of posts from organizations. 
+  </p>
+  <button ion-button block type="submit" (click)="goToPersonalSignupPage()">
+     Personal account
+  </button>
+
+  <p>Choose this if you are an
+    <strong>organization or non-profit</strong> desiring to
+    <strong>provide aid, support, and relief</strong> to local people.
+  </p>
+  <button ion-button block type="submit" (click)="goToOrganizationSignupPage()">
+    Organization account
+  </button>
+
+</ion-content>
