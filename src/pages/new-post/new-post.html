@@ -1,23 +1,20 @@
-<!--
-  Created by Ryan Roe for Beacon Capstone Project
-
--->
-
-<!--<p> The lattitude: {{LocationProvider.usersLocation.lat}}</p>
-<p> The longitude: {{LocationProvider.usersLocation.lon}}</p>-->
-
 <ion-header>
-
-  <ion-navbar color="red">
-    <ion-title> CreatePost </ion-title>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      New Post
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
-
 <ion-content padding id="page10">
   <ion-card id="newPost-card210">
     <ion-list>
-   <!--   <form id="newPost-form17">-->
+      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
+        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
+      </div>
+      <form id="newPost-form17">
         <ion-item color="none" id="newPost-list-item101">
           <ion-avatar item-left>
             <img />
@@ -28,35 +25,38 @@
         </ion-item>
         <ion-item id="newPost-input12">
           <ion-label></ion-label>
-          <ion-input type="text" [(ngModel)]="postTitle" placeholder="Enter Post Title"></ion-input>
+          <ion-input type="text" placeholder="Enter Post Title"></ion-input>
         </ion-item>
         <ion-item id="newPost-input10">
           <ion-label></ion-label>
-          <ion-input type="text" [(ngModel)]="postContent" placeholder="Post Content..."></ion-input>
+          <ion-input type="text" placeholder="Post Content..."></ion-input>
         </ion-item>
-  <!--    </form> -->
+      </form>
       <ion-item color="none" id="newPost-list-item100">
         <ion-icon name="image" item-left></ion-icon>
         Upload Image
       </ion-item>
     </ion-list>
   </ion-card>
-  <!--<form id="newPost-form13">-->
+  <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
+    <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
+  </div>
+  <form id="newPost-form13">
     <ion-item id="newPost-select5">
       <ion-label>
         Type of Request
       </ion-label>
-      <ion-select  [(ngModel)]="selected_value" (ionChange)="showSelected(selected_value)"[ngModelOptions]="{standalone: true}">
-        <ion-option value="Supplies Request" >
+      <ion-select name="">
+        <ion-option>
           Supplies Request
         </ion-option>
-        <ion-option value="Supplies Pickup">
+        <ion-option>
           Supply Pickup
         </ion-option>
-        <ion-option value="Volunteer Request">
+        <ion-option>
           Volunteer Request
         </ion-option>
-        <ion-option value="Volunteers Available">
+        <ion-option>
           Volunteers Available
         </ion-option>
       </ion-select>
@@ -79,15 +79,8 @@
       </ion-label>
       <ion-checkbox></ion-checkbox>
     </ion-item>
-    <ion-item>
-      <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend(postContent, postTitle)">
-      Create Post  
-      </button>
-    </ion-item>
-    <ion-item>
-      <button id="newPost-button10" ion-button block color="positive"  (click)="showtheVar()">
-        Log the Variable on the console.
-      </button>
-    </ion-item>
- <!-- </form>-->
+    <button id="newPost-button9" ion-button color="positive" block>
+      Create Post
+    </button>
+  </form>
 </ion-content>

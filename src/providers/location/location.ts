@@ -34,9 +34,9 @@ export class LocationProvider {
 	 	
 	}).catch((error) => {
 	  console.log('Error getting location', error);
-	});*/
+	});
   
-
+*/
 	/*
 	let watch = this.geolocation.watchPosition(); //this returns an observable, not a promise, which constantly tracks the user's location.
 	watch.subscribe((data) => {

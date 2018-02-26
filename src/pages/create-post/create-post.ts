@@ -31,6 +31,7 @@ postData =[]
 createPostMessage : any = "original messsage";
 testingPostsArr : any = [];
 locationprovidermessage;
+typeofPost;
 //msglat = LocationProvider.lat;
 //msglon = LocationProvider.lon;
 //second firebase messaging try variable
@@ -41,36 +42,46 @@ locationprovidermessage;
 user: Observable<firebase.User>;
 
 itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
+items: Observable<any[]>;
 userEmail: Observable<any>;
+
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
-  	//
+    
   	this.fdb.list("/posts/").valueChanges().subscribe(_data => {
 		this.arrData = _data;
 
 		console.log(this.arrData);
   })
 
-  	this.itemsRef = fdb.list('messages', );
+  	this.itemsRef = fdb.list('messages');
     this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
 
 /****Attempting to access logged in user's email
  //this.userEmail = firebase.auth().currentUser;
  //this.userEmail = MyApp.user.email; */
  this.locationprovidermessage = this.locationProvider.username;
+
 }
 
 //Sends the post information to database
- chatSend(theirMessage: string, theirTitle: string, theirLocation: string) {
+ chatSend(theirMessage: string, theirTitle: string, theirLocation: string, theirImage: string, theirUser : string, 
+  theirUserName: string) {
  	const item = {
- 		message: theirMessage,
- 		title: theirTitle,
- 		timestamp: Date.now(),
- 	}
-    this.itemsRef.push(item); //name: this.user});
+ 		message: theirMessage, //works
+ 		title: theirTitle,     //works
+ 		timestamp: Date.now(), //works, but needs filtering
+    PostType: this.typeofPost,  //works
+   // user: theirUser,       
+    //username: theirUserName,
+   // location: theirLocation,
+   // image: theirImage
+ 	 }
+    this.itemsRef.push(item);
     this.navCtrl.setRoot(FeedPage); 
-  }
+   }
 
 
 
@@ -87,6 +98,13 @@ userEmail: Observable<any>;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreatePostPage');
+
+  }
+
+  showSelected(mySelect : string) {
+
+    console.log(mySelect);
+    this.typeofPost = mySelect;
   }
 
 /* created to view the logged in user's email...which is not working.
