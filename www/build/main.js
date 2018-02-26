@@ -126,15 +126,15 @@ var map = {
 		5
 	],
 	"../pages/password-reset/password-reset.module": [
-		488,
+		487,
 		1
 	],
 	"../pages/signup-choice/signup-choice.module": [
-		489,
+		488,
 		4
 	],
 	"../pages/signup/signup.module": [
-		487,
+		489,
 		0
 	],
 	"../pages/welcome/welcome.module": [
@@ -321,9 +321,9 @@ AppModule = __decorate([
                     { loadChildren: '../pages/feed/feed.module#FeedPageModule', name: 'FeedPage', segment: 'feed', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/org-profile/org-profile.module#OrgProfilePageModule', name: 'OrgProfilePage', segment: 'org-profile', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup-choice/signup-choice.module#SignupChoicePageModule', name: 'SignupChoicePage', segment: 'signup-choice', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/welcome/welcome.module#WelcomePageModule', name: 'WelcomePage', segment: 'welcome', priority: 'low', defaultHistory: [] }
                 ]
             }),
@@ -649,7 +649,7 @@ var FeedPage = (function () {
 }());
 FeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-feed',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="secondary">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title> Beacon Feed</ion-title>\n  </ion-navbar>\n  <h3 align="right"> New Post \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only>\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h3>\n</ion-header>\n\n\n<ion-content padding>\n\n\n	\n   \n\n\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>United Red Cross\n    </h2>\n    <p>{{item.timestamp  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>0 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        <!--11h ago-->\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/,
+        selector: 'page-feed',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="secondary">\n\n  	 <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title> Beacon Feed</ion-title>\n  </ion-navbar>\n  <h3 align="right" font color="seconday"> New Post \n  <button (click) = "btnCreateClicked()" ion-button outline icon-only >\n      <ion-icon name=\'create\' is-active="false"></ion-icon>\n    </button>\n  </h3>\n</ion-header>\n\n\n<ion-content padding>\n\n <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n  <ion-card>\n<!--html template for the title, username, avatar, and date-->\n     <ion-item>\n    <ion-avatar item-start>\n      <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n    </ion-avatar>\n    <h2> {{item.title}}</h2>\n    <h2>United Red Cross\n    </h2>\n    <p>{{item.timestamp  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p>\n  </ion-item>\n<!--creates the card content using two way data linking for an async for loop-->\n    <ion-card-content>\n\n      <a href="#">{{item.name}}</a>\n      \n      <p>{{item.message}}</p>\n    </ion-card-content>\n<!--Creates the likes, comments, and time since post-->\n    <ion-row>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="thumbs-up"></ion-icon>\n        <div>0 Likes</div>\n      </button>\n    </ion-col>\n    <ion-col>\n      <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n      </button>\n    </ion-col>\n    <ion-col center text-center>\n      <ion-note>\n        <!--11h ago-->\n      </ion-note>\n    </ion-col>\n  </ion-row>\n\n  </ion-card>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]])
 ], FeedPage);

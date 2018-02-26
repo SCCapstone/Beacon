@@ -13,8 +13,8 @@
     </button>
     <ion-title> Beacon Feed</ion-title>
   </ion-navbar>
-  <h3 align="right"> New Post 
-  <button (click) = "btnCreateClicked()" ion-button outline icon-only>
+  <h3 align="right" font color="seconday"> New Post 
+  <button (click) = "btnCreateClicked()" ion-button outline icon-only >
       <ion-icon name='create' is-active="false"></ion-icon>
     </button>
   </h3>
@@ -22,12 +22,6 @@
 
 
 <ion-content padding>
-
-
-	
-   
-
-
 
  <div class="chat-container" *ngFor="let item of items | async "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
   <ion-card>
