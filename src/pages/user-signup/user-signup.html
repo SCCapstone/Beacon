@@ -14,13 +14,13 @@
 <!--Amanda -->
 
    <ion-item>
-      <ion-label stacked>Name</ion-label>
+      <ion-label color="primary">Name</ion-label>
       <ion-input  placeholder="Your Name"></ion-input>
     </ion-item>
 
 <!-- Khory -->
     <ion-item>
-      <ion-label stacked>Email</ion-label>
+      <ion-label color="primary">Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
     </ion-item>
@@ -28,19 +28,19 @@
 <!--Amanda -->
 
    <ion-item>
-      <ion-label stacked> Repeat Email</ion-label>
+      <ion-label color="primary"> Repeat Email</ion-label>
       <ion-input  placeholder="Your email address"></ion-input>
     </ion-item>
 
 <!--Amanda -->
 
    <ion-item>
-      <ion-label stacked>Phone Number</ion-label>
+      <ion-label color="primary">Phone Number</ion-label>
       <ion-input formControlName="phone" placeholder="555-555-5555"></ion-input>
     </ion-item>
 
    <ion-item>
-      <ion-label stacked>Repeat Phone Number</ion-label>
+      <ion-label color="primary">Repeat Phone Number</ion-label>
       <ion-input  placeholder="555-555-5555"></ion-input>
     </ion-item>
 
@@ -51,7 +51,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Password</ion-label>
+      <ion-label color="primary">Password</ion-label>
       <ion-input formControlName="password" type="password" placeholder="Your password"
         [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
     </ion-item>
@@ -61,7 +61,7 @@
 
 
     <ion-item>
-      <ion-label stacked>Repeat Password</ion-label>
+      <ion-label color="primary">Repeat Password</ion-label>
       <ion-input formControlName="password2" type="password" placeholder="Your password"
         [class.invalid]="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">
       </ion-input>
