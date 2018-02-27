@@ -40,8 +40,6 @@ export class FeedPage {
 		this.menuCtrl.enable(true, 'navMenu');
 	  	//this.itemsRef = fdb.list('/messages');
 	    //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-
-	    //Open a reference to our Firebase Database under the /messages node
 	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
 
 	    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
@@ -53,32 +51,20 @@ export class FeedPage {
           this.postList = posts;
           this.loadedPostList = posts;
         });
-
-   	//this.postList.filter //need to filter posts by default
   	}
-
-  	//Search Functions
 
 	initializeItems(): void {
   		this.postList = this.loadedPostList; //This is so we don't have to call the data again from Firebase. We can just use the list we already have.
 	}
-	getItems(searchbar) {
-		
+	getItems(searchbar) { 
   		// Reset items back to all of the items
- 		 this.initializeItems();
-
-		  // set q to the value of the searchbar
-		  var q = searchbar.srcElement.value;
-
-		  // if the value is an empty string don't filter the items
-		  if (!q) {
-		    return;
-		  }
-
-		  //var newArray = arr.filter(callback[, thisArg]) //callback keeps element if true is returned
-		  //v is a name we are giving to our projected array from this.postList
-		 this.postList = this.postList.filter((v) => {
-		    if(v.title && q) {
+ 		this.initializeItems();
+		var q = searchbar.srcElement.value;// set q to the value of the searchbar
+		if (!q) { // if the value is an empty string don't filter the items
+		  return;
+		}
+		this.postList = this.postList.filter((v) => { //v is a name we are giving to our projected array from this.postList
+			if(v.title && q) {
 		    	if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) { //checks the string against the value of the title property
 		        	return true;
 		      	}
@@ -87,7 +73,6 @@ export class FeedPage {
 		});
   		console.log(q, this.postList.length);
 	}
-	//End of Search Functions
 
 
   	ionViewDidLoad() {
