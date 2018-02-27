@@ -1,69 +1,44 @@
 <ion-header>
-
   <ion-navbar color="secondary">
-
     <ion-title>
-
-Welcome To Beacon
+      Welcome To Beacon
     </ion-title>
-
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding class="login">
 
   <img src="assets/imgs/beaconlogo.jpeg" alt="Beacon Logo"> 
-
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
     <ion-item class="input-form">
-
       <ion-label stacked color="primary">Email</ion-label>
-
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
-
       </ion-input>
-
     </ion-item>
 
     <ion-item class="error-message"
       *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
-
-<!---<button ion-button round [navPush]="listPage">Login</button>-->
-
-<!--<button (click) = "btnAddClicked()" ion-button> Login </button>-->
       <p>Please enter a valid email.</p>
-
     </ion-item>
 
     <ion-item class = "input-form">
-
       <ion-label stacked color="primary">Password</ion-label>
-
       <ion-input formControlName="password" type="password" placeholder="Your password"
         [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>
-
     </ion-item>
 
     <ion-item class="error-message"
       *ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">
-
       <p>Your password needs more than 6 characters.</p>
-
     </ion-item>
-<!--
-LOGIN
--->
+
     <button ion-button block type="submit" class="btn">
       Login
     </button>
-
   </form>
-<!--
-CREATE NEW ACCOUNT BUTTON
--->
+
   <button ion-button block type (click)="goToSignup()" class="btn">
     Create a new account
   </button>
