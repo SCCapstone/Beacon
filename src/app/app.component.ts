@@ -18,6 +18,7 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
+import { SettingsPage } from '../pages/settings/settings';
 
 
 @Component({
@@ -83,7 +84,10 @@ this.pages = [
   {title: 'Beacon Feed', component: FeedPage },
 
   //Homepage List Link
-  { title: 'Map', component: ListPage }
+  { title: 'Map', component: ListPage },
+
+  { title: 'Settings', component: SettingsPage }
+
 
   ////Homepage Organization Profile Link
   //{title: 'Organization Profile', component: OrgProfilePage },

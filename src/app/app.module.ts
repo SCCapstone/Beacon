@@ -12,6 +12,8 @@ import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
 import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
+import { SettingsPage } from '../pages/settings/settings';
+
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
 import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
@@ -21,6 +23,7 @@ import { LocationProvider } from '../providers/location/location';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { Facebook } from '@ionic-native/facebook';
+
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
  const config = {
@@ -39,7 +42,8 @@ import { Facebook } from '@ionic-native/facebook';
     ListPage,
     //OrgProfilePage, //added by Amanda
     FeedPage,
-    CreatePostPage //added by Ryan
+    CreatePostPage, //added by Ryan
+    SettingsPage
   ],
     imports: [
     BrowserModule,
@@ -57,6 +61,7 @@ import { Facebook } from '@ionic-native/facebook';
     // OrgProfilePage, //added by Amanda
     FeedPage,
     CreatePostPage, //added by Ryan
+    SettingsPage
   ],
   providers: [
     StatusBar,
