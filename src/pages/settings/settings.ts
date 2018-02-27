@@ -32,8 +32,10 @@ export class SettingsPage {
   	{	
   	  this.name = this.currentUser.name;
   	  this.email = this.currentUser.email;
-  	  this.phone = this.currentUser.phone;
+  	  this.phone = this.currentUser.userPhone;
   	  console.log(this.email);
+      console.log(this.name);
+      console.log(this.phone);
   	}
   }
 

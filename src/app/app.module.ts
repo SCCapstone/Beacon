@@ -40,9 +40,8 @@ import { Facebook } from '@ionic-native/facebook';
   declarations: [
     MyApp, //sets root component
     ListPage,
-    //OrgProfilePage, //added by Amanda
     FeedPage,
-    CreatePostPage, //added by Ryan
+    CreatePostPage,
     SettingsPage
   ],
     imports: [

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, MenuController } 
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
@@ -46,37 +46,48 @@ items: Observable<any[]>;
 userEmail: Observable<any>;
 
 
-
+  public currentUser;
+  public organization;
+  name;
+  email;
+  public phone;
+  public username;
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
     
-    this.menuCtrl.enable(false, 'navMenu');
-  	this.fdb.list("/posts/").valueChanges().subscribe(_data => {
+  	/*this.fdb.list("/posts/").valueChanges().subscribe(_data => {
 		this.arrData = _data;
 
 		console.log(this.arrData);
-  })
+  })*/
+    this.currentUser = firebase.auth().currentUser;
+    if (this.currentUser != null) 
+    { 
+     this.name = this.currentUser.name; //logs null
+     this.email = this.currentUser.email; 
+     this.phone = this.currentUser.phone;//logs null
+      console.log(this.email);
+      console.log(this.currentUser.name);
+      console.log(this.phone);
+    }
 
   	this.itemsRef = fdb.list('messages');
-    this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
+   // this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
 
-/****Attempting to access logged in user's email
- //this.userEmail = firebase.auth().currentUser;
- //this.userEmail = MyApp.user.email; */
- this.locationprovidermessage = this.locationProvider.username;
+    //this.locationprovidermessage = this.locationProvider.username;
 
 }
 
 //Sends the post information to database
- chatSend(theirMessage: string, theirTitle: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string, 
-  theirUserName: string) {
+ chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string, 
+  ) {
  	const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
  		timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
-   // user: theirUser,       
-    //username: theirUserName,
+    email: this.email,   
+   // username: this.name
    // location: theirLocation,
    // image: theirImage
    // userImage : userImageSrc
@@ -108,16 +119,5 @@ userEmail: Observable<any>;
     console.log(mySelect);
     this.typeofPost = mySelect;
   }
-
-/* created to view the logged in user's email...which is not working.
- doAlert() {
-    let alert = this.alertCtrl.create({
-        title: 'New Friend!',
-        subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!' + this.userEmail,
-        buttons: ['Ok']
-      });
-
-    alert.present();
- }*/
 
 }
