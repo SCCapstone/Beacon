@@ -73,7 +73,7 @@ userEmail: Observable<any>;
  	const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
- 		timestamp: Date.now(), //works, but needs filtering
+ 		timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
    // user: theirUser,       
     //username: theirUserName,

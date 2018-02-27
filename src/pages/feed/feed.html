@@ -36,13 +36,20 @@
 
 <ion-content>
 
-
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."></ion-refresher-content>
+  </ion-refresher>
 
 <!--html template for the title, username, avatar, and date-->
 
- <div class="chat-container" *ngFor=" let item of postList "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
-    <ion-card>
+
+ <!-- div class="chat-container" *ngFor=" let item of postList "> <!-- | orderBy: '-timestamp' > <!--let variable items be of type items, |async automatically checks for new updates-->
+ <ion-list>
+    <ion-card *ngFor=" let item of postList ">
       <!--Avatar image, title, and timestamp-->
       <ion-item>
         <ion-avatar item-start>
@@ -50,7 +57,7 @@
         </ion-avatar>
         <h2>{{item.title}}</h2>
         <h2>United Red Cross</h2>
-        <p>{{item.timestamp  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p> <span> </span> <p>{{item.PostType}}</p>
+        <p>{{item.timestamp*(-1)  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p> <span> </span> <p>{{item.PostType}}</p>
       </ion-item>
 
       <!--creates the card content using two way data linking for an async for loop-->
@@ -82,7 +89,12 @@
     </ion-row>
 
   </ion-card>
+</ion-list>
 
-  </div>
+<ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">
+ <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+  <!--/div-->
 
 </ion-content>
