@@ -65,10 +65,10 @@ userEmail: Observable<any>;
     { 
      this.name = this.currentUser.name; //logs null
      this.email = this.currentUser.email; 
-     this.phone = this.currentUser.phone;//logs null
-      console.log(this.email);
+     this.phone = this.currentUser.userPhone;//logs null
+      console.log(this.currentUser.email);
       console.log(this.currentUser.name);
-      console.log(this.phone);
+      console.log(this.currentUser.userPhone);
     }
 
   	this.itemsRef = fdb.list('messages');
@@ -79,8 +79,7 @@ userEmail: Observable<any>;
 }
 
 //Sends the post information to database
- chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string, 
-  ) {
+ chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string) {
  	const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
