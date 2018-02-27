@@ -49,7 +49,7 @@ export class AuthProvider {
     return firebase.auth().createUserWithEmailAndPassword(contactEmail, password).then((newUser) => {
       firebase.database().ref('/userProfile').child(newUser.uid).set({
           organizaton: orgName,
-          name: name,
+          name: contactName,
           email: contactEmail,
           phone: contactPhone,
           address: address
