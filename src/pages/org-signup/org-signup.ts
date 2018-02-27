@@ -74,4 +74,9 @@ export class OrgSignupPage {
       this.loading.present();
     }
   }
+
+  returnToLogin()
+  {
+  	 this.navCtrl.popTo( this.navCtrl.getByIndex(0));
+  }
 }

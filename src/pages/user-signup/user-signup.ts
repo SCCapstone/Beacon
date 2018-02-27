@@ -55,4 +55,9 @@ export class UserSignupPage {
     }
   }
 
+  returnToLogin()
+  {
+     this.navCtrl.popTo( this.navCtrl.getByIndex(0));
+  }
+
 }
