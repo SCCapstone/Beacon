@@ -44,6 +44,19 @@ export class AuthProvider {
     });
   }
 
+  signupOrganization(orgName: string, contactName: string, contactEmail: string, 
+    contactPhone: string, address: string, password: string): Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(contactEmail, password).then((newUser) => {
+      firebase.database().ref('/userProfile').child(newUser.uid).set({
+          organizaton: orgName,
+          name: name,
+          email: contactEmail,
+          phone: contactPhone,
+          address: address
+      });
+    });
+  }
+
   /**
    * resetPassword takes the email address as a string and sends the email with the reset password
    * link.

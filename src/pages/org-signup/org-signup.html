@@ -14,53 +14,54 @@
 </ion-header>
 
 <ion-content padding>
-  
-  <ion-item>
-    <ion-label stacked color="primary">Organization Name *</ion-label>
-    <ion-input type="email" placeholder="Your Organization Name"></ion-input>
-  </ion-item>
+  <form [formGroup]="signupForm" (submit)="signupOrganization()" novalidate>
+    <ion-item>
+      <ion-label stacked color="primary">Organization Name *</ion-label>
+      <ion-input type="text" formControlName="organization" placeholder="Your Organization Name"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" >Contact's Name *</ion-label>
-    <ion-input type="email" placeholder="Your Name"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary" >Contact's Name *</ion-label>
+      <ion-input type="text" formControlName="name" placeholder="Your Name"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" >Contact's email *</ion-label>
-    <ion-input type="password" placeholder="Your Email"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary" >Contact's email *</ion-label>
+      <ion-input type="email" formControlName="email" placeholder="Your Email"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" >Confirm Contact's email *</ion-label>
-    <ion-input type="password" placeholder="Your Email"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary" >Confirm Contact's email *</ion-label>
+      <ion-input type="email" formControlName="email2" placeholder="Your Email"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" >Contact's Phone Number *</ion-label>
-    <ion-input type="password" placeholder="555-555-5555"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary" >Contact's Phone Number *</ion-label>
+      <ion-input type="tel" formControlName="phone" placeholder="555-555-5555"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label stacked color="primary" >Address *</ion-label>
-    <ion-input type="password" placeholder="Street Address, City, State"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label stacked color="primary" >Address *</ion-label>
+      <ion-input type="text" formControlName="address" placeholder="Street Address, City, State"></ion-input>
+    </ion-item>
 
-   <ion-item>
-    <ion-label stacked color="primary" >Password *</ion-label>
-    <ion-input type="email" placeholder="Your Password"></ion-input>
-  </ion-item>
+     <ion-item>
+      <ion-label stacked color="primary" >Password *</ion-label>
+      <ion-input type="password" formControlName="password" placeholder="Your Password"></ion-input>
+    </ion-item>
 
-   <ion-item>
-    <ion-label stacked color="primary" >Confirm Password *</ion-label>
-    <ion-input type="email" placeholder="Your Password"></ion-input>
-  </ion-item>
+     <ion-item>
+      <ion-label stacked color="primary" >Confirm Password *</ion-label>
+      <ion-input type="password" formControlName="password2" placeholder="Your Password"></ion-input>
+    </ion-item>
 
-  <button ion-button block type="Submit">
-    Sign up 
-  </button>
+    <button ion-button block type="Submit">
+      Sign up 
+    </button>
 
-  <button ion-button block type="Submit">
-    Cancel
-  </button>
+    <button ion-button block type="Submit">
+      Cancel
+    </button>
+  </form>
 
 </ion-content>
