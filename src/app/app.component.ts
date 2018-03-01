@@ -25,17 +25,9 @@ import { SettingsPage } from '../pages/settings/settings';
   templateUrl: 'app.html'
 })
 
-
 export class MyApp { //this is template for the root component that is set in module.ts
-
-
 // This lets us access our pages as children from the Home
 @ViewChild(Nav) nav: Nav;
-
-
-
-
-
   /**
   **********************************************************************
   ** rootPage: any; => this is a NavController which is the base class
@@ -60,45 +52,26 @@ export class MyApp { //this is template for the root component that is set in mo
 
  public zone:NgZone;
     // used for an example of ngFor and navigation
-    
-
-
   constructor(public authProvider: AuthProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
+    const config = {
+        apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
+        authDomain: "ionicdbtest1.firebaseapp.com",
+        databaseURL: "https://ionicdbtest1.firebaseio.com",
+        projectId: "ionicdbtest1",
+        storageBucket: "ionicdbtest1.appspot.com",
+        messagingSenderId: "207415494381"
+      };
 
-const config = {
-    apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
-    authDomain: "ionicdbtest1.firebaseapp.com",
-    databaseURL: "https://ionicdbtest1.firebaseio.com",
-    projectId: "ionicdbtest1",
-    storageBucket: "ionicdbtest1.appspot.com",
-    messagingSenderId: "207415494381"
-  };
-
-// used for an example of ngFor and navigation
-this.pages = [
-
-  //Homepage Beacon Feed Link
-  {title: 'Beacon Feed', component: FeedPage },
-
-  //Homepage List Link
-  { title: 'Map', component: ListPage },
-
-  { title: 'Settings', component: SettingsPage }
-
-
-  ////Homepage Organization Profile Link
-  //{title: 'Organization Profile', component: OrgProfilePage },
-
-  
-
-];
-
+    this.pages = [
+      {title: 'Beacon Feed', component: FeedPage },
+      { title: 'Map', component: ListPage },
+      { title: 'Settings', component: SettingsPage } 
+    ];
+    
     //initialize Firebase with app, angularfiremodule is initialized in module.
     firebase.initializeApp(config);
-
     //keeps track of auth changes
     firebase.auth().onAuthStateChanged( user => {
       this.zone.run( () => {
@@ -111,7 +84,6 @@ this.pages = [
         }
       });
     });
-
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
