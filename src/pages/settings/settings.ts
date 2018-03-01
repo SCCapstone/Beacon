@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import firebase from 'firebase';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the SettingsPage page.
@@ -20,27 +22,62 @@ import firebase from 'firebase';
 export class SettingsPage {
 
   public currentUser;
+  public attributes;
   public organization;
-  public name;
-  email;
+  public username;
+  public email;
   public phone;
+  public address;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams) {
+  public organizationForm;
+
+  constructor(private fdb: AngularFireDatabase, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder) {
   	this.menuCtrl.enable(true, 'navMenu');
-  	this.currentUser = firebase.auth().currentUser;
-  	if (this.currentUser != null) 
-  	{	
-  	  this.name = this.currentUser.name;
-  	  this.email = this.currentUser.email;
-  	  this.phone = this.currentUser.userPhone;
-  	  console.log(this.email);
-      console.log(this.name);
-      console.log(this.phone);
-  	}
+ 
+    //goes directly to the entry for the user based off of the USER ID. 
+    this.currentUser = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+
+    this.currentUser.once('value', userInfo => {
+        this.username = (userInfo.val().username);
+        this.email = userInfo.val().email;
+        this.phone = userInfo.val().phone;
+        this.organization = userInfo.val().organization;
+        this.address = userInfo.val().address;
+     });
+
+    this.organizationForm = formBuilder.group({
+      organization: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
+      address: ['', Validators.required],
+      /*password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])] */
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+  }
+
+  isFacebookUser()
+  {
+    if(this.currentUser.providerId === "facebook.com")
+    {
+      return true;
+    }
+  }
+
+  isOrganization()
+  {
+    if(this.organization != null)
+    {
+       return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
 }

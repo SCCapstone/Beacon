@@ -17,74 +17,92 @@
 <ion-content padding>
 
 <!--<form novalidate -->
+  <div *ngIf="!isFacebookUser()">
+    <ion-list *ngIf="!isOrganization()">
+      <!--ion-item>
+        <ion-label stacked color="primary">Name</ion-label>
+        <ion-input placeholder="Your Name" [(ngModel)]="email">{{email}}</ion-input>
+      </ion-item-->
 
+      <ion-item>
+        <ion-label stacked color="primary">Email</ion-label>
+        <ion-input type="email" placeholder="Your Email" [(ngModel)]="email">
+          {{email}}
+        </ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">Name</ion-label>
-      <ion-input placeholder="Your Name" [(ngModel)]="email">{{email}}</ion-input>
-    </ion-item>
+    	<ion-item>
+        <ion-label stacked color="primary">Phone Number *</ion-label>
+        <ion-input placeholder="555-555-5555" [(ngModel)]="phone">
+          {{phone}}
+        </ion-input>
+      </ion-item>
 
-    <ion-label>
-    	<h2>Update Email</h2>
-    </ion-label>
+      <button ion-button block type>
+        Update Credentials
+    	</button>
+    </ion-list>
+    <ion-list *ngIf="isOrganization()">
+      <form [formGroup]="organizationForm" (submit)="signupOrganization()" novalidate>
+        <ion-item>
+          <ion-label stacked color="primary">Organization Name *</ion-label>
+          <ion-input type="text" formControlName="organization" placeholder="Your Organization Name" [(ngModel)]="organization">
+            {{organization}}
+          </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">Current Email</ion-label>
-      <ion-input type="email" placeholder="Your Current Email"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label stacked color="primary" >Contact's Name *</ion-label>
+          <ion-input type="text" formControlName="name" placeholder="Your Name" [(ngModel)]="username">
+            {{username}}
+          </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">New Email</ion-label>
-      <ion-input type="email" placeholder="Your New Email"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label stacked color="primary" >Contact's email *</ion-label>
+          <ion-input type="email" formControlName="email" placeholder="Your Email"[(ngModel)]="email">
+            {{email}}
+          </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">Confirm New Email</ion-label>
-      <ion-input type="password" placeholder="Your New Email"></ion-input>
-    </ion-item>
-    <button ion-button block type>
-      Update Email
-  	</button>
+        <ion-item>
+          <ion-label stacked color="primary" >Contact's Phone Number *</ion-label>
+          <ion-input type="tel" formControlName="phone" placeholder="555-555-5555" [(ngModel)]="phone">{{phone}}</ion-input>
+        </ion-item>
 
-    <ion-label>
-    	<h2>Update Password</h2>
-    </ion-label>
+        <ion-item>
+          <ion-label stacked color="primary" >Address *</ion-label>
+          <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">
+          {{address}}
+        </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">Current Password</ion-label>
-      <ion-input type="password" placeholder="Your New Password"></ion-input>
-    </ion-item>
+      </form>
+    </ion-list>
 
-    <ion-item>
-      <ion-label stacked color="primary">New Password</ion-label>
-      <ion-input type="password" placeholder="Your New Password"></ion-input>
-    </ion-item>
+    <ion-list>
+      <ion-label>
+        <h2>Change Password</h2>
+      </ion-label>
 
-    <ion-item>
-      <ion-label stacked color="primary">Confirm New Password</ion-label>
-      <ion-input type="password" placeholder="Your New Password"></ion-input>
-    </ion-item>
-    <button ion-button block type>
-      Update Password
-  	</button>
+      <ion-item>
+        <ion-label stacked color="primary">Current Password</ion-label>
+        <ion-input type="password" placeholder="Your New Password"></ion-input>
+      </ion-item>
 
-  	<ion-label>
-  		<h2>Update Phone Number</h2>
-  	</ion-label>
-  	<ion-item>
-      <ion-label stacked color="primary">Current Phone Number *</ion-label>
-      <ion-input placeholder="555-555-5555">{{phone}}</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked color="primary">New Phone Number *</ion-label>
-      <ion-input placeholder="555-555-5555">{{phone}}</ion-input>
-    </ion-item>
-     <ion-item>
-      <ion-label stacked color="primary">Confirm New Phone Number *</ion-label>
-      <ion-input placeholder="555-555-5555">{{phone}}</ion-input>
-    </ion-item>
-    <button ion-button block type>
-      Update Phone Number
-  	</button>
+      <ion-item>
+        <ion-label stacked color="primary">New Password</ion-label>
+        <ion-input type="password" placeholder="Your New Password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked color="primary">Confirm New Password</ion-label>
+        <ion-input type="password" placeholder="Your New Password"></ion-input>
+      </ion-item>
+      <button ion-button block type>
+        Update Password
+      </button>
+    </ion-list>
+  </div>
 <!--/form-->
 </ion-content>
