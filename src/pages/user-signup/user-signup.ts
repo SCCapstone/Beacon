@@ -27,7 +27,6 @@ export class UserSignupPage {
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])],
       phone: ['', Validators.compose([Validators.minLength(9), Validators.required])]
     });
-  
   }
 
   signupUser(){
@@ -59,5 +58,4 @@ export class UserSignupPage {
   {
      this.navCtrl.popTo( this.navCtrl.getByIndex(0));
   }
-
 }

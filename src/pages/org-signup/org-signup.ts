@@ -30,7 +30,6 @@ export class OrgSignupPage {
   	  organization: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      email2: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
       address: ['', Validators.required],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],

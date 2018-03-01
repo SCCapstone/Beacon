@@ -13,7 +13,7 @@
 
     <ion-item>
       <ion-label stacked color="primary">Name *</ion-label>
-      <ion-input  formControlName="name" placeholder="Your Name"></ion-input>
+      <ion-input  formControlName="name" placeholder="Your Full Name"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -22,18 +22,13 @@
         [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label stacked color="primary">Confirm Email *</ion-label>
-      <ion-input  placeholder="Your email address"></ion-input>
+    <ion-item stacked class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+      <p>Please enter a valid email.</p>
     </ion-item>
 
     <ion-item>
       <ion-label stacked color="primary">Phone Number *</ion-label>
       <ion-input formControlName="phone" placeholder="555-555-5555"></ion-input>
-    </ion-item>
-
-    <ion-item stacked class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
-      <p>Please enter a valid email.</p>
     </ion-item>
 
     <ion-item>
@@ -64,7 +59,5 @@
   <button ion-button block type (click)="returnToLogin()">
       Cancel
   </button>
-
-  
 
 </ion-content>
