@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import firebase from 'firebase';
@@ -21,8 +21,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class SettingsPage {
 
-  public currentUser;
-  public attributes;
+  public UID; 
+  public currentUserDB;
   public organization;
   public username;
   public email;
@@ -30,19 +30,22 @@ export class SettingsPage {
   public address;
 
   public organizationForm;
+  public userForm;
+  public passwordForm;
 
   constructor(private fdb: AngularFireDatabase, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder) {
   	this.menuCtrl.enable(true, 'navMenu');
- 
     //goes directly to the entry for the user based off of the USER ID. 
-    this.currentUser = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+    this.UID = firebase.auth().currentUser.uid
+    this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
 
-    this.currentUser.once('value', userInfo => {
+    this.currentUserDB.once('value', userInfo => {
         this.username = (userInfo.val().username);
         this.email = userInfo.val().email;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
+
      });
 
     this.organizationForm = formBuilder.group({
@@ -50,10 +53,25 @@ export class SettingsPage {
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
-      address: ['', Validators.required],
-      /*password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])] */
+      address: ['', Validators.required]
     });
+
+    this.userForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])]
+    });
+
+    this.passwordForm = formBuilder.group({
+      currentPassword: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password1: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
+    });
+
+    // this.organizationForm.get('organization').valueChanges.subscribe(value => {
+    //   console.log('name has changed:', value);
+    //});
+    
+
   }
 
   ionViewDidLoad() {
@@ -62,7 +80,7 @@ export class SettingsPage {
 
   isFacebookUser()
   {
-    if(this.currentUser.providerId === "facebook.com")
+    if(this.currentUserDB.providerId === "facebook.com")
     {
       return true;
     }
@@ -79,5 +97,41 @@ export class SettingsPage {
       return false;
     }
   }
+
+  updateUser()
+  {
+    this.currentUserDB.update({ username: this.username,
+     email: this.email, 
+     phone: this.phone});
+    firebase.auth().currentUser.updateEmail(this.email);
+    // An error happened.
+  }
+
+  updateOrganization()
+  {
+    this.currentUserDB.update({ username: this.username, 
+      email: this.email, 
+      phone: this.phone, 
+      address: this.address,
+      organization: this.organization});
+    firebase.auth().currentUser.updateEmail(this.email);
+  }
+
+  updatePassword()
+  {
+
+    if(firebase.auth().currentUser
+      .reauthenticateWithCredential(firebase.auth.EmailAuthProvider
+      .credential(firebase.auth().currentUser.email,this.passwordForm.value.currentPassword)))
+    {
+        firebase.auth().currentUser.updatePassword(this.passwordForm.value.password2).then(function() {
+          console.log("password updated successfully");
+        }).catch(error => {
+          console.log(error);
+        });
+
+    }
+  }
+
 
 }

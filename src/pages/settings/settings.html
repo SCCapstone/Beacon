@@ -23,27 +23,29 @@
         <ion-label stacked color="primary">Name</ion-label>
         <ion-input placeholder="Your Name" [(ngModel)]="email">{{email}}</ion-input>
       </ion-item-->
+      <form [formGroup]="userForm" (submit)="updateUser()" novalidate>
 
-      <ion-item>
-        <ion-label stacked color="primary">Email</ion-label>
-        <ion-input type="email" placeholder="Your Email" [(ngModel)]="email">
-          {{email}}
-        </ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label stacked color="primary">Email</ion-label>
+          <ion-input type="email" placeholder="Your Email" formControlName="email" [(ngModel)]="email">
+            {{email}}
+          </ion-input>
+        </ion-item>
 
-    	<ion-item>
-        <ion-label stacked color="primary">Phone Number *</ion-label>
-        <ion-input placeholder="555-555-5555" [(ngModel)]="phone">
-          {{phone}}
-        </ion-input>
-      </ion-item>
+      	<ion-item>
+          <ion-label stacked color="primary">Phone Number *</ion-label>
+          <ion-input placeholder="555-555-5555"  formControlName = "phone" [(ngModel)]="phone">
+            {{phone}}
+          </ion-input>
+        </ion-item>
 
-      <button ion-button block type>
-        Update Credentials
-    	</button>
+        <button ion-button block type>
+          Update Credentials
+      	</button>
+      </form>
     </ion-list>
     <ion-list *ngIf="isOrganization()">
-      <form [formGroup]="organizationForm" (submit)="signupOrganization()" novalidate>
+      <form [formGroup]="organizationForm" (submit)="updateOrganization()" novalidate>
         <ion-item>
           <ion-label stacked color="primary">Organization Name *</ion-label>
           <ion-input type="text" formControlName="organization" placeholder="Your Organization Name" [(ngModel)]="organization">
@@ -76,7 +78,9 @@
           {{address}}
         </ion-input>
         </ion-item>
-
+        <button ion-button block type>
+          Update Credentials
+        </button>
       </form>
     </ion-list>
 
@@ -85,23 +89,26 @@
         <h2>Change Password</h2>
       </ion-label>
 
-      <ion-item>
-        <ion-label stacked color="primary">Current Password</ion-label>
-        <ion-input type="password" placeholder="Your New Password"></ion-input>
-      </ion-item>
+      <form [formGroup]="passwordForm" (submit)="updatePassword()" novalidate>
 
-      <ion-item>
-        <ion-label stacked color="primary">New Password</ion-label>
-        <ion-input type="password" placeholder="Your New Password"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label stacked color="primary">Current Password</ion-label>
+          <ion-input type="password" placeholder="Your New Password" formControlName="currentPassword"></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-label stacked color="primary">Confirm New Password</ion-label>
-        <ion-input type="password" placeholder="Your New Password"></ion-input>
-      </ion-item>
-      <button ion-button block type>
-        Update Password
-      </button>
+        <ion-item>
+          <ion-label stacked color="primary">New Password</ion-label>
+          <ion-input type="password" placeholder="Your New Password" formControlName="password1"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked color="primary">Confirm New Password</ion-label>
+          <ion-input type="password" placeholder="Your New Password" formControlName="password2"></ion-input>
+        </ion-item>
+        <button ion-button block type>
+          Update Password
+        </button>
+      </form>
     </ion-list>
   </div>
 <!--/form-->
