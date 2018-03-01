@@ -37,9 +37,9 @@ export class AuthProvider {
   signupUser(name: string, email: string, password: string, phone: string): Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(email, password).then((newUser) => {
       firebase.database().ref('/userProfile').child(newUser.uid).set({
-          name: name,
+          username: name,
           email: email,
-          userPhone: phone
+          phone: phone
       });
     });
   }
@@ -48,8 +48,8 @@ export class AuthProvider {
     contactPhone: string, address: string, password: string): Promise<any> {
     return firebase.auth().createUserWithEmailAndPassword(contactEmail, password).then((newUser) => {
       firebase.database().ref('/userProfile').child(newUser.uid).set({
-          organizaton: orgName,
-          name: contactName,
+          organization: orgName,
+          username: contactName,
           email: contactEmail,
           phone: contactPhone,
           address: address
