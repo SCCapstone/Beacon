@@ -7,29 +7,18 @@
 
 <ion-header>
 <ion-navbar color="secondary">
-    <ion-grid>
-      <ion-row>
         <ion-title> Beacon Feed</ion-title>
-      </ion-row>
-      <ion-row>
-        <ion-col width-10>
-  	 <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-  </ion-col>
-    <ion-col width-80>
-     <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-     </ion-col>
-     <ion-col width-10>
-         <h3 align="right"> New Post 
-          <button (click) = "btnCreateClicked()" ion-button outline icon-only>
-         <ion-icon name='create' is-active="false"></ion-icon>
-       </button>
-     </h3>
-  </ion-col>
-
-   </ion-row>
-   </ion-grid>
+        <ion-buttons left>
+          <button ion-button menuToggle icon-only>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons> 
+         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+         <ion-buttons right>
+            <button (click) = "btnCreateClicked()" ion-button icon-only>
+              <ion-icon name='create' is-active="false"></ion-icon>
+            </button>
+         </ion-buttons>
   </ion-navbar>
 </ion-header>
 
