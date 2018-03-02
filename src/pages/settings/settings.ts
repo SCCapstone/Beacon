@@ -63,8 +63,8 @@ export class SettingsPage {
 
     this.passwordForm = formBuilder.group({
       currentPassword: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      password1: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password1: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
     });
 
     // this.organizationForm.get('organization').valueChanges.subscribe(value => {

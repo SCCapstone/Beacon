@@ -39,7 +39,7 @@
           </ion-input>
         </ion-item>
 
-        <button ion-button block type>
+        <button ion-button block type [disabled]="!userForm.valid">
           Update Credentials
       	</button>
       </form>
@@ -78,7 +78,7 @@
           {{address}}
         </ion-input>
         </ion-item>
-        <button ion-button block type>
+        <button ion-button block type [disabled]="!organizationForm.valid">
           Update Credentials
         </button>
       </form>
@@ -98,14 +98,14 @@
 
         <ion-item>
           <ion-label stacked color="primary">New Password</ion-label>
-          <ion-input type="password" placeholder="Your New Password" formControlName="password1"></ion-input>
+          <ion-input type="password" placeholder="Your New Password" formControlName="password"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked color="primary">Confirm New Password</ion-label>
-          <ion-input type="password" placeholder="Your New Password" formControlName="password2"></ion-input>
+          <ion-input type="password" placeholder="Your New Password" formControlName="password1"></ion-input>
         </ion-item>
-        <button ion-button block type>
+        <button ion-button block type [disabled]="!passwordForm.valid">
           Update Password
         </button>
       </form>
