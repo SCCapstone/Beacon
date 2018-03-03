@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 494:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupChoicePageModule", function() { return SignupChoicePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_choice__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_choice__ = __webpack_require__(504);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,13 +38,13 @@ SignupChoicePageModule = __decorate([
 
 /***/ }),
 
-/***/ 499:
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupChoicePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -82,7 +82,7 @@ var SignupChoicePage = (function () {
 }());
 SignupChoicePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-signup-choice',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/signup-choice/signup-choice.html"*/'<!--\n  Generated template for the SignupChoicePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="secondary">\n    <ion-title>Account type:</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <p>Choose this if you are an\n    <strong>individual entity</strong> \n    in search of posts from organizations. \n  </p>\n  <button ion-button block type="submit" (click)="goToPersonalSignupPage()">\n     Personal account\n  </button>\n\n  <p>Choose this if you are an\n    <strong>organization or non-profit</strong> desiring to\n    <strong>provide aid, support, and relief</strong> to local people.\n  </p>\n  <button ion-button block type="submit" (click)="goToOrganizationSignupPage()">\n    Organization account\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/signup-choice/signup-choice.html"*/,
+        selector: 'page-signup-choice',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/signup-choice/signup-choice.html"*/'<!--\n  Generated template for the SignupChoicePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="secondary">\n    <ion-title>Account type:</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <p>Choose this if you are an\n    <strong>individual entity</strong> \n    in search of posts from organizations. \n  </p>\n  <button ion-button block type="submit" (click)="goToPersonalSignupPage()">\n     Personal account\n  </button>\n\n  <p>Choose this if you are an\n    <strong>organization or non-profit</strong> desiring to\n    <strong>provide aid, support, and relief</strong> to local people.\n  </p>\n  <button ion-button block type="submit" (click)="goToOrganizationSignupPage()">\n    Organization account\n  </button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/signup-choice/signup-choice.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
 ], SignupChoicePage);

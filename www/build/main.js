@@ -1,18 +1,18 @@
 webpackJsonp([8],{
 
-/***/ 150:
+/***/ 155:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreatePostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__feed_feed__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_location_location__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_location_location__ = __webpack_require__(272);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,7 +100,7 @@ var CreatePostPage = (function () {
 }());
 CreatePostPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-create-post',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n\n<!--<p> The lattitude: {{LocationProvider.usersLocation.lat}}</p>\n<p> The longitude: {{LocationProvider.usersLocation.lon}}</p>-->\n\n<ion-header>\n\n  <ion-navbar color="secondary">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page10">\n  <ion-card id="newPost-card210">\n    <ion-list>\n   <!--   <form id="newPost-form17">-->\n        <ion-item color="none" id="newPost-list-item101">\n          <ion-avatar item-left>\n            <img />\n          </ion-avatar>\n          <ion-input placeholder="United Red Cross"><h2>[(ngModel)]="name">{{name}}</h2></ion-input>\n        </ion-item>\n        <ion-item id="newPost-input12">\n          <ion-label></ion-label>\n          <ion-input type="text" [(ngModel)]="postTitle" placeholder="Enter Post Title"></ion-input>\n        </ion-item>\n        <ion-item id="newPost-input10">\n          <ion-label></ion-label>\n          <ion-input type="text" [(ngModel)]="postContent" placeholder="Post Content..."></ion-input>\n        </ion-item>\n  <!--    </form> -->\n      <ion-item color="none" id="newPost-list-item100">\n        <ion-icon name="image" item-left></ion-icon>\n        Upload Image\n      </ion-item>\n    </ion-list>\n  </ion-card>\n  <!--<form id="newPost-form13">-->\n    <ion-item id="newPost-select5">\n      <ion-label>\n        Type of Request\n      </ion-label>\n      <ion-select  [(ngModel)]="selected_value" (ionChange)="showSelected(selected_value)"[ngModelOptions]="{standalone: true}">\n        <ion-option value="Supplies Request" >\n          Supplies Request\n        </ion-option>\n        <ion-option value="Supplies Pickup">\n          Supply Pickup\n        </ion-option>\n        <ion-option value="Volunteer Request">\n          Volunteer Request\n        </ion-option>\n        <ion-option value="Volunteers Available">\n          Volunteers Available\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item id="newPost-input11">\n      <ion-label>\n        Location:\n      </ion-label>\n      <ion-input type="text" placeholder=""></ion-input>\n    </ion-item>\n    <ion-item id="newPost-toggle10">\n      <ion-label>\n        Toggle\n      </ion-label>\n      <ion-toggle color="positive" checked="false"></ion-toggle>\n    </ion-item>\n    <ion-item id="newPost-checkbox1">\n      <ion-label>\n        Use Current Location\n      </ion-label>\n      <ion-checkbox></ion-checkbox>\n    </ion-item>\n    <ion-item>\n      <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend( postTitle, postContent)">\n      Create Post  \n      </button>\n    </ion-item>\n    <ion-item>\n      <button id="newPost-button10" ion-button block color="positive"  (click)="showtheVar()">\n        Log the Variable on the console.\n      </button>\n    </ion-item>\n <!-- </form>-->\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/create-post/create-post.html"*/,
+        selector: 'page-create-post',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n-->\n\n<!--<p> The lattitude: {{LocationProvider.usersLocation.lat}}</p>\n<p> The longitude: {{LocationProvider.usersLocation.lon}}</p>-->\n\n<ion-header>\n\n  <ion-navbar color="secondary">\n    <ion-title> CreatePost </ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page10">\n  <ion-card id="newPost-card210">\n    <ion-list>\n   <!--   <form id="newPost-form17">-->\n        <ion-item color="none" id="newPost-list-item101">\n          <ion-avatar item-left>\n            <img />\n          </ion-avatar>\n          <ion-input placeholder="United Red Cross"><h2>[(ngModel)]="name">{{name}}</h2></ion-input>\n        </ion-item>\n        <ion-item id="newPost-input12">\n          <ion-label></ion-label>\n          <ion-input type="text" [(ngModel)]="postTitle" placeholder="Enter Post Title"></ion-input>\n        </ion-item>\n        <ion-item id="newPost-input10">\n          <ion-label></ion-label>\n          <ion-input type="text" [(ngModel)]="postContent" placeholder="Post Content..."></ion-input>\n        </ion-item>\n  <!--    </form> -->\n      <ion-item color="none" id="newPost-list-item100">\n        <ion-icon name="image" item-left></ion-icon>\n        Upload Image\n      </ion-item>\n    </ion-list>\n  </ion-card>\n  <!--<form id="newPost-form13">-->\n    <ion-item id="newPost-select5">\n      <ion-label>\n        Type of Request\n      </ion-label>\n      <ion-select  [(ngModel)]="selected_value" (ionChange)="showSelected(selected_value)"[ngModelOptions]="{standalone: true}">\n        <ion-option value="Supplies Request" >\n          Supplies Request\n        </ion-option>\n        <ion-option value="Supplies Pickup">\n          Supply Pickup\n        </ion-option>\n        <ion-option value="Volunteer Request">\n          Volunteer Request\n        </ion-option>\n        <ion-option value="Volunteers Available">\n          Volunteers Available\n        </ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item id="newPost-input11">\n      <ion-label>\n        Location:\n      </ion-label>\n      <ion-input type="text" placeholder=""></ion-input>\n    </ion-item>\n    <ion-item id="newPost-toggle10">\n      <ion-label>\n        Toggle\n      </ion-label>\n      <ion-toggle color="positive" checked="false"></ion-toggle>\n    </ion-item>\n    <ion-item id="newPost-checkbox1">\n      <ion-label>\n        Use Current Location\n      </ion-label>\n      <ion-checkbox></ion-checkbox>\n    </ion-item>\n    <ion-item>\n      <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend( postTitle, postContent)">\n      Create Post  \n      </button>\n    </ion-item>\n    <ion-item>\n      <button id="newPost-button10" ion-button block color="positive"  (click)="showtheVar()">\n        Log the Variable on the console.\n      </button>\n    </ion-item>\n <!-- </form>-->\n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/create-post/create-post.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_6__providers_location_location__["a" /* LocationProvider */]])
@@ -110,19 +110,19 @@ CreatePostPage = __decorate([
 
 /***/ }),
 
-/***/ 152:
+/***/ 157:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators_email__ = __webpack_require__(311);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_password__ = __webpack_require__(312);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators_email__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_password__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(74);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -230,7 +230,7 @@ var SettingsPage = (function () {
 }());
 SettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-settings',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="secondary">\n  	<button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Profile Settings</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n<!--<form novalidate -->\n  <div *ngIf="!isFacebookUser()">\n    <h2>Account Credentials</h2>\n    <ion-list *ngIf="!isOrganization()">\n      <!--ion-item>\n        <ion-label stacked color="primary">Name</ion-label>\n        <ion-input placeholder="Your Name" [(ngModel)]="email">{{email}}</ion-input>\n      </ion-item-->\n          <ion-label>\n      </ion-label>\n      <form [formGroup]="userForm" (submit)="updateUser()" novalidate>\n\n        <ion-item>\n          <ion-label stacked color="primary">Email</ion-label>\n          <ion-input type="email" placeholder="Your Email" formControlName="email" [(ngModel)]="email">\n            {{email}}\n          </ion-input>\n        </ion-item>\n\n      	<ion-item>\n          <ion-label stacked color="primary">Phone Number *</ion-label>\n          <ion-input placeholder="555-555-5555"  formControlName = "phone" [(ngModel)]="phone">\n            {{phone}}\n          </ion-input>\n        </ion-item>\n\n        <button ion-button block type [disabled]="!userForm.valid">\n          Update Credentials\n      	</button>\n      </form>\n    </ion-list>\n    <ion-list *ngIf="isOrganization()">\n      <form [formGroup]="organizationForm" (submit)="updateOrganization()" novalidate>\n        <ion-item>\n          <ion-label stacked color="primary">Organization Name *</ion-label>\n          <ion-input type="text" formControlName="organization" placeholder="Your Organization Name" [(ngModel)]="organization">\n            {{organization}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s Name *</ion-label>\n          <ion-input type="text" formControlName="name" placeholder="Your Name" [(ngModel)]="username">\n            {{username}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s email *</ion-label>\n          <ion-input type="email" formControlName="email" placeholder="Your Email"[(ngModel)]="email">\n            {{email}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s Phone Number *</ion-label>\n          <ion-input type="tel" formControlName="phone" placeholder="555-555-5555" [(ngModel)]="phone">{{phone}}</ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Address *</ion-label>\n          <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">\n          {{address}}\n        </ion-input>\n        </ion-item>\n        <button ion-button block type [disabled]="!organizationForm.valid">\n          Update Credentials\n        </button>\n      </form>\n    </ion-list>\n\n    <ion-list>\n      <ion-label>\n        <h2>Change Password</h2>\n      </ion-label>\n\n      <form [formGroup]="passwordForm" (submit)="updatePassword()" novalidate>\n\n        <ion-item>\n          <ion-label stacked color="primary">Current Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="currentPassword"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary">New Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="password"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary">Confirm New Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="password1"></ion-input>\n        </ion-item>\n        <button ion-button block type [disabled]="!passwordForm.valid">\n          Update Password\n        </button>\n      </form>\n    </ion-list>\n  </div>\n<!--/form-->\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/settings/settings.html"*/,
+        selector: 'page-settings',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/settings/settings.html"*/'<!--\n  Generated template for the SettingsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color="secondary">\n  	<button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Profile Settings</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n<!--<form novalidate -->\n  <div *ngIf="!isFacebookUser()">\n    <h2>Account Credentials</h2>\n    <ion-list *ngIf="!isOrganization()">\n      <!--ion-item>\n        <ion-label stacked color="primary">Name</ion-label>\n        <ion-input placeholder="Your Name" [(ngModel)]="email">{{email}}</ion-input>\n      </ion-item-->\n          <ion-label>\n      </ion-label>\n      <form [formGroup]="userForm" (submit)="updateUser()" novalidate>\n\n        <ion-item>\n          <ion-label stacked color="primary">Email</ion-label>\n          <ion-input type="email" placeholder="Your Email" formControlName="email" [(ngModel)]="email">\n            {{email}}\n          </ion-input>\n        </ion-item>\n\n      	<ion-item>\n          <ion-label stacked color="primary">Phone Number *</ion-label>\n          <ion-input placeholder="555-555-5555"  formControlName = "phone" [(ngModel)]="phone">\n            {{phone}}\n          </ion-input>\n        </ion-item>\n\n        <button ion-button block type [disabled]="!userForm.valid">\n          Update Credentials\n      	</button>\n      </form>\n    </ion-list>\n    <ion-list *ngIf="isOrganization()">\n      <form [formGroup]="organizationForm" (submit)="updateOrganization()" novalidate>\n        <ion-item>\n          <ion-label stacked color="primary">Organization Name *</ion-label>\n          <ion-input type="text" formControlName="organization" placeholder="Your Organization Name" [(ngModel)]="organization">\n            {{organization}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s Name *</ion-label>\n          <ion-input type="text" formControlName="name" placeholder="Your Name" [(ngModel)]="username">\n            {{username}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s email *</ion-label>\n          <ion-input type="email" formControlName="email" placeholder="Your Email"[(ngModel)]="email">\n            {{email}}\n          </ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Contact\'s Phone Number *</ion-label>\n          <ion-input type="tel" formControlName="phone" placeholder="555-555-5555" [(ngModel)]="phone">{{phone}}</ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary" >Address *</ion-label>\n          <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">\n          {{address}}\n        </ion-input>\n        </ion-item>\n        <button ion-button block type [disabled]="!organizationForm.valid">\n          Update Credentials\n        </button>\n      </form>\n    </ion-list>\n\n    <ion-list>\n      <ion-label>\n        <h2>Change Password</h2>\n      </ion-label>\n\n      <form [formGroup]="passwordForm" (submit)="updatePassword()" novalidate>\n\n        <ion-item>\n          <ion-label stacked color="primary">Current Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="currentPassword"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary">New Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="password"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label stacked color="primary">Confirm New Password</ion-label>\n          <ion-input type="password" placeholder="Your New Password" formControlName="password1"></ion-input>\n        </ion-item>\n        <button ion-button block type [disabled]="!passwordForm.valid">\n          Update Password\n        </button>\n      </form>\n    </ion-list>\n  </div>\n<!--/form-->\n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/settings/settings.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
 ], SettingsPage);
@@ -239,7 +239,7 @@ SettingsPage = __decorate([
 
 /***/ }),
 
-/***/ 162:
+/***/ 167:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -252,44 +252,44 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 162;
+webpackEmptyAsyncContext.id = 167;
 
 /***/ }),
 
-/***/ 206:
+/***/ 211:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/create-post/create-post.module": [
-		488,
+		493,
 		7
 	],
 	"../pages/feed/feed.module": [
-		489,
+		494,
 		6
 	],
 	"../pages/login/login.module": [
-		490,
+		495,
 		4
 	],
 	"../pages/org-signup/org-signup.module": [
-		491,
+		496,
 		3
 	],
 	"../pages/password-reset/password-reset.module": [
-		492,
+		497,
 		2
 	],
 	"../pages/settings/settings.module": [
-		493,
+		498,
 		5
 	],
 	"../pages/signup-choice/signup-choice.module": [
-		494,
+		499,
 		1
 	],
 	"../pages/user-signup/user-signup.module": [
-		495,
+		500,
 		0
 	]
 };
@@ -304,21 +304,21 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 206;
+webpackAsyncContext.id = 211;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 267:
+/***/ 272:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocationProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(133);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -357,13 +357,14 @@ LocationProvider = __decorate([
 
 /***/ }),
 
-/***/ 310:
+/***/ 314:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(133);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -375,21 +376,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var ListPage = (function () {
-    function ListPage(menuCtrl, navCtrl) {
-        this.menuCtrl = menuCtrl;
+    function ListPage(navCtrl, geolocation) {
         this.navCtrl = navCtrl;
+        this.geolocation = geolocation;
         this.name = "";
-        this.menuCtrl.enable(true, 'navMenu');
     }
     ListPage.prototype.ionViewDidLoad = function () {
-        this.initializeMap();
+        this.getUserPosition();
     };
-    ListPage.prototype.initializeMap = function () {
-        var letLng = new google.maps.LatLng(34.007, -81.034);
+    ListPage.prototype.getUserPosition = function () {
+        var _this = this;
+        this.options = {
+            enableHighAccuracy: false
+        };
+        this.geolocation.getCurrentPosition(this.options).then(function (pos) {
+            _this.currentPos = pos;
+            console.log(pos);
+            _this.initializeMap(pos.coords.latitude, pos.coords.longitude);
+        }, function (err) {
+            console.log("error : " + err.message);
+            ;
+        });
+    };
+    ListPage.prototype.initializeMap = function (lat, long) {
+        var letLng = new google.maps.LatLng(lat, long);
         var mapOptions = {
             center: letLng,
-            zoom: 7,
+            zoom: 11,
             mapTypeId: google.maps.MapTypeId.HYBRID
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -423,16 +438,16 @@ __decorate([
 ], ListPage.prototype, "mapElement", void 0);
 ListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-list',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar color="secondary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map id="map">\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/list/list.html"*/
+        selector: 'page-list',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/list/list.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div #map id="map">\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/list/list.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]])
 ], ListPage);
 
 //# sourceMappingURL=list.js.map
 
 /***/ }),
 
-/***/ 311:
+/***/ 315:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -456,7 +471,7 @@ var EmailValidator = (function () {
 
 /***/ }),
 
-/***/ 312:
+/***/ 316:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -480,13 +495,13 @@ var PasswordValidator = (function () {
 
 /***/ }),
 
-/***/ 313:
+/***/ 317:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(314);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(329);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(318);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(333);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -494,30 +509,30 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 329:
+/***/ 333:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_sms__ = __webpack_require__(486);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(487);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_list_list__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_sms__ = __webpack_require__(491);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_list_list__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feed_feed__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_settings_settings__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_create_post_create_post__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_settings_settings__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_auth_auth__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_location_location__ = __webpack_require__(267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_geolocation__ = __webpack_require__(268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_facebook__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_location_location__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_geolocation__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_facebook__ = __webpack_require__(156);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -614,21 +629,21 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 487:
+/***/ 492:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(314);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_feed_feed__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_auth_auth__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_settings_settings__ = __webpack_require__(152);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_settings_settings__ = __webpack_require__(157);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -708,7 +723,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/app/app.html"*/'<!--This is the main template for the app, content tells it where to rotate aroud, this first part is all the main template for the navbar until </ion-menu>, ion-nav is the main content of the page -->\n<ion-menu [content]="content" id="navMenu">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n      <button menuClose ion-item (click)="logMeOut()">\n        Sign Out\n      </button>\n\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/app/app.html"*/'<!--This is the main template for the app, content tells it where to rotate aroud, this first part is all the main template for the navbar until </ion-menu>, ion-nav is the main content of the page -->\n<ion-menu [content]="content" id="navMenu">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n      <button menuClose ion-item (click)="logMeOut()">\n        Sign Out\n      </button>\n\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_7__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
@@ -723,11 +738,11 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_post_create_post__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_post_create_post__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -841,7 +856,7 @@ var FeedPage = (function () {
 }());
 FeedPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-feed',template:/*ion-inline-start:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="secondary">\n        <ion-title> Beacon Feed</ion-title>\n        <ion-buttons left>\n          <button ion-button menuToggle icon-only>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n        </ion-buttons> \n         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n         <ion-buttons right>\n            <button (click) = "btnCreateClicked()" ion-button icon-only>\n              <ion-icon name=\'create\' is-active="false"></ion-icon>\n            </button>\n         </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content\n      pullingIcon="arrow-dropdown"\n      pullingText="Pull to refresh"\n      refreshingSpinner="circles"\n      refreshingText="Refreshing..."></ion-refresher-content>\n  </ion-refresher>\n\n<!--html template for the title, username, avatar, and date-->\n\n\n <!-- div class="chat-container" *ngFor=" let item of postList "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n <ion-list>\n    <ion-card *ngFor=" let item of postList ">\n      <!--Avatar image, title, and timestamp-->\n      <ion-item>\n        <ion-avatar item-start>\n          <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n        </ion-avatar>\n        <h2>{{item.title}}</h2>\n        <h2>{{item.email}} </h2>\n        <p>{{item.timestamp*(-1)  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p> <span> </span> <p>{{item.PostType}}</p>\n      </ion-item>\n\n      <!--creates the card content using two way data linking for an async for loop-->\n      <ion-card-content>\n        <a href="#">{{item.name}}</a>\n        <p>{{item.message}}</p>\n      </ion-card-content>\n      <!--Creates the likes, comments, and time since post-->\n    <ion-row>\n      <ion-col>\n        <button ion-button icon-left clear small>\n          <ion-icon name="thumbs-up"></ion-icon>\n          <div>0 Likes</div>\n        </button>\n      </ion-col>\n\n      <ion-col>\n        <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n        </button>\n      </ion-col>\n\n      <ion-col center text-center>\n        <ion-note>\n          <!--11h ago-->\n        </ion-note>\n      </ion-col>\n    </ion-row>\n\n  </ion-card>\n</ion-list>\n\n<ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">\n <ion-infinite-scroll-content></ion-infinite-scroll-content>\n</ion-infinite-scroll>\n\n  <!--/div-->\n\n</ion-content>\n'/*ion-inline-end:"/Users/amandabrummett/Desktop/490/Beacon/src/pages/feed/feed.html"*/,
+        selector: 'page-feed',template:/*ion-inline-start:"/Users/Mason/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/'<!--\n  Created by Ryan Roe for Beacon Capstone Project\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n\n<ion-header>\n<ion-navbar color="secondary">\n        <ion-title> Beacon Feed</ion-title>\n        <ion-buttons left>\n          <button ion-button menuToggle icon-only>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n        </ion-buttons> \n         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n         <ion-buttons right>\n            <button (click) = "btnCreateClicked()" ion-button icon-only>\n              <ion-icon name=\'create\' is-active="false"></ion-icon>\n            </button>\n         </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n    <ion-refresher-content\n      pullingIcon="arrow-dropdown"\n      pullingText="Pull to refresh"\n      refreshingSpinner="circles"\n      refreshingText="Refreshing..."></ion-refresher-content>\n  </ion-refresher>\n\n<!--html template for the title, username, avatar, and date-->\n\n\n <!-- div class="chat-container" *ngFor=" let item of postList "> <!-- | orderBy: \'-timestamp\' > <!--let variable items be of type items, |async automatically checks for new updates-->\n <ion-list>\n    <ion-card *ngFor=" let item of postList ">\n      <!--Avatar image, title, and timestamp-->\n      <ion-item>\n        <ion-avatar item-start>\n          <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">\n        </ion-avatar>\n        <h2>{{item.title}}</h2>\n        <h2>{{item.email}} </h2>\n        <p>{{item.timestamp*(-1)  | date:\'yyyy-MM-dd HH:mm:ss Z\'}}</p> <span> </span> <p>{{item.PostType}}</p>\n      </ion-item>\n\n      <!--creates the card content using two way data linking for an async for loop-->\n      <ion-card-content>\n        <a href="#">{{item.name}}</a>\n        <p>{{item.message}}</p>\n      </ion-card-content>\n      <!--Creates the likes, comments, and time since post-->\n    <ion-row>\n      <ion-col>\n        <button ion-button icon-left clear small>\n          <ion-icon name="thumbs-up"></ion-icon>\n          <div>0 Likes</div>\n        </button>\n      </ion-col>\n\n      <ion-col>\n        <button ion-button icon-left clear small>\n        <ion-icon name="text"></ion-icon>\n        <div>0 Comments</div>\n        </button>\n      </ion-col>\n\n      <ion-col center text-center>\n        <ion-note>\n          <!--11h ago-->\n        </ion-note>\n      </ion-col>\n    </ion-row>\n\n  </ion-card>\n</ion-list>\n\n<ion-infinite-scroll (ionInfinite)="loadMorePosts($event)">\n <ion-infinite-scroll-content></ion-infinite-scroll-content>\n</ion-infinite-scroll>\n\n  <!--/div-->\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mason/Documents/GitHub/Beacon/src/pages/feed/feed.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */],
         __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
@@ -857,9 +872,9 @@ FeedPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_facebook__ = __webpack_require__(156);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -942,5 +957,5 @@ AuthProvider = __decorate([
 
 /***/ })
 
-},[313]);
+},[317]);
 //# sourceMappingURL=main.js.map
