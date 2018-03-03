@@ -30547,8 +30547,9 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-ion-header {
-  color: #e57373;
+page-feed ion-searchbar {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .ios page-list .scroll, .md page-list .scroll {
@@ -30622,114 +30623,6 @@ h1 {
   -webkit-box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #8BC9B3;
   box-shadow: 0 0 0 -2px #8A93B0, 0 0 0 -1px #8BC9B3;
   border: none;
-  -webkit-transition: -webkit-box-shadow .3s;
-  transition: -webkit-box-shadow .3s;
-  transition: box-shadow .3s;
-  transition: box-shadow .3s, -webkit-box-shadow .3s;
-}
-
-.btn:hover, .btn:focus {
-  -webkit-box-shadow: 0 0 0 2px #8A93B0, 0 0 0 4px #ff0464;
-  box-shadow: 0 0 0 2px #8A93B0, 0 0 0 4px #ff0464;
-  -webkit-transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
-  transition-timing-function: cubic-bezier(0.6, 4, 0.3, 0.8);
-  -webkit-animation: jelly 0.5s 1;
-  animation: jelly 0.5s 1;
-}
-
-/**
-.btn-secondary {
-  background:$color-btn-secondary;
-  box-shadow: 0 0 0 -2px $color-bg, 0 0 0 -1px $color-btn-secondary;
-  &:hover {
-    box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px darken($color-btn-secondary, 5%);
-  }
-}
-.btn-secondary:active  {
-    background: $color-btn-active;
-    @include transition-duration(0);
-    box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px darken($color-btn-active, 5%);
-  }
-**/
-.btn:active {
-  background: #4ECDC4;
-  -webkit-transition-duration: 0;
-  transition-duration: 0;
-  -webkit-box-shadow: 0 0 0 2px #8A93B0, 0 0 0 4px #3ac7bd;
-  box-shadow: 0 0 0 2px #8A93B0, 0 0 0 4px #3ac7bd;
-}
-
-/**
- * $keyframes jelly bounce effect
- **/
-@keyframes jelly {
-  from, to {
-    -webkit-transform: scale(1, 1);
-    transform: scale(1, 1);
-  }
-  25% {
-    -webkit-transform: scale(0.9, 1.1);
-    transform: scale(0.9, 1.1);
-  }
-  50% {
-    -webkit-transform: scale(1.1, 0.9);
-    transform: scale(1.1, 0.9);
-  }
-  75% {
-    -webkit-transform: scale(0.95, 1.05);
-    transform: scale(0.95, 1.05);
-  }
-  from, to {
-    -webkit-transform: scale(1, 1);
-    transform: scale(1, 1);
-  }
-  25% {
-    -webkit-transform: scale(0.9, 1.1);
-    transform: scale(0.9, 1.1);
-  }
-  50% {
-    -webkit-transform: scale(1.1, 0.9);
-    transform: scale(1.1, 0.9);
-  }
-  75% {
-    -webkit-transform: scale(0.95, 1.05);
-    transform: scale(0.95, 1.05);
-  }
-}
-
-@-webkit-keyframes jelly {
-  from, to {
-    -webkit-transform: scale(1, 1);
-    transform: scale(1, 1);
-  }
-  25% {
-    -webkit-transform: scale(0.9, 1.1);
-    transform: scale(0.9, 1.1);
-  }
-  50% {
-    -webkit-transform: scale(1.1, 0.9);
-    transform: scale(1.1, 0.9);
-  }
-  75% {
-    -webkit-transform: scale(0.95, 1.05);
-    transform: scale(0.95, 1.05);
-  }
-  from, to {
-    -webkit-transform: scale(1, 1);
-    transform: scale(1, 1);
-  }
-  25% {
-    -webkit-transform: scale(0.9, 1.1);
-    transform: scale(0.9, 1.1);
-  }
-  50% {
-    -webkit-transform: scale(1.1, 0.9);
-    transform: scale(1.1, 0.9);
-  }
-  75% {
-    -webkit-transform: scale(0.95, 1.05);
-    transform: scale(0.95, 1.05);
-  }
 }
 
 page-reset-password form {
@@ -30763,10 +30656,6 @@ page-reset-password .error-message .item-inner {
 
 ion-header {
   color: #e57373;
-}
-
-page-user-signup form {
-  margin-bottom: 32px;
 }
 
 page-user-signup form button {
