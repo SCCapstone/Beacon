@@ -281,11 +281,11 @@ var map = {
 		2
 	],
 	"../pages/settings/settings.module": [
-		498,
+		499,
 		5
 	],
 	"../pages/signup-choice/signup-choice.module": [
-		499,
+		498,
 		1
 	],
 	"../pages/user-signup/user-signup.module": [
@@ -404,7 +404,7 @@ var ListPage = (function () {
         var letLng = new google.maps.LatLng(lat, long);
         var mapOptions = {
             center: letLng,
-            zoom: 11,
+            zoom: 15,
             mapTypeId: google.maps.MapTypeId.HYBRID
         };
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -592,8 +592,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/org-signup/org-signup.module#OrgSignupPageModule', name: 'OrgSignupPage', segment: 'org-signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/password-reset/password-reset.module#PasswordResetPageModule', name: 'PasswordResetPage', segment: 'password-reset', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup-choice/signup-choice.module#SignupChoicePageModule', name: 'SignupChoicePage', segment: 'signup-choice', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/user-signup/user-signup.module#UserSignupPageModule', name: 'UserSignupPage', segment: 'user-signup', priority: 'low', defaultHistory: [] }
                 ]
             }),

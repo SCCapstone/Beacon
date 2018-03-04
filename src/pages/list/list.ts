@@ -39,7 +39,7 @@ export class ListPage {
     let letLng = new google.maps.LatLng(lat, long);
     let mapOptions = {
       center: letLng,
-      zoom: 11,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
