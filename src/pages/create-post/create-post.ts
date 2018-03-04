@@ -117,13 +117,15 @@ userEmail: Observable<any>;
 
 //Sends the post information to database
  chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string) {
- 	const item = {
+ 	 console.log(this.organization);
+   const item = {
     
  		message: theirMessage, //works
  		title: theirTitle,     //works
  		timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
-    email: this.email,   
+    email: this.email, 
+    organization: this.organization  
    // username: this.name
    // location: theirLocation,
    // image: theirImage
