@@ -30547,8 +30547,9 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-ion-header {
-  color: #e57373;
+page-feed ion-searchbar {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .ios page-list .scroll, .md page-list .scroll {
@@ -30763,10 +30764,6 @@ page-reset-password .error-message .item-inner {
 
 ion-header {
   color: #e57373;
-}
-
-page-user-signup form {
-  margin-bottom: 32px;
 }
 
 page-user-signup form button {

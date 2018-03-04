@@ -45,13 +45,31 @@ itemsRef: AngularFireList<any>;
 items: Observable<any[]>;
 userEmail: Observable<any>;
 
-
+  /**
   public currentUser;
   public organization;
   name;
   email;
   public phone;
   public username;
+
+  */
+  
+  //added
+  public UID; 
+  public currentUserDB;
+  public organization;
+  public username;
+  public email;
+  public phone;
+  public address;
+
+  public organizationForm;
+  public userForm;
+  public passwordForm;
+  //end added
+
+
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
     
@@ -60,6 +78,8 @@ userEmail: Observable<any>;
 
 		console.log(this.arrData);
   })*/
+
+  /**
     this.currentUser = firebase.auth().currentUser;
     if (this.currentUser != null) 
     { 
@@ -70,6 +90,21 @@ userEmail: Observable<any>;
       console.log(this.currentUser.name);
       console.log(this.currentUser.userPhone);
     }
+*/
+    //added
+        this.UID = firebase.auth().currentUser.uid
+    this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
+
+    this.currentUserDB.once('value', userInfo => {
+        this.username = (userInfo.val().username);
+        this.email = userInfo.val().email;
+        this.phone = userInfo.val().phone;
+        this.organization = userInfo.val().organization;
+        this.address = userInfo.val().address;
+
+     });
+     //end added
+
 
   	this.itemsRef = fdb.list('messages');
    // this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
@@ -78,9 +113,12 @@ userEmail: Observable<any>;
 
 }
 
+
+
 //Sends the post information to database
  chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string) {
  	const item = {
+    
  		message: theirMessage, //works
  		title: theirTitle,     //works
  		timestamp: Date.now() * -1, //works, but needs filtering
