@@ -7,7 +7,6 @@
 
 <ion-header>
 <ion-navbar color="secondary">
-        <ion-title> Beacon Feed</ion-title>
         <ion-buttons left>
           <button ion-button menuToggle icon-only>
             <ion-icon name="menu"></ion-icon>
@@ -15,7 +14,7 @@
         </ion-buttons> 
          <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
          <ion-buttons right>
-            <button (click) = "btnCreateClicked()" ion-button icon-only>
+            <button (click) = "btnCreateClicked()" ion-button icon-only *ngIf="isOrganization">
               <ion-icon name='create' is-active="false"></ion-icon>
             </button>
          </ion-buttons>

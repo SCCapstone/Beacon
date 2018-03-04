@@ -33,11 +33,26 @@ export class FeedPage {
 	public postRef;//:firebase.database.Reference;//Is to store the list of posts we’re pulling from Firebase.
 	//public loading:Loading;
 	public postsToLoad: number = 10;
+	public isOrganization;
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController) { 
 
 		this.menuCtrl.enable(true, 'navMenu');
+
+		var UID = firebase.auth().currentUser.uid;
+    	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
+    	currentUserDB.once('value', userInfo => {
+        	var organization = userInfo.val().organization;
+        	if(organization != null)
+	    	{
+	       		this.isOrganization = true;
+	    	}
+	    	else
+	    	{
+	    	  this.isOrganization = false;
+	    	}
+	    });
 	  	//this.itemsRef = fdb.list('/messages');
 	    //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
 	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
@@ -52,6 +67,7 @@ export class FeedPage {
           this.loadedPostList = posts;
         });
   	}
+
 
 	initializeItems(): void {
   		this.postList = this.loadedPostList; //This is so we don't have to call the data again from Firebase. We can just use the list we already have.
