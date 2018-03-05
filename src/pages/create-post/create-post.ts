@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
 import {LocationProvider} from '../../providers/location/location';
-
+import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 /**
  * Generated class for the CreatePostPage page.
  * Created by Ryan Roe for Beacon Capstone Project
@@ -16,6 +16,8 @@ import {LocationProvider} from '../../providers/location/location';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+declare var google;
 
 @IonicPage()
 @Component({
@@ -28,6 +30,8 @@ postTitle
 postContent
 arrData = []
 postData =[]
+options: GeolocationOptions;
+currentPos : Geoposition;
 createPostMessage : any = "original messsage";
 testingPostsArr : any = [];
 locationprovidermessage;
@@ -70,7 +74,7 @@ userEmail: Observable<any>;
   //end added
 
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
     
   	/*this.fdb.list("/posts/").valueChanges().subscribe(_data => {
@@ -113,10 +117,23 @@ userEmail: Observable<any>;
 
 }
 
+  getUserPosition(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
+    this.options = {
+      enableHighAccuracy: false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+      this.currentPos = pos;
+      console.log(pos);
+      this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
+    })
+  }
 
 
 //Sends the post information to database
- chatSend(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser : string, userImageSrc: string) {
+ chatSend2(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
+    this.getUserPosition(theirTitle, theirMessage, theirLocation, theirImage, theirUser, userImageSrc);
+  }
+ chatSend(theirTitle: string, theirMessage: string, theirLatitude, theirLongitude, theirImage: string, theirUser : string, userImageSrc: string) {
  	 console.log(this.organization);
    const item = {
     
@@ -125,9 +142,10 @@ userEmail: Observable<any>;
  		timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
     email: this.email, 
-    organization: this.organization  
+    organization: this.organization,  
    // username: this.name
-   // location: theirLocation,
+    latitude: theirLatitude,
+    longitude: theirLongitude
    // image: theirImage
    // userImage : userImageSrc
  	 }

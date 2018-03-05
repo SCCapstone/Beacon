@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
  
 declare var google;
 
@@ -11,17 +12,34 @@ export class ListPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   name: string = "";
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController) {
-    this.menuCtrl.enable(true, 'navMenu');
+  options : GeolocationOptions;
+  currentPos : Geoposition;
+  constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
+  ionViewDidLoad() {    
+    this.getUserPosition()
   }
-  ionViewDidLoad() {
-    this.initializeMap();
+  getUserPosition(){
+    this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+        this.currentPos = pos;     
+
+        console.log(pos);
+        this.initializeMap(pos.coords.latitude,pos.coords.longitude);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
   }
-  initializeMap() {
-    let letLng = new google.maps.LatLng(34.007, -81.034);
+  
+  initializeMap(lat, long) {
+    let letLng = new google.maps.LatLng(lat, long);
     let mapOptions = {
       center: letLng,
-      zoom: 7,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
