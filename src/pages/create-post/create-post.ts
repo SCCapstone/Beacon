@@ -49,17 +49,6 @@ itemsRef: AngularFireList<any>;
 items: Observable<any[]>;
 userEmail: Observable<any>;
 
-  /**
-  public currentUser;
-  public organization;
-  name;
-  email;
-  public phone;
-  public username;
-
-  */
-  
-  //added
   public UID; 
   public currentUserDB;
   public organization;
@@ -71,33 +60,16 @@ userEmail: Observable<any>;
   public organizationForm;
   public userForm;
   public passwordForm;
-  //end added
+
+  public pos;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
-    
-  	/*this.fdb.list("/posts/").valueChanges().subscribe(_data => {
-		this.arrData = _data;
-
-		console.log(this.arrData);
-  })*/
-
-  /**
-    this.currentUser = firebase.auth().currentUser;
-    if (this.currentUser != null) 
-    { 
-     this.name = this.currentUser.name; //logs null
-     this.email = this.currentUser.email; 
-     this.phone = this.currentUser.userPhone;//logs null
-      console.log(this.currentUser.email);
-      console.log(this.currentUser.name);
-      console.log(this.currentUser.userPhone);
-    }
-*/
-    //added
-        this.UID = firebase.auth().currentUser.uid
+  
+    this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
+    this.itemsRef = fdb.list('messages');
 
     this.currentUserDB.once('value', userInfo => {
         this.username = (userInfo.val().username);
@@ -107,33 +79,20 @@ userEmail: Observable<any>;
         this.address = userInfo.val().address;
 
      });
-     //end added
 
-
-  	this.itemsRef = fdb.list('messages');
-   // this.items = this.itemsRef.valueChanges();//There are properties, such as valueChanges, that return an RxJS Observable. 
-
-    //this.locationprovidermessage = this.locationProvider.username;
-
-}
-
-  getUserPosition(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
-    this.options = {
-      enableHighAccuracy: false
-    };
+     this.options = {
+        enableHighAccuracy: false
+       };
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
       this.currentPos = pos;
       console.log(pos);
-      this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
+      //this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
     })
-  }
+  
 
+}
 
-//Sends the post information to database
- chatSend2(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
-    this.getUserPosition(theirTitle, theirMessage, theirLocation, theirImage, theirUser, userImageSrc);
-  }
- chatSend(theirTitle: string, theirMessage: string, theirLatitude, theirLongitude, theirImage: string, theirUser : string, userImageSrc: string) {
+ chatSend(theirTitle: string, theirMessage: string, theirImage: string, userImageSrc: string) {
  	 console.log(this.organization);
    const item = {
     
@@ -144,8 +103,8 @@ userEmail: Observable<any>;
     email: this.email, 
     organization: this.organization,  
    // username: this.name
-    latitude: theirLatitude,
-    longitude: theirLongitude
+    latitude: this.currentPos.coords.latitude,
+    longitude: this.currentPos.coords.longitude,
    // image: theirImage
    // userImage : userImageSrc
  	 }

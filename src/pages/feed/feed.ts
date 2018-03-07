@@ -83,6 +83,9 @@ export class FeedPage {
 			if(v.title && q) {
 		    	if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) { //checks the string against the value of the title property
 		        	return true;
+		        }
+		        if (v.message.toLowerCase().indexOf(q.toLowerCase()) > -1){
+		        	return true;
 		      	}
 		      	return false;
 		    }
