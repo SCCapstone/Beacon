@@ -76,6 +76,14 @@ userEmail: Observable<any>;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
    public alertCtrl: AlertController, private locationProvider : LocationProvider) {
+
+    this.options = {
+      enableHighAccuracy: false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+      this.currentPos = pos;
+      console.log(pos);
+    })
     
   	/*this.fdb.list("/posts/").valueChanges().subscribe(_data => {
 		this.arrData = _data;
@@ -117,22 +125,7 @@ userEmail: Observable<any>;
 
 }
 
-  getUserPosition(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
-    this.options = {
-      enableHighAccuracy: false
-    };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-      this.currentPos = pos;
-      console.log(pos);
-      this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
-    })
-  }
 
-
-//Sends the post information to database
- chatSend2(theirTitle: string, theirMessage: string, theirLocation: string, theirImage: string, theirUser: string, userImageSrc: string){
-    this.getUserPosition(theirTitle, theirMessage, theirLocation, theirImage, theirUser, userImageSrc);
-  }
  chatSend(theirTitle: string, theirMessage: string, theirLatitude, theirLongitude, theirImage: string, theirUser : string, userImageSrc: string) {
  	 console.log(this.organization);
    const item = {
@@ -144,8 +137,8 @@ userEmail: Observable<any>;
     email: this.email, 
     organization: this.organization,  
    // username: this.name
-    latitude: theirLatitude,
-    longitude: theirLongitude
+    latitude: this.currentPos.coords.latitude,
+    longitude: this.currentPos.coords.longitude
    // image: theirImage
    // userImage : userImageSrc
  	 }
