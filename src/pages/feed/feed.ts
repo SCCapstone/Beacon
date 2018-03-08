@@ -34,7 +34,6 @@ export class FeedPage {
 	//public loading:Loading;
 	public postsToLoad: number = 10;
 	public isOrganization;
-	currentPos : Geoposition;
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController) { 
