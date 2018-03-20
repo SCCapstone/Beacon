@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, MenuController,
 
 import { CreatePostPage } from '../create-post/create-post';
 import {LoginPage} from '../login/login';
+import {SearchPage} from '../search/search';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
@@ -40,6 +41,7 @@ export class FeedPage {
 
 		this.menuCtrl.enable(true, 'navMenu');
 
+		//determines current userID and determines whether they are an org or not
 		var UID = firebase.auth().currentUser.uid;
     	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
     	currentUserDB.once('value', userInfo => {
@@ -68,10 +70,11 @@ export class FeedPage {
         });
   	}
 
-
+  	/*
 	initializeItems(): void {
   		this.postList = this.loadedPostList; //This is so we don't have to call the data again from Firebase. We can just use the list we already have.
 	}
+	/*
 	getItems(searchbar) { 
   		// Reset items back to all of the items
  		this.initializeItems();
@@ -91,7 +94,7 @@ export class FeedPage {
 		    }
 		});
   		console.log(q, this.postList.length);
-	}
+	}*/
 
 
   	ionViewDidLoad() {
@@ -103,6 +106,10 @@ export class FeedPage {
 
 	btnCreateClicked(){
 		this.navCtrl.push(CreatePostPage);
+	}
+
+	btnSearchClicked(){
+		this.navCtrl.push(SearchPage);
 	}
 
 	doRefresh(refresher) {

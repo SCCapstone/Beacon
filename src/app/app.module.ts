@@ -13,6 +13,8 @@ import { CreatePostPage } from '../pages/create-post/create-post';
 import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
+import { SearchPage } from '../pages/search/search';
+
 
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
@@ -42,7 +44,8 @@ import { Facebook } from '@ionic-native/facebook';
     ListPage,
     FeedPage,
     CreatePostPage,
-    SettingsPage
+    SettingsPage,
+    SearchPage
   ],
     imports: [
     BrowserModule,
@@ -57,10 +60,10 @@ import { Facebook } from '@ionic-native/facebook';
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
     ListPage,
-    // OrgProfilePage, //added by Amanda
     FeedPage,
-    CreatePostPage, //added by Ryan
-    SettingsPage
+    CreatePostPage, 
+    SettingsPage,
+    SearchPage
   ],
   providers: [
     StatusBar,
