@@ -1,9 +1,10 @@
 import { Component, Pipe } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
 
 import { CreatePostPage } from '../create-post/create-post';
 import {LoginPage} from '../login/login';
 import {SearchPage} from '../search/search';
+import {OrgApprovalPage} from '../org-approval/org-approval';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
 import LocationProvider from '../../providers/location/location';
+
 
 /**
  * Generated class for the FeedPage page.
@@ -34,27 +36,38 @@ export class FeedPage {
 	public postRef;//:firebase.database.Reference;//Is to store the list of posts we’re pulling from Firebase.
 	//public loading:Loading;
 	public postsToLoad: number = 10;
-	public isOrganization;
+	public isOrganization = false;
+	public isAdmin = false;
+	public isTest = true;
+	public isUser = true;
+	public isApprovedOrg = false;
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
-		public authProvider: AuthProvider, public loadingCtrl: LoadingController) { 
+		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) { 
 
 		this.menuCtrl.enable(true, 'navMenu');
 
-		//determines current userID and determines whether they are an org or not
 		var UID = firebase.auth().currentUser.uid;
     	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
     	currentUserDB.once('value', userInfo => {
         	var organization = userInfo.val().organization;
-        	if(organization != null)
+        	var approvedOrg = userInfo.val().approved;
+        	var admin = userInfo.val().username;
+        	if(organization != null )
 	    	{
 	       		this.isOrganization = true;
+	       		this.isUser = false;
 	    	}
-	    	else
+	    	if(approvedOrg == "approved"){
+	    		this.isApprovedOrg = true;
+	    		this.isOrganization = false;
+	    	}
+	    	if(admin == "Ryan Roe")
 	    	{
-	    	  this.isOrganization = false;
+	       		this.isAdmin = true;
 	    	}
 	    });
+
 	  	//this.itemsRef = fdb.list('/messages');
 	    //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
 	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
@@ -69,32 +82,6 @@ export class FeedPage {
           this.loadedPostList = posts;
         });
   	}
-
-  	/*
-	initializeItems(): void {
-  		this.postList = this.loadedPostList; //This is so we don't have to call the data again from Firebase. We can just use the list we already have.
-	}
-	/*
-	getItems(searchbar) { 
-  		// Reset items back to all of the items
- 		this.initializeItems();
-		var q = searchbar.srcElement.value;// set q to the value of the searchbar
-		if (!q) { // if the value is an empty string don't filter the items
-		  return;
-		}
-		this.postList = this.postList.filter((v) => { //v is a name we are giving to our projected array from this.postList
-			if(v.title && q) {
-		    	if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1) { //checks the string against the value of the title property
-		        	return true;
-		        }
-		        if (v.message.toLowerCase().indexOf(q.toLowerCase()) > -1){
-		        	return true;
-		      	}
-		      	return false;
-		    }
-		});
-  		console.log(q, this.postList.length);
-	}*/
 
 
   	ionViewDidLoad() {
@@ -111,6 +98,30 @@ export class FeedPage {
 	btnSearchClicked(){
 		this.navCtrl.push(SearchPage);
 	}
+	
+
+	btnOrgClicked(){
+		this.navCtrl.push(OrgApprovalPage);
+	}
+
+	btnCreateClickedFalse(){
+		if(this.isOrganization == true){
+		  let alert = this.alertCtrl.create({
+		    title: 'Sorry!',
+		    subTitle: 'Only approved organization profiles are able to create posts with Beacon. Please wait until we approve your account.',
+		    buttons: ['Dismiss']
+		  });
+		  alert.present();
+		}
+		else {
+		  let alert = this.alertCtrl.create({
+		    title: 'Sorry!',
+		    subTitle: 'User profiles are unable to create posts. This is designed to declutter the feed, and enable you to quickly find supplies and volunteer opportunities.',
+		    buttons: ['Dismiss']
+		  });
+		  alert.present();
+		}
+	};
 
 	doRefresh(refresher) {
 	    console.log('Begin async operation');

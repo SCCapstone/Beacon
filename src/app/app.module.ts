@@ -14,6 +14,7 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
+import {OrgApprovalPage} from '../pages/org-approval/org-approval';
 
 
 import { AngularFireModule } from "angularfire2"; //ryan
@@ -45,7 +46,8 @@ import { Facebook } from '@ionic-native/facebook';
     FeedPage,
     CreatePostPage,
     SettingsPage,
-    SearchPage
+    SearchPage,
+    OrgApprovalPage
   ],
     imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { Facebook } from '@ionic-native/facebook';
     FeedPage,
     CreatePostPage, 
     SettingsPage,
-    SearchPage
+    SearchPage,
+    OrgApprovalPage
   ],
   providers: [
     StatusBar,

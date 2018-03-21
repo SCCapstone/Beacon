@@ -19,6 +19,8 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
+import { OrgApprovalPage } from '../pages/org-approval/org-approval';
+
 
 
 @Component({
@@ -50,8 +52,12 @@ export class MyApp { //this is template for the root component that is set in mo
 //added this
  pages: Array<{title: string, component: any}>;
 
+
  public zone:NgZone;
     // used for an example of ngFor and navigation
+
+  public isAdmin;
+
   constructor(public authProvider: AuthProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
@@ -63,6 +69,7 @@ export class MyApp { //this is template for the root component that is set in mo
         storageBucket: "ionicdbtest1.appspot.com",
         messagingSenderId: "207415494381"
       };
+
 
     this.pages = [
       {title: 'Beacon Feed', component: FeedPage },
@@ -84,6 +91,7 @@ export class MyApp { //this is template for the root component that is set in mo
         }
       });
     });
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -103,4 +111,5 @@ export class MyApp { //this is template for the root component that is set in mo
       this.nav.setRoot('LoginPage');
     });
   }
+
 }

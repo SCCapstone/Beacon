@@ -7,9 +7,11 @@ import { Facebook } from '@ionic-native/facebook'
 @Injectable()
 export class AuthProvider {
 
-  constructor(public facebook: Facebook) {}
 
 
+  constructor(public facebook: Facebook) {
+  var approved = "not approved";
+  }
   /*
    * facebookLogin does not take in any arguments. It opens up the native facebook application or a 
    * pseudo in app browser if the application is not downloaded. It asks for permissions and then 
@@ -52,7 +54,8 @@ export class AuthProvider {
           username: contactName,
           email: contactEmail,
           phone: contactPhone,
-          address: address
+          address: address,
+          approved: "not approved"
       });
     });
   }
@@ -72,23 +75,6 @@ export class AuthProvider {
   logoutUser(): Promise<any> {
     return firebase.auth().signOut();
   }
-/*//Ryan trying to observe current user informaiton
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    var displayName = user.displayName;
-    var email = user.email;
-    var emailVerified = user.emailVerified;
-    var photoURL = user.photoURL;
-    var isAnonymous = user.isAnonymous;
-    var uid = user.uid;
-    var providerData = user.providerData;
-    // ...
-  } else {
-    // User is signed out.
-    // ...
-  }
-});*/
 
 
 }

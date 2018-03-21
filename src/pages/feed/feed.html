@@ -21,23 +21,29 @@
         </button>
       </ion-buttons>
       <ion-buttons right>
-        <button (click) = "btnCreateClicked()" ion-button icon-only *ngIf="isOrganization">
+        <button (click) = "btnOrgClicked()" ion-button icon-only *ngIf="isAdmin">
+          <ion-icon name='megaphone' is-active="false"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-buttons right>
+        <button (click) = "btnCreateClicked()" ion-button icon-only *ngIf="isApprovedOrg">
           <ion-icon name='create' is-active="false"></ion-icon>
         </button>
       </ion-buttons>
+
+      <ion-buttons right>
+        <button (click) = "btnCreateClickedFalse()" ion-button icon-only *ngIf="isOrganization || isUser ">
+          <ion-icon name='create' is-active="false"></ion-icon>
+        </button>
+      </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
 
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing..."></ion-refresher-content>
-  </ion-refresher>
 
 <!--html template for the title, username, avatar, and date-->
 
