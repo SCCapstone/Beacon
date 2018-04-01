@@ -45,10 +45,17 @@
       <ion-input type="password" formControlName="password" placeholder="Your Password"></ion-input>
     </ion-item>
 
-     <ion-item>
+    <ion-item>
       <ion-label stacked color="primary" >Confirm Password *</ion-label>
       <ion-input type="password" formControlName="password2" placeholder="Your Password"></ion-input>
     </ion-item>
+
+
+    <!--Added 3/31-->
+    <ion-item>
+        <button ion-button (click)="takePhoto()"> Take Photo </button>
+    </ion-item>
+
 
     <button ion-button block type="Submit">
       Sign up 

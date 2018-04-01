@@ -6,6 +6,10 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 
+import { Storage } from 'firebase'; //added 3/31 by amanda
+import { Camera , CameraOptions} from '@ionic-native/Camera'; //added 3/31 by Amanda
+
+
 /**
  * Generated class for the OrgSignupPage page.
  *
@@ -23,7 +27,7 @@ export class OrgSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public camera: Camera) {
   	this.menuCtrl.enable(false, 'navMenu');
 
   	this.signupForm = formBuilder.group({
@@ -78,4 +82,27 @@ export class OrgSignupPage {
   {
   	 this.navCtrl.popTo( this.navCtrl.getByIndex(0));
   }
+
+  async takePhoto(){ //added 3/31
+    try{
+      //defining camera otions      
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+      }
+      const result = await this.camera.getPicture(options); //capturing the result of getPicture()
+      const image = 'data:image/jpeg;base64,${result}';
+      const pictures = Storage().ref('pictures');
+      pictures.putString(image, 'data_url');
+     }  
+     catch(e){
+       console.error(e);
+     } 
+  }
+
+
 }
