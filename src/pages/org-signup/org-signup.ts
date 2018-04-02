@@ -6,7 +6,7 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 
-import { Storage } from 'firebase'; //added 3/31 by amanda
+import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/Camera'; //added 3/31 by Amanda
 
 
@@ -93,10 +93,11 @@ export class OrgSignupPage {
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true
       }
       const result = await this.camera.getPicture(options); //capturing the result of getPicture()
       const image = 'data:image/jpeg;base64,${result}';
-      const pictures = Storage().ref('pictures');
+      const pictures = storage().ref('pictures');
       pictures.putString(image, 'data_url');
      }  
      catch(e){
