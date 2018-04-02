@@ -8,7 +8,9 @@ import { FeedPage } from '../feed/feed';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/Camera'; //added 3/31 by Amanda
-
+import firebase from 'firebase';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the OrgSignupPage page.
@@ -27,7 +29,11 @@ export class OrgSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public camera: Camera) {
+  public myPhoto: any
+
+  constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, 
+    public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, 
+    public camera: Camera, private transfer: FileTransfer, private file: File) {
   	this.menuCtrl.enable(false, 'navMenu');
 
   	this.signupForm = formBuilder.group({
@@ -40,6 +46,7 @@ export class OrgSignupPage {
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
     });
 
+     this.mypicref=firebase.storage().ref('/') //giving the ref to mypicref
   }
 
   ionViewDidLoad() {
@@ -84,26 +91,36 @@ export class OrgSignupPage {
   }
 
   async takePhoto(){ //added 3/31
-    try{
-      //defining camera otions      
-      const options: CameraOptions = {
-        quality: 50,
-        targetHeight: 600,
-        targetWidth: 600,
+    const options: CameraOptions = {
+        quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        correctOrientation: true
-      }
-      const result = await this.camera.getPicture(options); //capturing the result of getPicture()
-      const image = 'data:image/jpeg;base64,${result}';
-      const pictures = storage().ref('pictures');
-      pictures.putString(image, 'data_url');
-     }  
-     catch(e){
-       console.error(e);
-     } 
+        //sourceType: Camera.PictureSourceType.CAMERA,
+        saveToPhotoAlbum: true, //saving picture to library  
+        correctOrientation: true 
+    }
+    this.camera.getPicture(options).then((imageData) => { 
+      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+      // Handle error
+    });
+  }
+
+  async getPhoto(){ //added 3/31
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        saveToPhotoAlbum: false
+    }
+    this.camera.getPicture(options).then((imageData) => { 
+      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+      // Handle error
+    });
   }
 
 
-}

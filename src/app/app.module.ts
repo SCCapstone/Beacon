@@ -14,7 +14,7 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
-import {OrgApprovalPage} from '../pages/org-approval/org-approval';
+import { OrgApprovalPage } from '../pages/org-approval/org-approval';
 
 
 import { AngularFireModule } from "angularfire2"; //ryan
@@ -29,9 +29,9 @@ import { Facebook } from '@ionic-native/facebook';
 
 import { storage } from 'firebase'; //added 3/31 by Amanda
 import { Camera } from '@ionic-native/Camera'; //added 3/31 by Amanda
-import { File } from '@ionic-native/file'; //added 3/31 by Amanda
-import { Transfer } from '@ionic-native/transfer'; //added 3/31 by Amanda
-import { FilePath } from '@ionic-native/file-path'; //added 3/31 by Amanda
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
 
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
@@ -85,9 +85,8 @@ import { FilePath } from '@ionic-native/file-path'; //added 3/31 by Amanda
     Geolocation,
     Facebook,
     Camera, //for image upload
-    File, //for image storage
-    Transfer, //for image storage
-    FilePath //for image storage
+    File,
+    FileTransfer,
   ]
 })
 export class AppModule {}
