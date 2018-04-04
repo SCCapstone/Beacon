@@ -1,7 +1,19 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild, ElementRef, Pipe } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
- 
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
+
+import { CreatePostPage } from '../create-post/create-post';
+import {LoginPage} from '../login/login';
+import {SearchPage} from '../search/search';
+import {OrgApprovalPage} from '../org-approval/org-approval';
+
+//import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { Observable } from 'rxjs/Observable';
+import { AuthProvider } from '../../providers/auth/auth';
+import firebase from 'firebase';
+import LocationProvider from '../../providers/location/location';
+
 declare var google;
 
 @Component({
@@ -9,12 +21,73 @@ declare var google;
   templateUrl: 'list.html'
 })
 export class ListPage {
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   name: string = "";
   options : GeolocationOptions;
   currentPos : Geoposition;
-  constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
+  itemsRef: AngularFireList<any>;
+  items: Observable<any[]>;
+
+  public postList:Array<any>; //Is for creating a database reference so we can pull the data from Firebase.
+  public loadedPostList:Array<any>; //So we dont have to call data twice from firebase
+  public postRef;//:firebase.database.Reference;//Is to store the list of posts we’re pulling from Firebase.
+  //public loading:Loading;
+  public postsToLoad: number = 10;
+  public isOrganization = false;
+  public isAdmin = false;
+  public isTest = true;
+  public isUser = true;
+  public isApprovedOrg = false;
+  public latitude = 1;
+  public longitude = 1;
+
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
+    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation : Geolocation) { 
+
+    this.menuCtrl.enable(true, 'navMenu');
+
+    var UID = firebase.auth().currentUser.uid;
+      var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
+      currentUserDB.once('value', userInfo => {
+          var organization = userInfo.val().organization;
+          var approvedOrg = userInfo.val().approved;
+          var admin = userInfo.val().username;
+          if(organization != null )
+        {
+            this.isOrganization = true;
+            this.isUser = false;
+        }
+        if(approvedOrg == "approved"){
+          this.isApprovedOrg = true;
+          this.isOrganization = false;
+        }
+        if(admin == "Ryan Roe")
+        {
+            this.isAdmin = true;
+        }
+      });
+
+      //this.itemsRef = fdb.list('/messages');
+      //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
+      this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
+
+      this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
+          let posts = [];
+          postList.forEach( post => {
+            posts.push(post.val());
+            var latitude = post.val().latitude;
+            var longitude = post.val().longitude;
+            //latitude = post.val().latitude;
+            //longitude = post.val().longitude;
+            return false;
+          });
+          this.postList = posts;
+          this.loadedPostList = posts;
+        });
+    }
+  //constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
   ionViewDidLoad() {    
     this.getUserPosition()
   }
@@ -46,14 +119,39 @@ export class ListPage {
     this.addMarker();
   }
   addMarker() {
-    let marker = new google.maps.Marker({
+    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
+
+      this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
+          let posts = [];
+          postList.forEach( post => {
+            posts.push(post.val());
+            let latitude = post.val().latitude;
+            let longitude = post.val().longitude;
+            let content = post.val().organization;
+            let marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: { lat: latitude, lng: longitude },
+            title: content
+      })
+      //let content = `<h1>Hospital</h1>`;
+      this.addInfoWindow(marker, content);
+            //latitude = post.val().latitude;
+            //longitude = post.val().longitude;
+          return false;
+      });
+          this.postList = posts;
+          this.loadedPostList = posts;
+        });
+    /*let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: { lat: 34.007, lng: -81.034 },
+      position: { lat: latitude, lng: longitude },
+      //position: { lat: latitude, lng: longitude },
       title: 'Hospital'
     })
     let content = `<h1>Hospital</h1>`;
-    this.addInfoWindow(marker, content);
+    this.addInfoWindow(marker, content);*/
   }
   addInfoWindow(marker, content) {
     let infoWindow = new google.maps.InfoWindow({
@@ -65,3 +163,5 @@ export class ListPage {
     })
   }
 }
+
+

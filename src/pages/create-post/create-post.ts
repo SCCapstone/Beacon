@@ -83,7 +83,6 @@ userEmail: Observable<any>;
      this.options = {
         enableHighAccuracy: false
        };
-     /* 
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
       this.currentPos = pos;
       console.log(pos);
