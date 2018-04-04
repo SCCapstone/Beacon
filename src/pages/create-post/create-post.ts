@@ -60,8 +60,8 @@ userEmail: Observable<any>;
   public organizationForm;
   public userForm;
   public passwordForm;
-
-  public pos;
+  options : GeolocationOptions;
+  currentPos : Geoposition;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
@@ -78,7 +78,21 @@ userEmail: Observable<any>;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
 
+
      });
+    this.options = {
+        enableHighAccuracy : false
+      };
+      this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+          this.currentPos = pos;     
+
+          console.log(pos);
+
+      },(err : PositionError)=>{
+          console.log("error : " + err.message);
+      ;
+      })
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
      this.options = {
         enableHighAccuracy: false
@@ -103,8 +117,8 @@ userEmail: Observable<any>;
     email: this.email, 
     organization: this.organization,  
    // username: this.name
-   // latitude: this.currentPos.coords.latitude,
-   // longitude: this.currentPos.coords.longitude,
+    latitude: this.currentPos.coords.latitude,
+    longitude: this.currentPos.coords.longitude,
    // image: theirImage
    // userImage : userImageSrc
  	 }

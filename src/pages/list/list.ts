@@ -86,12 +86,26 @@ export class ListPage {
           this.postList = posts;
           this.loadedPostList = posts;
         });
+      this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+        this.currentPos = pos;     
+
+        console.log(pos);
+        this.initializeMap(pos.coords.latitude,pos.coords.longitude);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
     }
   //constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
   ionViewDidLoad() {    
-    this.getUserPosition()
+    this.initializeMap()
   }
-  getUserPosition(){
+  /*getUserPosition(){
     this.options = {
     enableHighAccuracy : false
     };
@@ -106,7 +120,7 @@ export class ListPage {
         console.log("error : " + err.message);
     ;
     })
-  }
+  }*/
   
   initializeMap(lat, long) {
     let letLng = new google.maps.LatLng(lat, long);
