@@ -16,7 +16,7 @@ import {
   MenuController
    } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 //import {AngularFireDatabase} from 'angularfire2/database';
 import { FeedPage } from '../feed/feed';
 import { AuthProvider } from '../../providers/auth/auth';
