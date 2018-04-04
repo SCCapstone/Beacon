@@ -86,20 +86,21 @@ export class ListPage {
           this.postList = posts;
           this.loadedPostList = posts;
         });
+      
       this.options = {
-    enableHighAccuracy : false
-    };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+        enableHighAccuracy : false
+      };
+      this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
         this.currentPos = pos;     
 
         console.log(pos);
         this.initializeMap(pos.coords.latitude,pos.coords.longitude);
 
-    },(err : PositionError)=>{
+      },(err : PositionError)=>{
         console.log("error : " + err.message);
-    ;
-    })
+      ;
+      })
     }
   //constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
   ionViewDidLoad() {    
