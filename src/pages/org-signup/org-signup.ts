@@ -46,7 +46,7 @@ export class OrgSignupPage {
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
     });
 
-     this.mypicref=firebase.storage().ref('/') //giving the ref to mypicref
+     //this.mypicref=firebase.storage().ref('/') //giving the ref to mypicref
   }
 
   ionViewDidLoad() {
@@ -121,6 +121,8 @@ export class OrgSignupPage {
     (err) => {
       // Handle error
     });
-  }
+   }
+
+ }
 
 

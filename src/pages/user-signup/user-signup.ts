@@ -19,6 +19,9 @@ import { File } from '@ionic-native/file';
 export class UserSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
+
+  public myPhoto: any
+
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public loadingCtrl: LoadingController, 
   public alertCtrl: AlertController, public formBuilder: FormBuilder, 
   public authProvider: AuthProvider, public camera: Camera, private transfer: FileTransfer, private file: File) {
