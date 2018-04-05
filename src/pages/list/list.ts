@@ -40,13 +40,13 @@ export class ListPage {
   public isTest = true;
   public isUser = true;
   public isApprovedOrg = false;
-  public latitude: coords;
-  public longitude: coords;
+  //public latitude: number;
+  //public longitude: number;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
     public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation : Geolocation) { 
 
-    this.menuCtrl.enable(true, 'navMenu');
+    /*this.menuCtrl.enable(true, 'navMenu');
 
     var UID = firebase.auth().currentUser.uid;
       var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
@@ -67,18 +67,20 @@ export class ListPage {
         {
             this.isAdmin = true;
         }
-      });
+      });*/
 
       //this.itemsRef = fdb.list('/messages');
       //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-      this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
+      /*this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
 
       this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
           postList.forEach( post => {
             posts.push(post.val());
-            var latitude = post.val().latitude;
-            var longitude = post.val().longitude;
+            this.latitude = post.val().latitude;
+            this.longitude = post.val().longitude;
+            //latitude = post.val().latitude;
+            //longitude = post.val().longitude;
             //latitude = post.val().latitude;
             //longitude = post.val().longitude;
             return false;
@@ -86,7 +88,7 @@ export class ListPage {
           this.postList = posts;
           this.loadedPostList = posts;
         });
-      
+      */
       this.options = {
         enableHighAccuracy : false
       };
