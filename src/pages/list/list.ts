@@ -40,8 +40,8 @@ export class ListPage {
   public isTest = true;
   public isUser = true;
   public isApprovedOrg = false;
-  public latitude = 1;
-  public longitude = 1;
+  public latitude: coords;
+  public longitude: coords;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
     public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation : Geolocation) { 

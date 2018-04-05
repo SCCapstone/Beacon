@@ -62,6 +62,9 @@ userEmail: Observable<any>;
   public passwordForm;
   options : GeolocationOptions;
   currentPos : Geoposition;
+  public check: number;
+  latitude: Geoposition;
+  longitude: Geoposition;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
@@ -70,6 +73,7 @@ userEmail: Observable<any>;
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
     this.itemsRef = fdb.list('messages');
+    this.check = 0;
 
     this.currentUserDB.once('value', userInfo => {
         this.username = (userInfo.val().username);
@@ -105,9 +109,33 @@ userEmail: Observable<any>;
   
 
 }
+  getUserPosition(){
+    this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
- chatSend(theirTitle: string, theirMessage: string) {
+        this.currentPos = pos;
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;    
+
+        console.log(pos);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
+    this.check = 1;
+  }
+
+ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
  	 console.log(this.organization);
+   if(this.check > 0){
+   }
+   else{
+    this.latitude = latitude;
+    this.longitude = longitude;
+   }
    const item = {
     
  		message: theirMessage, //works
@@ -117,8 +145,8 @@ userEmail: Observable<any>;
     email: this.email, 
     organization: this.organization,  
    // username: this.name
-    latitude: this.currentPos.coords.latitude,
-    longitude: this.currentPos.coords.longitude,
+   latitude: this.latitude,
+   longitude: this.longitude,
    // image: theirImage
    // userImage : userImageSrc
  	 }
