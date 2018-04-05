@@ -90,7 +90,6 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you during emergencies." />
     </plugin>
     <allow-navigation href="http://192.168.0.2:8100" />
-    <engine name="ios" spec="~4.4.0" />
     <engine name="android" spec="~6.3.0" />
     <plugin name="cordova-plugin-filepath" spec="^1.2.0" />
     <allow-navigation href="http://10.30.164.224:8100" />
@@ -98,4 +97,5 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <allow-navigation href="http://10.30.203.166:8100" />
+    <engine name="ios" spec="~4.4.0" />
 </widget>
