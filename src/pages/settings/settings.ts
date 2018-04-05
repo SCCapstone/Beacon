@@ -78,14 +78,6 @@ export class SettingsPage {
     console.log('ionViewDidLoad SettingsPage');
   }
 
-  isFacebookUser()
-  {
-    if(this.currentUserDB.providerId === "facebook.com")
-    {
-      return true;
-    }
-  }
-
   isOrganization()
   {
     if(this.organization != null)

@@ -51,12 +51,13 @@ export class MyApp { //this is template for the root component that is set in mo
 
 //added this
  pages: Array<{title: string, component: any}>;
-
+ settingsPages: Array<{title:string, component: any}>;
 
  public zone:NgZone;
     // used for an example of ngFor and navigation
 
   public isAdmin;
+  public normalUser: boolean = true;
 
   constructor(public authProvider: AuthProvider, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     //Angular’s change detection is triggered
@@ -74,7 +75,6 @@ export class MyApp { //this is template for the root component that is set in mo
     this.pages = [
       {title: 'Beacon Feed', component: FeedPage },
       { title: 'Map', component: ListPage },
-      { title: 'Settings', component: SettingsPage } 
     ];
     
     //initialize Firebase with app, angularfiremodule is initialized in module.
@@ -86,11 +86,14 @@ export class MyApp { //this is template for the root component that is set in mo
           this.rootPage = 'LoginPage';
         } else {
           this.rootPage = FeedPage;
+          this.normalUser = user.providerData[0].providerId != "facebook.com";
+
          
           var email = user.email;
         }
       });
     });
+
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -104,6 +107,11 @@ export class MyApp { //this is template for the root component that is set in mo
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  openSettings()
+  {
+    this.nav.setRoot(SettingsPage);
   }
 
   logMeOut() {
