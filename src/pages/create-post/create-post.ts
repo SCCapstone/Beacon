@@ -11,7 +11,7 @@ import {LocationProvider} from '../../providers/location/location';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
-import { Camera , CameraOptions} from '@ionic-native/Camera'; //added 3/31 by Amanda
+import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 /**
