@@ -63,8 +63,8 @@ userEmail: Observable<any>;
   options : GeolocationOptions;
   currentPos : Geoposition;
   public check: number;
-  latitude: number;
-  longitude: number;
+  latitude;
+  longitude;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,

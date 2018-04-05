@@ -140,10 +140,10 @@ export class ListPage {
       this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
           postList.forEach( post => {
-            posts.push(post.val());
+            //posts.push(post.val());
             let latitude = post.val().latitude;
             let longitude = post.val().longitude;
-            let content = post.val().organization;
+            let content = post.val().message;
             let marker = new google.maps.Marker({
             map: this.map,
             animation: google.maps.Animation.DROP,
