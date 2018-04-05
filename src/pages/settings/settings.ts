@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
@@ -33,7 +33,7 @@ export class SettingsPage {
   public userForm;
   public passwordForm;
 
-  constructor(private fdb: AngularFireDatabase, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder) {
+  constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 
     this.UID = firebase.auth().currentUser.uid
@@ -78,14 +78,6 @@ export class SettingsPage {
     console.log('ionViewDidLoad SettingsPage');
   }
 
-  isFacebookUser()
-  {
-    if(this.currentUserDB.providerId === "facebook.com")
-    {
-      return true;
-    }
-  }
-
   isOrganization()
   {
     if(this.organization != null)
@@ -119,18 +111,34 @@ export class SettingsPage {
 
   updatePassword()
   {
-
-    if(firebase.auth().currentUser
-      .reauthenticateWithCredential(firebase.auth.EmailAuthProvider
-      .credential(firebase.auth().currentUser.email,this.passwordForm.value.currentPassword)))
-    {
-        firebase.auth().currentUser.updatePassword(this.passwordForm.value.password2).then(function() {
-          console.log("password updated successfully");
-        }).catch(error => {
-          console.log(error);
+    var that = this;
+    var credential = firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, that.passwordForm.value.currentPassword);
+    firebase.auth().currentUser.reauthenticateWithCredential(credential).then(function() {
+      firebase.auth().currentUser.updatePassword(that.passwordForm.value.password1).then(function() {
+        console.log("password updated successfully");
+        let toast = this.toastCtrl.create({
+          message: 'Password Updated Successfully',
+          duration: 1000,
+          position: 'middle'
         });
-
-    }
+        toast.present();
+      }).catch(error => {
+        let toast = this.toastCtrl.create({
+          message: 'Unable to update password',
+          duration: 1000,
+          position: 'middle'
+        });
+        toast.present();
+      })
+    }).catch(error => {
+      let toast = this.toastCtrl.create({
+        message: 'Invalid password',
+        duration: 1000,
+        position: 'middle'
+      });
+      toast.present();
+    });
+    this.passwordForm.reset();
   }
 
 
