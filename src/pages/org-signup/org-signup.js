@@ -50,7 +50,6 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 import { Camera } from '@ionic-native/Camera'; //added 3/31 by Amanda
-import firebase from 'firebase';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 /**
@@ -81,7 +80,7 @@ var OrgSignupPage = /** @class */ (function () {
             password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
             password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
         });
-        this.mypicref = firebase.storage().ref('/'); //giving the ref to mypicref
+        //this.mypicref=firebase.storage().ref('/') //giving the ref to mypicref
     }
     OrgSignupPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad OrgSignupPage');
@@ -116,6 +115,7 @@ var OrgSignupPage = /** @class */ (function () {
     };
     OrgSignupPage.prototype.takePhoto = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             var options;
             return __generator(this, function (_a) {
                 options = {
@@ -127,14 +127,39 @@ var OrgSignupPage = /** @class */ (function () {
                     saveToPhotoAlbum: true,
                     correctOrientation: true
                 };
-                this.camera.getPicture(options).then(imageData);
-                {
-                    this.myPhoto = 'data:image/jpeg;base64,' + imageData;
-                }
-                (function (err) {
+                this.camera.getPicture(options).then(function (imageData) {
+                    _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+                }, function (err) {
                     // Handle error
                 });
-                ;
+                return [2 /*return*/];
+            });
+        });
+    };
+    OrgSignupPage.prototype.getPhoto = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var options;
+            return __generator(this, function (_a) {
+                options = {
+                    quality: 100,
+                    destinationType: this.camera.DestinationType.DATA_URL,
+                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+                    saveToPhotoAlbum: false
+                };
+                /**
+                //code from paul halliday: store images with ionic
+                const result = await this.camera.getPicture(options);
+                const image = 'data:image/jpeg;base64,${result}';
+                const pictures = storage().ref('pictures/myPhoto');
+                pictures.putString(image, 'data_url');
+                */
+                // code from ionic documentation and Maballo Net: pick from gallary
+                this.camera.getPicture(options).then(function (imageData) {
+                    _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+                }, function (err) {
+                    // Handle error
+                });
                 return [2 /*return*/];
             });
         });

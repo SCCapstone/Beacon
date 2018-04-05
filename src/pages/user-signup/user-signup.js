@@ -49,7 +49,6 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
-import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera } from '@ionic-native/Camera'; //added 3/31 by Amanda
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
@@ -103,33 +102,44 @@ var UserSignupPage = /** @class */ (function () {
     };
     UserSignupPage.prototype.takePhoto = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var options, result, image, pictures, e_1;
+            var _this = this;
+            var options;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        options = {
-                            quality: 50,
-                            targetHeight: 600,
-                            targetWidth: 600,
-                            destinationType: this.camera.DestinationType.DATA_URL,
-                            encodingType: this.camera.EncodingType.JPEG,
-                            mediaType: this.camera.MediaType.PICTURE,
-                            correctOrientation: true
-                        };
-                        return [4 /*yield*/, this.camera.getPicture(options)];
-                    case 1:
-                        result = _a.sent();
-                        image = 'data:image/jpeg;base64,${result}';
-                        pictures = storage().ref('pictures');
-                        pictures.putString(image, 'data_url');
-                        return [3 /*break*/, 3];
-                    case 2:
-                        e_1 = _a.sent();
-                        console.error(e_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
-                }
+                options = {
+                    quality: 100,
+                    destinationType: this.camera.DestinationType.DATA_URL,
+                    encodingType: this.camera.EncodingType.JPEG,
+                    mediaType: this.camera.MediaType.PICTURE,
+                    //sourceType: Camera.PictureSourceType.CAMERA,
+                    saveToPhotoAlbum: true,
+                    correctOrientation: true
+                };
+                this.camera.getPicture(options).then(function (imageData) {
+                    _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+                }, function (err) {
+                    // Handle error
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    UserSignupPage.prototype.getPhoto = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var options;
+            return __generator(this, function (_a) {
+                options = {
+                    quality: 100,
+                    destinationType: this.camera.DestinationType.DATA_URL,
+                    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+                    saveToPhotoAlbum: false
+                };
+                this.camera.getPicture(options).then(function (imageData) {
+                    _this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+                }, function (err) {
+                    // Handle error
+                });
+                return [2 /*return*/];
             });
         });
     };

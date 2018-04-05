@@ -29,7 +29,7 @@ export class OrgSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  public myPhoto: any
+  public myPhoto: any;
 
   constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, 
     public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, 
@@ -95,7 +95,7 @@ export class OrgSignupPage {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
+        mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
         //sourceType: Camera.PictureSourceType.CAMERA,
         saveToPhotoAlbum: true, //saving picture to library  
         correctOrientation: true 
@@ -115,14 +115,23 @@ export class OrgSignupPage {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
     }
+    /**
+    //code from paul halliday: store images with ionic
+    const result = await this.camera.getPicture(options);
+    const image = 'data:image/jpeg;base64,${result}';
+    const pictures = storage().ref('pictures/myPhoto');
+    pictures.putString(image, 'data_url'); 
+    */
+    
+    // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
     });
-   }
-
- }
+   
+  }
+}
 
 

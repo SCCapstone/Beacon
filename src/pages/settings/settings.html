@@ -19,6 +19,8 @@
 <!--<form novalidate -->
   <div *ngIf="!isFacebookUser()">
     <h2>Account Credentials</h2>
+    
+
     <ion-list *ngIf="!isOrganization()">
       <!--ion-item>
         <ion-label stacked color="primary">Name</ion-label>
@@ -45,8 +47,12 @@
         <button ion-button block type [disabled]="!userForm.valid">
           Update Credentials
       	</button>
+
       </form>
     </ion-list>
+
+
+
     <ion-list *ngIf="isOrganization()">
       <form [formGroup]="organizationForm" (submit)="updateOrganization()" novalidate>
         <ion-item>
@@ -79,9 +85,23 @@
           <ion-label stacked color="primary" >Address *</ion-label>
           <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">
           {{address}}
-        </ion-input>
+          </ion-input>
+        </ion-item>>
+        
+        <!--Added 3/31
+        <ion-item>
+          <button ion-button click="takePhoto()"> Take Profile Photo </button>
         </ion-item>
-        <button ion-button block type [disabled]="!organizationForm.valid">
+
+        <ion-item>
+          <button ion-button click="getPhoto()"> Upload Profile Photo </button>
+        </ion-item>
+        <ion-item.
+          <img src = "{{ myPhoto }}" >  
+        </ion-item>
+        <!--end added-->
+        
+         <button ion-button block type [disabled]="!organizationForm.valid">
           Update Credentials
         </button>
       </form>

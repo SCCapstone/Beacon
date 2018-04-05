@@ -29,8 +29,8 @@ import { Facebook } from '@ionic-native/facebook';
 
 import { storage } from 'firebase'; //added 3/31 by Amanda
 import { Camera } from '@ionic-native/Camera'; //added 3/31 by Amanda
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer'; //added 3/31 by Amanda
+import { File } from '@ionic-native/file'; //added 3/31 by Amanda
 
 
 

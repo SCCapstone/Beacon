@@ -20,7 +20,7 @@ export class UserSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  public myPhoto: any
+  public myPhoto: any;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public loadingCtrl: LoadingController, 
   public alertCtrl: AlertController, public formBuilder: FormBuilder, 
