@@ -104,7 +104,6 @@ export class ListPage {
     }
   //constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
   ionViewDidLoad() {    
-    this.initializeMap()
   }
   /*getUserPosition(){
     this.options = {
