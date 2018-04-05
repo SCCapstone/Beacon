@@ -9,7 +9,7 @@
   	 <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Organization Profile</ion-title>
+    <ion-title>Organization Profile Page</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -45,10 +45,23 @@
       <ion-input type="password" formControlName="password" placeholder="Your Password"></ion-input>
     </ion-item>
 
-     <ion-item>
+    <ion-item>
       <ion-label stacked color="primary" >Confirm Password *</ion-label>
       <ion-input type="password" formControlName="password2" placeholder="Your Password"></ion-input>
     </ion-item>
+
+
+    <!--Added 3/31-->
+    <ion-item>
+        <button ion-button (click)="takePhoto()"> Take Profile Photo </button>
+    </ion-item>
+
+     <ion-item>
+        <button ion-button (click)="getPhoto()"> Upload Profile Photo </button>
+    </ion-item>
+
+    <img src = "{{ myPhoto }}" >  <!--to disply photo-->
+
 
     <button ion-button block type="Submit">
       Sign up 
