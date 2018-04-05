@@ -81,8 +81,6 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
-
-
      });
     this.options = {
         enableHighAccuracy : false
@@ -145,8 +143,8 @@ userEmail: Observable<any>;
     email: this.email, 
     organization: this.organization,  
    // username: this.name
-   latitude: this.latitude,
-   longitude: this.longitude,
+   latitude: parseFloat(this.latitude),
+   longitude: parseFloat(this.longitude),
    // image: theirImage
    // userImage : userImageSrc
  	 }
