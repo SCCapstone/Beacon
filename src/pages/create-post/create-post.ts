@@ -68,7 +68,7 @@ userEmail: Observable<any>;
 
   public pos;
 
-  public myPhoto;
+  public photo;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
@@ -85,6 +85,7 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
+      //this.photo = userInfo.val().photo; //pulling photo in from database
 
      });
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
@@ -111,6 +112,8 @@ userEmail: Observable<any>;
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
+    //photo: this.photo
+
    // username: this.name
    // latitude: this.currentPos.coords.latitude,
    // longitude: this.currentPos.coords.longitude,
@@ -156,7 +159,7 @@ async takePhoto(){ //added 4/5
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.photo = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
@@ -180,7 +183,7 @@ async takePhoto(){ //added 4/5
     
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.photo = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error

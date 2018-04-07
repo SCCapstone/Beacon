@@ -33,11 +33,23 @@
           <ion-input type="text" [(ngModel)]="postContent" placeholder="Post Content..."></ion-input>
         </ion-item>
   <!--    </form> -->
-      <ion-item color="none" id="newPost-list-item100">
-        <ion-icon name="image" item-left></ion-icon>
-        Upload Image
-
+      <!-- image buttons-->
+       <ion-item color="none" id="newPost-list-item100">
+        <!--<ion-icon name="image" item-left></ion-icon> -->
+          <button id="upload-photo1" ion-button block color="positive"  (click)="takePhoto()">
+            Take Photo  
+          </button>
       </ion-item>
+      <ion-item color="none" id="newPost-list-item100">
+        <!--<ion-icon name="image" item-left></ion-icon> -->
+          <button id="upload-photo2" ion-button block color="positive"  (click)="getPhoto()">
+            Upload Photo  
+          </button>
+      </ion-item>
+
+
+
+
     </ion-list>
   </ion-card>
   <!--<form id="newPost-form13">-->
@@ -66,12 +78,16 @@
       </ion-label>
       <ion-input type="text" placeholder=""></ion-input>
     </ion-item>
+
+<!--
     <ion-item id="newPost-toggle10">
       <ion-label>
         Toggle
       </ion-label>
       <ion-toggle color="positive" checked="false"></ion-toggle>
     </ion-item>
+
+  -->
     <ion-item id="newPost-checkbox1">
       <ion-label>
         Use Current Location
