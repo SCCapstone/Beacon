@@ -115,14 +115,14 @@ export class OrgSignupPage {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
     }
-    /**
+    
     //code from paul halliday: store images with ionic
     const result = await this.camera.getPicture(options);
     const image = 'data:image/jpeg;base64,${result}';
     const pictures = storage().ref('pictures/myPhoto');
     pictures.putString(image, 'data_url'); 
-    */
     
+    /**
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.myPhoto = 'data:image/jpeg;base64,' + imageData;
@@ -130,7 +130,7 @@ export class OrgSignupPage {
     (err) => {
       // Handle error
     });
-   
+   */
   }
 }
 
