@@ -154,7 +154,6 @@ async takePhoto(){ //added 4/5
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
-        //sourceType: Camera.PictureSourceType.CAMERA,
         saveToPhotoAlbum: true, //saving picture to library  
         correctOrientation: true 
     }
