@@ -6,7 +6,7 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 
-import { storage } from 'firebase'; //added 3/31 by amanda
+import { storage, initializeApp } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 import firebase from 'firebase';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -46,7 +46,6 @@ export class OrgSignupPage {
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
     });
 
-     //this.mypicref=firebase.storage().ref('/') //giving the ref to mypicref
   }
 
   ionViewDidLoad() {
@@ -109,26 +108,37 @@ export class OrgSignupPage {
   }
 
   async getPhoto(){ //added 3/31
-    const options: CameraOptions = {
+    try{
+
+      const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
+      }
+    
+      //code from paul halliday: store images with ionic
+      const user = firebase.auth().currentUser; //getting current userID
+      const result = await this.camera.getPicture(options);
+      const image = 'data:image/jpeg;base64,${result}';
+      const picRef = firebase.storage().ref( user + '/profilePic');
+      picRef.putString(image, 'data_url'); 
+    
+       /**
+      //code from paul halliday: store images with ionic
+      //modifications
+      //const user = firebase.auth().currentUser; //getting current userID
+      const result = await this.camera.getPicture(options);
+      const image = 'data:image/jpeg;base64,${result}';
+      const profilePic = firebase.storage().ref( user + '/profilePic/');
+      profilePic.putString(image, 'data_url'); 
+      */
     }
-    
-    /**
-    //var user = this.signupForm.value.email;
-    var user = firebase.auth().currentUser;
-    var storageRef = firebase.storage().ref(user + '/profilePic/' + file.name);
-    var task = storageRef.put(file);
-    */
-    
-    //code from paul halliday: store images with ionic
-    const result = await this.camera.getPicture(options);
-    const image = 'data:image/jpeg;base64,${result}';
-    const pictures = firebase.storage().ref('pictures/myPhoto');
-    pictures.putString(image, 'data_url'); 
-    
+    catch(e){
+      console.error(e);
+    }
+
+
     /**
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
