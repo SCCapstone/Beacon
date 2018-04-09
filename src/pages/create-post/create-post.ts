@@ -12,8 +12,7 @@ import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@io
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+
 /**
  * Generated class for the CreatePostPage page.
  * Created by Ryan Roe for Beacon Capstone Project
@@ -73,7 +72,7 @@ userEmail: Observable<any>;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
-   public camera: Camera, private transfer: FileTransfer, private file: File) {
+   public camera: Camera) {
   
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
@@ -184,8 +183,8 @@ async takePhoto(){ //added 4/5
 
   uploadPic(){
     let storageRef = firebase.storage().ref();
-    const filename = Math.floor(Date.now() / 1000);
-    const imageRef = storageRef.child('images/${filename}.jpg');
+    //const filename = Math.floor(Date.now() / 1000);
+    const imageRef = storageRef.child('images/filename.jpg');
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
  

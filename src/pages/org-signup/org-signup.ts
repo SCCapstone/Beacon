@@ -9,8 +9,7 @@ import { FeedPage } from '../feed/feed';
 import { storage, initializeApp } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 import firebase from 'firebase';
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+
 
 /**
  * Generated class for the OrgSignupPage page.
@@ -29,11 +28,11 @@ export class OrgSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  public myPhoto: any;
+  public capturedDataURL;
 
   constructor(public alertCtrl: AlertController, public loadingCtrl: LoadingController, public authProvider: AuthProvider, 
     public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, 
-    public camera: Camera, private transfer: FileTransfer, private file: File) {
+    public camera: Camera) {
   	this.menuCtrl.enable(false, 'navMenu');
 
   	this.signupForm = formBuilder.group({
@@ -107,48 +106,31 @@ export class OrgSignupPage {
     });
   }
 
-  async getPhoto(){ //added 3/31
-    try{
 
-      const options: CameraOptions = {
+  async getPhoto(){ //added 3/31
+    const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
-      }
-    
-      //code from paul halliday: store images with ionic
-      const user = firebase.auth().currentUser; //getting current userID
-      const result = await this.camera.getPicture(options);
-      const image = 'data:image/jpeg;base64,${result}';
-      const picRef = firebase.storage().ref( user + '/profilePic');
-      picRef.putString(image, 'data_url'); 
-    
-       /**
-      //code from paul halliday: store images with ionic
-      //modifications
-      //const user = firebase.auth().currentUser; //getting current userID
-      const result = await this.camera.getPicture(options);
-      const image = 'data:image/jpeg;base64,${result}';
-      const profilePic = firebase.storage().ref( user + '/profilePic/');
-      profilePic.putString(image, 'data_url'); 
-      */
     }
-    catch(e){
-      console.error(e);
-    }
-
-
-    /**
+    
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
     });
-   */
   }
+
+  uploadPic(){
+    let storageRef = firebase.storage().ref();
+    //const filename = Math.floor(Date.now() / 1000);
+    const imageRef = storageRef.child('images/filename.jpg');
+    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+  }
+  
 }
 
 

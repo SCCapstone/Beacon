@@ -8,8 +8,7 @@ import { FeedPage } from '../feed/feed';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+import firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -20,11 +19,11 @@ export class UserSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  public myPhoto: any;
+  public capturedDataURL;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public loadingCtrl: LoadingController, 
   public alertCtrl: AlertController, public formBuilder: FormBuilder, 
-  public authProvider: AuthProvider, public camera: Camera, private transfer: FileTransfer, private file: File) {
+  public authProvider: AuthProvider, public camera: Camera) {
     this.menuCtrl.enable(false, 'navMenu');
 
     this.signupForm = formBuilder.group({
@@ -78,12 +77,13 @@ export class UserSignupPage {
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
     });
   }
+
 
   async getPhoto(){ //added 3/31
     const options: CameraOptions = {
@@ -92,12 +92,21 @@ export class UserSignupPage {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
     }
+    
+    // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
     });
+  }
+
+  uploadPic(){
+    let storageRef = firebase.storage().ref();
+    //const filename = Math.floor(Date.now() / 1000);
+    const imageRef = storageRef.child('images/filename.jpg');
+    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
 
 
