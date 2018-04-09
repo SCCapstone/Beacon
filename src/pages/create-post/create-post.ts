@@ -173,14 +173,6 @@ async takePhoto(){ //added 4/5
         saveToPhotoAlbum: false
     }
     
-    /**
-    //code from paul halliday: store images with ionic
-    const result = await this.camera.getPicture(options);
-    const imageData = 'data:image/jpeg;base64,${result}';
-    const imageRef = firebase.storage().ref().child('/pictures');
-    imageRef.putString(imageData, 'data_url'); 
-    */
-    
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
@@ -188,7 +180,13 @@ async takePhoto(){ //added 4/5
     (err) => {
       // Handle error
     });
-   
+  }
+
+  uploadPic(){
+    let storageRef = firebase.storage().ref();
+    const filename = Math.floor(Date.now() / 1000);
+    const imageRef = storageRef.child('images/${filename}.jpg');
+    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
  
 }
