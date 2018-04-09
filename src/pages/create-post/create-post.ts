@@ -158,7 +158,7 @@ async takePhoto(){ //added 4/5
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.photo = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
