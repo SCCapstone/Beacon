@@ -68,7 +68,7 @@ userEmail: Observable<any>;
 
   public pos;
 
-  public photo;
+  public capturedDataURL;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
@@ -173,21 +173,22 @@ async takePhoto(){ //added 4/5
         saveToPhotoAlbum: false
     }
     
+    /**
     //code from paul halliday: store images with ionic
     const result = await this.camera.getPicture(options);
     const imageData = 'data:image/jpeg;base64,${result}';
     const imageRef = firebase.storage().ref().child('/pictures');
     imageRef.putString(imageData, 'data_url'); 
-  
-    /**
+    */
+    
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.photo = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
     });
-   */
+   
   }
  
 }
