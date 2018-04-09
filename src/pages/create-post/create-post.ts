@@ -176,7 +176,7 @@ async takePhoto(){ //added 4/5
     //code from paul halliday: store images with ionic
     const result = await this.camera.getPicture(options);
     const imageData = 'data:image/jpeg;base64,${result}';
-    const imageRef = firebase.storage().ref().child('pictures');
+    const imageRef = firebase.storage().ref().child('/pictures');
     imageRef.putString(imageData, 'data_url'); 
   
     /**
