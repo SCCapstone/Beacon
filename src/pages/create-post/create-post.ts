@@ -183,8 +183,8 @@ async takePhoto(){ //added 4/5
 
   uploadPic(){
     let storageRef = firebase.storage().ref();
-    //const filename = Math.floor(Date.now() / 1000);
-    const imageRef = storageRef.child('images/filename.jpg');
+    const filename = Math.floor(Date.now() / 1000);
+    const imageRef = storageRef.child('images/' + filename + '.jpg');
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
  
