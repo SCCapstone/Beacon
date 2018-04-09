@@ -116,10 +116,17 @@ export class OrgSignupPage {
         saveToPhotoAlbum: false
     }
     
+    /**
+    //var user = this.signupForm.value.email;
+    var user = firebase.auth().currentUser;
+    var storageRef = firebase.storage().ref(user + '/profilePic/' + file.name);
+    var task = storageRef.put(file);
+    */
+    
     //code from paul halliday: store images with ionic
     const result = await this.camera.getPicture(options);
     const image = 'data:image/jpeg;base64,${result}';
-    const pictures = storage().ref('pictures/myPhoto');
+    const pictures = firebase.storage().ref('pictures/myPhoto');
     pictures.putString(image, 'data_url'); 
     
     /**
