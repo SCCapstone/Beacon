@@ -99,7 +99,7 @@ export class OrgSignupPage {
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error
