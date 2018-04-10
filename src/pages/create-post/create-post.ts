@@ -194,7 +194,7 @@ userEmail: Observable<any>;
   public getProfilePic(){
     //let uimgrl: string;
     try{
-      const url = firebase.storage().ref().child('/profilePic/' + this.UID + '.jpg').getDownloadURL().then(function(url){
+      const url = firebase.storage().ref().child('/profilePics/' + this.UID + '.jpg').getDownloadURL().then(function(url){
         return url;
       });
     }

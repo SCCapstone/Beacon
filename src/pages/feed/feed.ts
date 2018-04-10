@@ -43,7 +43,7 @@ export class FeedPage {
 	public isApprovedOrg = false;
 
 	//added for image feature
-	public profilePicURL = this.getProfilePic();
+	public profilePicURL; 
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) { 
@@ -170,7 +170,8 @@ export class FeedPage {
     var UID = firebase.auth().currentUser.uid;
     try{
       const url = firebase.storage().ref().child('/profilePics/' + UID +'.jpg').getDownloadURL().then(function(url){
-        return url;
+        console.log(url);
+        this.profilePicURL = url;
       });
     }
     catch(e){
