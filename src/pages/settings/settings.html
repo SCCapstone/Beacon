@@ -85,26 +85,15 @@
           <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">
           {{address}}
           </ion-input>
-        </ion-item>>
-        
-        <!--Added 3/31
-        <ion-item>
-          <button ion-button click="takePhoto()"> Take Profile Photo </button>
         </ion-item>
 
-        <ion-item>
-          <button ion-button click="getPhoto()"> Upload Profile Photo </button>
-        </ion-item>
-        <ion-item.
-          <img src = "{{ myPhoto }}" >  
-        </ion-item>
-        <!--end added-->
-        
-         <button ion-button block type [disabled]="!organizationForm.valid">
+        <button ion-button block type [disabled]="!organizationForm.valid">
           Update Credentials
         </button>
       </form>
     </ion-list>
+
+
 
     <ion-list>
       <ion-label>
@@ -133,4 +122,27 @@
       </form>
     </ion-list>
 <!--/form-->
+
+
+  <ion-list>
+    <!--Added 4/10-->
+
+    <ion-label>
+        <h2>Add Profile Picture</h2>
+      </ion-label>
+        <ion-item>
+          <button ion-button (click)="takePhoto()"> Take Profile Photo </button>
+        </ion-item>
+
+        <ion-item>
+          <button ion-button (click)="getPhoto()"> Upload Profile Photo </button>
+        </ion-item>
+
+        <img src = "{{ capturedDataURL }}" >  <!--to disply photo-->
+
+        <ion-item color="none" >
+          <button ion-button block color="positive"  (click)="uploadPic()"> Upload Photo  </button>
+        </ion-item>
+  </ion-list>
+
 </ion-content>

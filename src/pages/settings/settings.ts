@@ -7,6 +7,9 @@ import firebase from 'firebase';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { storage } from 'firebase'; //added 3/31 by amanda
+import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -33,7 +36,11 @@ export class SettingsPage {
   public userForm;
   public passwordForm;
 
-  constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder) {
+  public capturedDataURL;
+  public profilePicURL = this.getProfilePic;
+
+  constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
+   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 
     this.UID = firebase.auth().currentUser.uid
@@ -141,5 +148,60 @@ export class SettingsPage {
     this.passwordForm.reset();
   }
 
+
+  async takePhoto(){ //takes image with camera
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
+        saveToPhotoAlbum: true, //saving picture to library  
+        correctOrientation: true 
+    }
+    this.camera.getPicture(options).then((imageData) => { 
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+      // Handle error
+    });
+  }
+
+  async getPhoto(){ //pulls from library
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        saveToPhotoAlbum: false
+    }
+    
+    // code from ionic documentation and Maballo Net: pick from gallary
+    this.camera.getPicture(options).then((imageData) => { 
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+      // Handle error
+    });
+  }
+
+  public uploadPic(){ //uploads image to firebase storage
+    let storageRef = firebase.storage().ref();
+    const filename = this.UID; //naming the file to match the current user
+    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+  }
+
+
+  public getProfilePic(image: string){
+    let imgUrl: string;
+    try{
+      const url = firebase.storage().ref().child('/profilePic/' + this.UID ).getDownloadURL().then(function(url){
+      console.log("log1: " + url);
+        return url;
+        });
+    }
+    catch(e){
+      console.log(e);
+    }   
+  }
 
 }
