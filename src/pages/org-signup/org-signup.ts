@@ -124,13 +124,16 @@ export class OrgSignupPage {
     });
   }
 
+  /**
   uploadPic(){
     let storageRef = firebase.storage().ref();
     //const filename = Math.floor(Date.now() / 1000);
-    const imageRef = storageRef.child('images/filename.jpg');
+    //const imageRef = storageRef.child('images/filename.jpg');
+    const filename = this.UID; //naming the file to match the current user
+    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
-  
+  */
 }
 
 

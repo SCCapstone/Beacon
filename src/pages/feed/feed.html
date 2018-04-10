@@ -54,13 +54,15 @@
       <!--Avatar image, title, and timestamp-->
       <ion-item>
         <ion-avatar item-start>
-          <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image">
+          <!-- <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image"> -->
+          <img src="{{ profilePicURL }}" alt="Stock Profile Image">
         </ion-avatar>
         <h2>{{item.organization}}</h2>
         <h2>{{item.title}}</h2>
         <p>{{item.timestamp*(-1)  | date:'yyyy-MM-dd HH:mm:ss Z'}}</p> <span> </span> <p>{{item.PostType}}</p><span> </span>
         <p>Latitude: {{item.latitude}} </p> <span> </span>
         <p>Longitude: {{item.longitude}}</p>
+
       </ion-item>
 
       <!--creates the card content using two way data linking for an async for loop-->

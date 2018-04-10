@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,7 +7,7 @@ import firebase from 'firebase';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
-import {LocationProvider} from '../../providers/location/location';
+import { LocationProvider } from '../../providers/location/location';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
@@ -68,11 +68,13 @@ userEmail: Observable<any>;
   public pos;
 
   public capturedDataURL;
+  public profilePicURL = this.getProfilePic;
+  //public profilePic; //testing profile pic in post
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
-   public camera: Camera) {
+   public camera: Camera, public loadingCtrl: LoadingController) {
   
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
@@ -84,7 +86,7 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
-      //this.photo = userInfo.val().photo; //pulling photo in from database
+        //this.profilePic = userInfo.val().photo; //pulling photo in from database
 
      });
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
@@ -97,9 +99,7 @@ userEmail: Observable<any>;
       console.log(pos);
       //this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
     })*/
-  
-
-}
+  }
 
  chatSend(theirTitle: string, theirMessage: string) {
  	 console.log(this.organization);
@@ -147,7 +147,7 @@ userEmail: Observable<any>;
     this.typeofPost = mySelect;
   }
 
-async takePhoto(){ //added 4/5
+  async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
@@ -164,7 +164,7 @@ async takePhoto(){ //added 4/5
     });
   }
 
-  async getPhoto(){ //added 3/31
+  async getPhoto(){ //pulls from library
     const options: CameraOptions = {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
@@ -181,13 +181,27 @@ async takePhoto(){ //added 4/5
     });
   }
 
-  uploadPic(){
+  public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    //const filename = Math.floor(Date.now() / 1000);
-    //const imageRef = storageRef.child('images/' + filename + '.jpg');
     const filename = this.UID; //naming the file to match the current user
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
+
+
+  public getProfilePic(image: string){
+    let imgUrl: string;
+    try{
+      const url = firebase.storage().ref().child('/profilePic/' + this.UID ).getDownloadURL().then(function(url){
+      console.log("log1: " + url);
+        return url;
+        });
+    }
+    catch(e){
+      console.log(e);
+    }   
+  }
+
+
  
 }
