@@ -55,7 +55,7 @@
       <ion-item>
         <ion-avatar item-start>
           <!-- <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image"> -->
-          <img src="{{ profilePicURL }}" alt="Stock Profile Image">
+          <img src="{{ profilePicURL }}" alt="Stock Profile Image" (onload)="getProfilePic()">
         </ion-avatar>
         <h2>{{item.organization}}</h2>
         <h2>{{item.title}}</h2>

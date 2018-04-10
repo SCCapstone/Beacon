@@ -22,7 +22,7 @@
           
 
           <ion-avatar item-left>
-            <img src = "{{ profilePicURL }}" width="100" height="150">  <!--to disply profile picture-->
+            <img src = "{{ profilePicURL }}" (onload)="getProfilePic()" width="100" height="150">  <!--to disply profile picture-->
           </ion-avatar>
 
 

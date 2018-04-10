@@ -68,7 +68,7 @@ userEmail: Observable<any>;
   public pos;
 
   public capturedDataURL; //added 4/10
-  public profilePicURL = this.getProfilePic(); //added 4/10
+  //public profilePicURL = this.getProfilePic(); //added 4/10
   
 
 
@@ -190,18 +190,18 @@ userEmail: Observable<any>;
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
 
-
   public getProfilePic(){
-    //let uimgrl: string;
-    try{
-      const url = firebase.storage().ref().child('/profilePics/' + this.UID + '.jpg').getDownloadURL().then(function(url){
-        return url;
-      });
+      //var UID = firebase.auth().currentUser.uid;
+      try{
+        const url = firebase.storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL().then(function(url){
+            url.toString();
+            this.profilePicURL = url;
+          });
+      }  
+      catch(e){
+          console.log(e);
+       }     
     }
-    catch(e){
-      console.log(e);
-    }   
-  }
 
 
  
