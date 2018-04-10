@@ -67,9 +67,9 @@ userEmail: Observable<any>;
 
   public pos;
 
-  public capturedDataURL;
-  public profilePicURL = this.getProfilePic;
-  //public profilePic; //testing profile pic in post
+  public capturedDataURL; //added 4/10
+  public profilePicURL = this.getProfilePic(); //added 4/10
+  
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
@@ -147,6 +147,8 @@ userEmail: Observable<any>;
     this.typeofPost = mySelect;
   }
 
+
+/**  All code below added by Amanda for image features */
   async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
         quality: 100,
@@ -189,13 +191,12 @@ userEmail: Observable<any>;
   }
 
 
-  public getProfilePic(image: string){
-    let imgUrl: string;
+  public getProfilePic(){
+    //let uimgrl: string;
     try{
-      const url = firebase.storage().ref().child('/profilePic/' + this.UID ).getDownloadURL().then(function(url){
-      console.log("log1: " + url);
+      const url = firebase.storage().ref().child('/profilePic/' + this.UID + '.jpg').getDownloadURL().then(function(url){
         return url;
-        });
+      });
     }
     catch(e){
       console.log(e);

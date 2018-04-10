@@ -42,6 +42,9 @@ export class FeedPage {
 	public isUser = true;
 	public isApprovedOrg = false;
 
+	//added for image feature
+	public profilePicURL = this.getProfilePic();
+
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) { 
 
@@ -159,19 +162,20 @@ export class FeedPage {
         });
     }
 
+
+    //all code below added by Amanda for image features
     //to get user's profile picture on feed posts
-    public getProfilePic(image: string){
-    let imgUrl: string;
+   public getProfilePic(){
+    //let uimgrl: string;
+    var UID = firebase.auth().currentUser.uid;
     try{
-      var UID = firebase.auth().currentUser.uid;
-      const url = firebase.storage().ref().child('/profilePic/' + UID ).getDownloadURL().then(function(url){
-      console.log("log1: " + url);
+      const url = firebase.storage().ref().child('/profilePics/' + UID +'.jpg').getDownloadURL().then(function(url){
         return url;
-        });
+      });
     }
     catch(e){
       console.log(e);
-    }   
-  }
+   	}   
+   }
 
 }
