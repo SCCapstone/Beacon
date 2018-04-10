@@ -128,7 +128,7 @@
     <!--Added 4/10-->
 
     <ion-label>
-        <h2>Add Profile Picture</h2>
+        <h2>Profile Picture</h2>
       </ion-label>
         <ion-item>
           <button ion-button (click)="takePhoto()"> Take Profile Photo </button>
@@ -141,7 +141,7 @@
         <img src = "{{ capturedDataURL }}" >  <!--to disply photo-->
 
         <ion-item color="none" >
-          <button ion-button block color="positive"  (click)="uploadPic()"> Upload Photo  </button>
+          <button ion-button block color="positive" (click)="uploadPic()"> Upload Photo </button> <!-- picture is uploading, but not displaying on feed-->
         </ion-item>
   </ion-list>
 

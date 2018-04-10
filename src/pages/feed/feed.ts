@@ -159,4 +159,19 @@ export class FeedPage {
         });
     }
 
+    //to get user's profile picture on feed posts
+    public getProfilePic(image: string){
+    let imgUrl: string;
+    try{
+      var UID = firebase.auth().currentUser.uid;
+      const url = firebase.storage().ref().child('/profilePic/' + UID ).getDownloadURL().then(function(url){
+      console.log("log1: " + url);
+        return url;
+        });
+    }
+    catch(e){
+      console.log(e);
+    }   
+  }
+
 }
