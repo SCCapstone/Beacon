@@ -67,9 +67,9 @@ userEmail: Observable<any>;
 
   public pos;
 
-  public capturedDataURL; //added 4/10
-  public ppURL;
-
+  public postImgURL; //the image in the content of the post
+  public ppURL;  //user's profile picture
+ 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
@@ -109,7 +109,9 @@ userEmail: Observable<any>;
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
-    //photo: this.photo
+    //below added for image features
+    ppURL: this.ppURL,  //profile picture url
+    //postImgURL: this.postImgURL   //post image url
 
    // username: this.name
    // latitude: this.currentPos.coords.latitude,
@@ -155,7 +157,7 @@ userEmail: Observable<any>;
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
     });
@@ -171,7 +173,7 @@ userEmail: Observable<any>;
     }
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
     });
@@ -181,7 +183,7 @@ userEmail: Observable<any>;
     let storageRef = firebase.storage().ref();
     const filename = this.UID; //naming the file to match the current user
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
 
 /**
@@ -195,7 +197,7 @@ userEmail: Observable<any>;
 */
 
 //pull profile pick in when page is fully loaded
-ionViewDidLoad(){
+ionViewWillEnter(){
   var filename = this.UID;
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;

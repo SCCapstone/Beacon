@@ -54,8 +54,8 @@
       <!--Avatar image, title, and timestamp-->
       <ion-item>
         <ion-avatar item-start>
-           <!-- <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image"> -->
-          <img  alt="Stock Profile Image" (onload)="getProfilePic()" src= "{{ppURL}}">
+            <!-- <img src="assets/imgs/m48040100_ButtonLogo200.jpg" alt="Stock Profile Image"> -->
+            <img src="{{item.ppURL}}" > 
         </ion-avatar>
         <h2>{{item.organization}}</h2>
         <h2>{{item.title}}</h2>
@@ -69,6 +69,7 @@
       <ion-card-content>
         <a href="#">{{item.name}}</a>
         <p>{{item.message}}</p>
+       <!-- <img src="{{item.postImgURL}}" >  -->
       </ion-card-content>
       <!--Creates the likes, comments, and time since post-->
     <ion-row>

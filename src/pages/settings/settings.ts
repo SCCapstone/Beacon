@@ -36,8 +36,8 @@ export class SettingsPage {
   public userForm;
   public passwordForm;
 
-  public capturedDataURL;
-  public ppURL;
+  public capturedDataURL; //user's newly uploaded (taken or selected image)
+  public ppURL; //profile picture
 
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
    public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
@@ -191,7 +191,7 @@ export class SettingsPage {
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
 
-    this.ppURL = this.capturedDataURL;//trying to update photo url to new pohot
+    this.ppURL = this.capturedDataURL;//updates photo url to new photo url
   }
 
 
