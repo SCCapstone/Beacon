@@ -181,8 +181,8 @@ userEmail: Observable<any>;
 
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    const filename = this.UID; //naming the file to match the current user
-    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+    const filename = this.itemsRef; //naming the file to match the current message
+    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
 
