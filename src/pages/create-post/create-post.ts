@@ -133,14 +133,12 @@ userEmail: Observable<any>;
   deleteEverything() {
     this.itemsRef.remove();
   }
-
+  /**
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreatePostPage');
-
   }
-
+  */
   showSelected(mySelect : string) {
-
     console.log(mySelect);
     this.typeofPost = mySelect;
   }
@@ -160,7 +158,6 @@ userEmail: Observable<any>;
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
-      // Handle error
     });
   }
 
@@ -169,14 +166,14 @@ userEmail: Observable<any>;
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        saveToPhotoAlbum: false
+        saveToPhotoAlbum: false,
+        correctOrientation: true
     }
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
-      // Handle error
     });
   }
 
@@ -187,12 +184,24 @@ userEmail: Observable<any>;
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
 
-//WORKING! Pulls url in, working on placing function call now
+/**
+  //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
   public getProfilePic(){ 
     var filename = this.UID;
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
     });
   }
+*/
+
+//pull profile pick in when page is fully loaded
+ionViewDidLoad(){
+  var filename = this.UID;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    });
+
+}
+
 
 }
