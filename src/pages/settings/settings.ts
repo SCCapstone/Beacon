@@ -37,7 +37,7 @@ export class SettingsPage {
   public passwordForm;
 
   public capturedDataURL;
-  public profilePicURL = this.getProfilePic;
+  public ppURL;
 
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
    public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
@@ -81,10 +81,11 @@ export class SettingsPage {
 
   }
 
+  /**
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
-
+  */
   isOrganization()
   {
     if(this.organization != null)
@@ -171,7 +172,8 @@ export class SettingsPage {
         quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        saveToPhotoAlbum: false
+        saveToPhotoAlbum: false,
+        correctOrientation: true 
     }
     
     // code from ionic documentation and Maballo Net: pick from gallary
@@ -188,20 +190,17 @@ export class SettingsPage {
     const filename = this.UID; //naming the file to match the current user
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+
+    this.ppURL = this.capturedDataURL;//trying to update photo url to new pohot
   }
 
 
-  public getProfilePic(image: string){
-    let imgUrl: string;
-    try{
-      const url = firebase.storage().ref().child('/profilePic/' + this.UID ).getDownloadURL().then(function(url){
-      console.log("log1: " + url);
-        return url;
-        });
-    }
-    catch(e){
-      console.log(e);
-    }   
-  }
+//pull profile pick in when page is fully loaded
+ionViewDidLoad(){
+  var filename = this.UID;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    });
+}
 
 }

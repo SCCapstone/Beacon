@@ -130,18 +130,23 @@
     <ion-label>
         <h2>Profile Picture</h2>
       </ion-label>
+         <!--
+        <img src = "{{ capturedDataURL }}" >  
+        -->
+        <img src = "{{ ppURL }}" hieght ="300" width="275"> 
+
+
         <ion-item>
-          <button ion-button (click)="takePhoto()"> Take Profile Photo </button>
+          <button ion-button block type (click)="takePhoto()"> Take Profile Photo </button>
         </ion-item>
 
         <ion-item>
-          <button ion-button (click)="getPhoto()"> Upload Profile Photo </button>
+          <button ion-button block type (click)="getPhoto()"> Upload Profile Photo </button>
         </ion-item>
 
-        <img src = "{{ capturedDataURL }}" >  <!--to disply photo-->
-
+       
         <ion-item color="none" >
-          <button ion-button block color="positive" (click)="uploadPic()"> Upload Photo </button> <!-- picture is uploading, but not displaying on feed-->
+          <button ion-button block color="positive" (click)="uploadPic()"> Save Photo </button> <!-- picture is uploading, but not displaying on feed-->
         </ion-item>
   </ion-list>
 
