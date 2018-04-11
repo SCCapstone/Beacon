@@ -85,8 +85,7 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
-        //this.profilePic = userInfo.val().photo; //pulling photo in from database
-
+        
      });
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
      this.options = {
@@ -172,7 +171,6 @@ userEmail: Observable<any>;
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false
     }
-    
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
@@ -189,24 +187,12 @@ userEmail: Observable<any>;
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
 
-/**
- public getProfilePic(){
-       var ppURL = storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL();
-       return ppURL;
-  }
-*/
-
-  public getProfilePic(){
-      //var UID = firebase.auth().currentUser.uid;
-      let imgURL: string; //added 4/10
-      try{
-        storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL().then(function(url){
-          imgURL = url;
-        });
-      }  
-      catch(e){
-          console.log(e);
-       }     
+//WORKING! Pulls url in, working on placing function call now
+  public getProfilePic(){ 
+    var filename = this.UID;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    });
   }
 
 }

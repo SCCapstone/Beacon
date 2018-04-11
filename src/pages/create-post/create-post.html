@@ -14,18 +14,18 @@
 
 
 <ion-content padding id="page10">
-  <ion-card id="newPost-card210">
+  <ion-card id="newPost-card210" >
     <ion-list>
    <!--   <form id="newPost-form17">-->
         <ion-item color="none" id="newPost-list-item101">
           
 
           <ion-avatar item-left>
-            <img src = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/profilePics%2FJzqwgbzupBaAz3lDNeJTa38jUXj2.jpg?alt=media&token=7934fabc-d63f-4d84-9e78-e2bc7de06408" width="100" height="150">  <!--to disply profile picture-->
+            <img src = "{{ppURL}}" width="100" height="150">  <!--to disply profile picture-->
           </ion-avatar>
 
 
-          <ion-item>{{organization}}</ion-item> 
+          <ion-item (click)= "getProfilePic()">{{organization}}</ion-item> 
         </ion-item>
         <ion-item id="newPost-input12">
           <ion-label></ion-label>
