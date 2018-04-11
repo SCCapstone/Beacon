@@ -68,8 +68,7 @@ userEmail: Observable<any>;
   public pos;
 
   public capturedDataURL; //added 4/10
-  //public profilePicURL = this.getProfilePic(); //added 4/10
-  
+  public ppURL;
 
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
@@ -190,19 +189,24 @@ userEmail: Observable<any>;
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
   }
 
+/**
+ public getProfilePic(){
+       var ppURL = storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL();
+       return ppURL;
+  }
+*/
+
   public getProfilePic(){
       //var UID = firebase.auth().currentUser.uid;
+      let imgURL: string; //added 4/10
       try{
-        const url = firebase.storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL().then(function(url){
-            url.toString();
-            this.profilePicURL = url;
-          });
+        storage().ref().child('/profilePics/' + this.UID +'.jpg').getDownloadURL().then(function(url){
+          imgURL = url;
+        });
       }  
       catch(e){
           console.log(e);
        }     
-    }
+  }
 
-
- 
 }

@@ -43,7 +43,13 @@ export class FeedPage {
 	public isApprovedOrg = false;
 
 	//added for image feature
-	public profilePicURL: any; 
+	public ppURL: any; 
+
+
+
+	//public profilePicURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/profilePics%2FJzqwgbzupBaAz3lDNeJTa38jUXj2.jpg?alt=media&token=7934fabc-d63f-4d84-9e78-e2bc7de06408"
+
+
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) { 
@@ -166,20 +172,23 @@ export class FeedPage {
     //all code below added by Amanda for image features
     //to get user's profile picture on feed posts
 
-/**
+
   	getProfilePic(){
    		var UID = firebase.auth().currentUser.uid;
     	try{
     		const url = firebase.storage().ref().child('/profilePics/' + UID +'.jpg').getDownloadURL().then(function(url){
-        		url.toString();
-        		this.profilePicURL = url;
+        		//url.toString();
+        		this.ppURL = url;
       		});
     	}	
     	catch(e){
       		console.log(e);
    		}	   
   	}
+/**
+	getProfilePic(){
+		this.ppURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/profilePics%2FJzqwgbzupBaAz3lDNeJTa38jUXj2.jpg?alt=media&token=7934fabc-d63f-4d84-9e78-e2bc7de06408"
+	}
 */
-
 }
 
