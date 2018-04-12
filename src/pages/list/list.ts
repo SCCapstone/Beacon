@@ -143,7 +143,7 @@ export class ListPage {
             //posts.push(post.val());
             let latitude = post.val().latitude;
             let longitude = post.val().longitude;
-            let content = post.val().message;
+            let content = post.val().organization + ": " + post.val().message;
             let marker = new google.maps.Marker({
             map: this.map,
             animation: google.maps.Animation.DROP,
