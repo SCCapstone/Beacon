@@ -67,7 +67,9 @@ userEmail: Observable<any>;
 
   public pos;
 
-  public postImgURL; //the image in the content of the post
+  //setting postImgURL as a defualt blank image
+  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
+  public postImgURL;
   public ppURL;  //user's profile picture
  
 
@@ -181,6 +183,7 @@ userEmail: Observable<any>;
 
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
+    //const filename = Math.floor(Date.now() / 1000);
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
     //might want to include user id in file name as well incase multiple users create a post at exact same time
     //its unlikely but good practice I would think
