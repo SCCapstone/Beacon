@@ -111,7 +111,7 @@ userEmail: Observable<any>;
     organization: this.organization,  
    
     ppURL: this.ppURL,  //profile picture url
-    //postImgURL: this.postImgURL   //post image url
+    postImgURL: this.postImgURL   //post image url
 
    // username: this.name
    // latitude: this.currentPos.coords.latitude,
