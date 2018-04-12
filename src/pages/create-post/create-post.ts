@@ -109,7 +109,7 @@ userEmail: Observable<any>;
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
-    //below added for image features
+   
     ppURL: this.ppURL,  //profile picture url
     //postImgURL: this.postImgURL   //post image url
 
@@ -181,7 +181,7 @@ userEmail: Observable<any>;
 
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    const filename = this.itemsRef; //naming the file to match the current message
+    const filename = this.itemsRef; //naming the file the current message' id
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
