@@ -69,8 +69,8 @@ userEmail: Observable<any>;
   public pos;
 
   //setting postImgURL as a defualt blank image
-  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
-  public postImgURL;
+  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
+  //public postImgURL;
   public ppURL;  //user's profile picture
  
 
