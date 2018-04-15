@@ -173,7 +173,9 @@ export class FeedPage {
         this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
           postList.forEach( post => {
-            posts.push(post.val());
+            if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
+            		posts.push(post.val());
+          	}
             return false;
           });
 
