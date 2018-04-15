@@ -65,8 +65,11 @@ userEmail: Observable<any>;
   public organizationForm;
   public userForm;
   public passwordForm;
-
-  public pos;
+  options : GeolocationOptions;
+  currentPos : Geoposition;
+  public check: number;
+  latitude;
+  longitude;
 
   //setting postImgURL as a defualt blank image
   public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
@@ -81,6 +84,7 @@ userEmail: Observable<any>;
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
     this.itemsRef = fdb.list('messages');
+    this.check = 0;
 
     this.currentUserDB.once('value', userInfo => {
         this.username = (userInfo.val().username);
@@ -88,22 +92,59 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
-        
+
      });
+    this.options = {
+        enableHighAccuracy : false
+      };
+      this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+          this.currentPos = pos;     
+
+          console.log(pos);
+
+      },(err : PositionError)=>{
+          console.log("error : " + err.message);
+      ;
+      })
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
      this.options = {
         enableHighAccuracy: false
        };
-     /* 
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
       this.currentPos = pos;
       console.log(pos);
       //this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
     })*/
+
+}
+  getUserPosition(){
+    this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+        this.currentPos = pos;
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;    
+
+        console.log(pos);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
+    this.check = 1;
   }
 
- chatSend(theirTitle: string, theirMessage: string) {
+ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
  	 console.log(this.organization);
+   if(this.check > 0){
+   }
+   else{
+    this.latitude = latitude;
+    this.longitude = longitude;
+   }
    const item = {
     
  		message: theirMessage, //works
@@ -117,8 +158,8 @@ userEmail: Observable<any>;
     postImgURL: this.postImgURL   //post image url
 
    // username: this.name
-   // latitude: this.currentPos.coords.latitude,
-   // longitude: this.currentPos.coords.longitude,
+   latitude: parseFloat(this.latitude),
+   longitude: parseFloat(this.longitude),
    // image: theirImage
    // userImage : userImageSrc
  	 }

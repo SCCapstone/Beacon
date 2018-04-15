@@ -1,4 +1,5 @@
 import { Component, Pipe } from '@angular/core';
+import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
 import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
 
 import { CreatePostPage } from '../create-post/create-post';
@@ -41,13 +42,32 @@ export class FeedPage {
 	public isTest = true;
 	public isUser = true;
 	public isApprovedOrg = false;
+	public latitude;
+	public longitude;
+	options : GeolocationOptions;
+	currentPos : Geoposition;
+	//latitude: Number;
+	//longitude : Number;
 
 
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
-		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController) { 
+		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation: Geolocation) { 
 
 		this.menuCtrl.enable(true, 'navMenu');
+		this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
+        this.currentPos = pos;
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;    
+        console.log(pos);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
 		var UID = firebase.auth().currentUser.uid;
     	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
     	currentUserDB.once('value', userInfo => {
@@ -68,15 +88,21 @@ export class FeedPage {
 	       		this.isAdmin = true;
 	    	}
 	    });
-
+	    
+    	
 	  	//this.itemsRef = fdb.list('/messages');
 	    //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
-
+	    //this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); 
+	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');//.startAt(this.latitude,'latitude').endAt(50, 'latitude').orderByChild('timestamp');
+	    //this.postRef.orderByChild('latitude')startAt(this.latitude,'latitude').endAt(50, 'latitude');//creating a database reference
+	    //filter this.postRef by latitude and longitude (50 miles)
 	    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
           postList.forEach( post => {
-            posts.push(post.val());
+          	if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
+            		posts.push(post.val());
+          	}
+          	//this filters the posts so that only posts within 50 miles longitude and 50 latitude are selected
             return false;
           });
           this.postList = posts;
@@ -129,6 +155,7 @@ export class FeedPage {
 	   	this.postRef.limitToFirst(this.postsToLoad).once('value', postList => { //value event is used to read a static snapshot of the contents at a given database path, as they existed at the time of the read event. It is triggered once with the initial data and again every time the data changes.
 		 	let posts = [];  //store Firebase data temporarily
 		  	postList.forEach( item => { 
+		  		
 		    	posts.push(item.val()); //returns the value attribute of item
 	   	 		return false;
 
@@ -147,7 +174,9 @@ export class FeedPage {
         this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
           postList.forEach( post => {
-            posts.push(post.val());
+            if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
+            		posts.push(post.val());
+          	}
             return false;
           });
 
@@ -159,6 +188,22 @@ export class FeedPage {
           }  
         });
     }
+    getUserPosition(){
+    this.options = {
+    enableHighAccuracy : false
+    };
+    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+
+        this.currentPos = pos;
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;    
+        console.log(pos);
+
+    },(err : PositionError)=>{
+        console.log("error : " + err.message);
+    ;
+    })
+  	}
 
 }
 
