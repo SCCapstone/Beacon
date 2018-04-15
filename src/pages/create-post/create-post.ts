@@ -160,7 +160,10 @@ userEmail: Observable<any>;
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      let data = normalizeURL(imageData);
+      this.postImgURL = 'data:image/jpeg;base64' + data;
+
+      //this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
     });
@@ -176,10 +179,7 @@ userEmail: Observable<any>;
     }
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-
-      let data = normalizeURL(imageData);
-      this.postImgURL = 'data:image/jpeg;base64' + data;
-      //this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
     });

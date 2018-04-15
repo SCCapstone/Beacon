@@ -28,6 +28,7 @@ import { Facebook } from '@ionic-native/facebook';
 
 import { storage } from 'firebase'; //added 3/31 by Amanda
 import { Camera } from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
  const config = {
