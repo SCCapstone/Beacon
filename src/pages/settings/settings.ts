@@ -163,7 +163,6 @@ export class SettingsPage {
     this.camera.getPicture(options).then((imageData) => { 
       let data = normalizeURL(imageData);
       this.capturedDataURL = 'data:image/jpeg;base64' + data;
-
       //this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
@@ -197,7 +196,6 @@ export class SettingsPage {
 
     this.ppURL = this.capturedDataURL;//updates photo url to new photo url
   }
-
 
 //pull profile pick in when page is fully loaded
 ionViewDidLoad(){
