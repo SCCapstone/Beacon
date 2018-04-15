@@ -161,8 +161,7 @@ userEmail: Observable<any>;
     }
     this.camera.getPicture(options).then((imageData) => { 
       let data = normalizeURL(imageData);
-      this.postImgURL = 'data:image/jpeg;base64' + data;
-
+      this.postImgURL = data;
       //this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
