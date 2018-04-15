@@ -103,7 +103,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="need camera access to take pictures" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="need photo library access to get pictures from there" />
     </plugin>
-<!-- below to try to fix ios11 issue with camera-->
+<!-- below to try to fix ios11 issue with camera
     <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
         <string>need camera access to take pictures</string>
     </edit-config>
@@ -116,4 +116,5 @@
     <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
         <string>need photo library access to save pictures there</string>
     </edit-config>
+-->
 </widget>
