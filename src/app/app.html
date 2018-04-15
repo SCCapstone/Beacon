@@ -16,6 +16,9 @@
         Approve Orgs
       </button>
 -->
+      <button menuClose ion-item *ngIf="normalUser" (click)="openSettings()">
+        Settings
+      </button>
       <button menuClose ion-item (click)="logMeOut()">
         Sign Out
       </button>
