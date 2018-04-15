@@ -154,6 +154,7 @@ export class FeedPage {
 	   	this.postRef.limitToFirst(this.postsToLoad).once('value', postList => { //value event is used to read a static snapshot of the contents at a given database path, as they existed at the time of the read event. It is triggered once with the initial data and again every time the data changes.
 		 	let posts = [];  //store Firebase data temporarily
 		  	postList.forEach( item => { 
+		  		
 		    	posts.push(item.val()); //returns the value attribute of item
 	   	 		return false;
 

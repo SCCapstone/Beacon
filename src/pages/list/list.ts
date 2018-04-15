@@ -132,30 +132,50 @@ export class ListPage {
       mapTypeId: google.maps.MapTypeId.HYBRID
     }
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.addMarker();
+    this.addMarker(lat, long);
   }
-  addMarker() {
+  addMarker(lat, long) {
     this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
 
       this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
           let posts = [];
+
           postList.forEach( post => {
             //posts.push(post.val());
-            let latitude = post.val().latitude;
+            if(lat+.724 > post.val().latitude && lat-.724 < post.val().latitude && long+.724 > post.val().longitude && long-.724 < post.val().longitude){
+                posts.push(post.val());
+                let latitude = post.val().latitude;
+                let longitude = post.val().longitude;
+                let content = post.val().organization + ": " + post.val().message;
+                let marker = new google.maps.Marker({
+                  map: this.map,
+                  animation: google.maps.Animation.DROP,
+                  position: { lat: latitude, lng: longitude },
+                title: content
+                })
+                this.addInfoWindow(marker, content);
+      //let content = `<h1>Hospital</h1>`;
+                //this.addInfoWindow(marker, content);
+            //latitude = post.val().latitude;
+            //longitude = post.val().longitude;
+                //return false;
+            }
+            /*let latitude = post.val().latitude;
             let longitude = post.val().longitude;
             let content = post.val().organization + ": " + post.val().message;
             let marker = new google.maps.Marker({
-            map: this.map,
-            animation: google.maps.Animation.DROP,
-            position: { lat: latitude, lng: longitude },
-            title: content
-      })
+              map: this.map,
+              animation: google.maps.Animation.DROP,
+              position: { lat: latitude, lng: longitude },
+              title: content
+            })
       //let content = `<h1>Hospital</h1>`;
-      this.addInfoWindow(marker, content);
+            this.addInfoWindow(marker, content);
             //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-          return false;
-      });
+            //longitude = post.val().longitude;*/
+            //this.addInfoWindow(marker, content);
+            return false;
+          });
           this.postList = posts;
           this.loadedPostList = posts;
         });
