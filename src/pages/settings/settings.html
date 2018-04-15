@@ -18,6 +18,8 @@
 
 <!--<form novalidate -->
     <h2>Account Credentials</h2>
+    
+
     <ion-list *ngIf="!isOrganization()">
       <!--ion-item>
         <ion-label stacked color="primary">Name</ion-label>
@@ -44,8 +46,12 @@
         <button ion-button block type [disabled]="!userForm.valid">
           Update Credentials
       	</button>
+
       </form>
     </ion-list>
+
+
+
     <ion-list *ngIf="isOrganization()">
       <form [formGroup]="organizationForm" (submit)="updateOrganization()" novalidate>
         <ion-item>
@@ -78,13 +84,16 @@
           <ion-label stacked color="primary" >Address *</ion-label>
           <ion-input type="text" formControlName="address" placeholder="Street Address, City, State" [(ngModel)]="address">
           {{address}}
-        </ion-input>
+          </ion-input>
         </ion-item>
+
         <button ion-button block type [disabled]="!organizationForm.valid">
           Update Credentials
         </button>
       </form>
     </ion-list>
+
+
 
     <ion-list>
       <ion-label>
@@ -113,4 +122,32 @@
       </form>
     </ion-list>
 <!--/form-->
+
+
+  <ion-list>
+    <!--Added 4/10-->
+
+    <ion-label>
+        <h2>Profile Picture</h2>
+      </ion-label>
+         <!--
+        <img src = "{{ capturedDataURL }}" >  
+        -->
+        <img src = "{{ ppURL }}" hieght ="300" width="275"> 
+
+
+        <ion-item>
+          <button ion-button block type (click)="takePhoto()"> Take Photo </button>
+        </ion-item>
+
+        <ion-item>
+          <button ion-button block type (click)="getPhoto()"> Choose Photo </button>
+        </ion-item>
+
+       
+        <ion-item color="none" >
+          <button ion-button block color="positive" (click)="uploadPic()"> Save Photo </button> <!-- picture is uploading, but not displaying on feed-->
+        </ion-item>
+  </ion-list>
+
 </ion-content>

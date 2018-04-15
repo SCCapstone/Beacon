@@ -86,9 +86,35 @@
         <variable name="APP_ID" value="150524595587726" />
         <variable name="APP_NAME" value="“Beacon”" />
     </plugin>
-    <engine name="ios" spec="~4.4.0" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you during emergencies." />
     </plugin>
+    <allow-navigation href="http://192.168.0.2:8100" />
     <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-filepath" spec="^1.2.0" />
+    <allow-navigation href="http://10.30.164.224:8100" />
+    <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+    <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <allow-navigation href="http://10.30.203.166:8100" />
+    <engine name="ios" spec="~4.4.0" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.2">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="need camera access to take pictures" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="need photo library access to get pictures from there" />
+    </plugin>
+<!-- below to try to fix ios11 issue with camera
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need camera access to take pictures</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need photo library access to get pictures from there</string>
+    </edit-config>
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need location access to find things nearby</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
+        <string>need photo library access to save pictures there</string>
+    </edit-config>
+-->
 </widget>

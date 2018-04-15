@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,8 +7,13 @@ import firebase from 'firebase';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
-import {LocationProvider} from '../../providers/location/location';
+import { LocationProvider } from '../../providers/location/location';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
+
+import { storage } from 'firebase'; //added 3/31 by amanda
+import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
+
 /**
  * Generated class for the CreatePostPage page.
  * Created by Ryan Roe for Beacon Capstone Project
@@ -66,9 +71,15 @@ userEmail: Observable<any>;
   latitude;
   longitude;
 
+  //setting postImgURL as a defualt blank image
+  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
+  //public postImgURL;
+  public ppURL;  //user's profile picture
+ 
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, private fdb: AngularFireDatabase,afAuth: AngularFireAuth,
-   public alertCtrl: AlertController, private locationProvider : LocationProvider) {
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
+   private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
+   public camera: Camera, public loadingCtrl: LoadingController) {
   
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
@@ -81,6 +92,7 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.address = userInfo.val().address;
+
      });
     this.options = {
         enableHighAccuracy : false
@@ -104,7 +116,6 @@ userEmail: Observable<any>;
       console.log(pos);
       //this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
     })*/
-  
 
 }
   getUserPosition(){
@@ -142,6 +153,10 @@ userEmail: Observable<any>;
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
+   
+    ppURL: this.ppURL,  //profile picture url
+    postImgURL: this.postImgURL   //post image url
+
    // username: this.name
    latitude: parseFloat(this.latitude),
    longitude: parseFloat(this.longitude),
@@ -164,16 +179,79 @@ userEmail: Observable<any>;
   deleteEverything() {
     this.itemsRef.remove();
   }
-
+  /**
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreatePostPage');
-
   }
-
+  */
   showSelected(mySelect : string) {
-
     console.log(mySelect);
     this.typeofPost = mySelect;
   }
+
+
+/**  All code below added by Amanda for image features */
+  async takePhoto(){ //takes image with camera
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
+        saveToPhotoAlbum: true, //saving picture to library  
+        correctOrientation: true 
+    }
+    this.camera.getPicture(options).then((imageData) => { 
+      //let data = normalizeURL(imageData);
+      //this.postImgURL = data;
+      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+    });
+  }
+
+  async getPhoto(){ //pulls from library
+    const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+    }
+    // code from ionic documentation and Maballo Net: pick from gallary
+    this.camera.getPicture(options).then((imageData) => { 
+      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+    },
+    (err) => {
+    });
+  }
+
+  public uploadPic(){ //uploads image to firebase storage
+    let storageRef = firebase.storage().ref();
+    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+    //might want to include user id in file name as well incase multiple users create a post at exact same time
+    //its unlikely but good practice I would think
+    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
+  }
+
+/**
+  //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
+  public getProfilePic(){ 
+    var filename = this.UID;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    });
+  }
+*/
+
+//pull profile pick in when page is fully loaded
+ionViewWillEnter(){
+  var filename = this.UID;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    });
+
+}
+
 
 }

@@ -14,8 +14,7 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
-import {OrgApprovalPage} from '../pages/org-approval/org-approval';
-
+import { OrgApprovalPage } from '../pages/org-approval/org-approval';
 
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
@@ -27,6 +26,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { Facebook } from '@ionic-native/facebook';
 
+import { storage } from 'firebase'; //added 3/31 by Amanda
+import { Camera } from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
  const config = {
@@ -77,7 +79,8 @@ import { Facebook } from '@ionic-native/facebook';
     SMS,
     LocationProvider, //adding providers into bootstrap means that one instance is created for all components
     Geolocation,
-    Facebook
+    Facebook,
+    Camera, //for image upload
   ]
 })
 export class AppModule {}
