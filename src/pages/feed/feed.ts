@@ -49,6 +49,7 @@ export class FeedPage {
 	//latitude: Number;
 	//longitude : Number;
 
+
 	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation: Geolocation) { 
 
@@ -205,3 +206,4 @@ export class FeedPage {
   	}
 
 }
+

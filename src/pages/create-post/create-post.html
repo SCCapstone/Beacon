@@ -7,22 +7,25 @@
 <p> The longitude: {{LocationProvider.usersLocation.lon}}</p>-->
 
 <ion-header>
-
   <ion-navbar color="secondary">
     <ion-title> Create Post </ion-title>
   </ion-navbar>
-
 </ion-header>
 
+
 <ion-content padding id="page10">
-  <ion-card id="newPost-card210">
+  <ion-card id="newPost-card210" >
     <ion-list>
    <!--   <form id="newPost-form17">-->
         <ion-item color="none" id="newPost-list-item101">
+          
+
           <ion-avatar item-left>
-            <img />
+            <img src = "{{ppURL}}" width="250" height="250">  <!--to disply profile picture-->
           </ion-avatar>
-          <ion-item>{{organization}}</ion-item> 
+
+
+          <ion-item >{{organization}}</ion-item> 
         </ion-item>
         <ion-item id="newPost-input12">
           <ion-label></ion-label>
@@ -33,10 +36,27 @@
           <ion-input type="text" [(ngModel)]="postContent" placeholder="Post Content..."></ion-input>
         </ion-item>
   <!--    </form> -->
-      <ion-item color="none" id="newPost-list-item100">
-        <ion-icon name="image" item-left></ion-icon>
-        Upload Image
+      <!-- image buttons-->
+       <ion-item color="none" id="newPost-list-item100">
+        <!--<ion-icon name="image" item-left></ion-icon> -->
+          <button id="upload-photo1" ion-button block color="positive"  (click)="takePhoto()">
+            Take Photo  
+          </button>
       </ion-item>
+      <ion-item color="none" id="newPost-list-item100">
+        <!--<ion-icon name="image" item-left></ion-icon> -->
+          <button id="upload-photo2" ion-button block color="positive"  (click)="getPhoto()">
+            Choose Photo  
+          </button>
+      </ion-item>
+      <ion-item>
+          <img src = "{{ postImgURL }}" width="200" height="300">  <!--to disply photo-->
+      </ion-item>
+
+      <ion-item color="none" >
+          <button ion-button block color="positive"  (click)="uploadPic()"> Upload Photo </button>
+      </ion-item>
+
     </ion-list>
   </ion-card>
   <!--<form id="newPost-form13">-->
@@ -59,6 +79,7 @@
         </ion-option>
       </ion-select>
     </ion-item>
+
     <ion-item id="newPost-input13">
           <ion-label></ion-label>
           <ion-input type="number" [(ngModel)]="latitude" placeholder="Latitude..."></ion-input>
@@ -67,12 +88,15 @@
           <ion-label></ion-label>
           <ion-input type="number" [(ngModel)]="longitude" placeholder="Longitude..."></ion-input>
         </ion-item>
+
     <ion-item id="newPost-toggle10">
       <ion-label>
         Toggle
       </ion-label>
       <ion-toggle color="positive" checked="false"></ion-toggle>
     </ion-item>
+
+  -->
     <ion-item id="newPost-checkbox1">
       <ion-label>
         Use Current Location

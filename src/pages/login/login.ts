@@ -24,6 +24,7 @@ import { EmailValidator } from '../../validators/email';
 
 import { SignupChoicePage } from '../signup-choice/signup-choice';
 import { Facebook } from '@ionic-native/facebook';
+
 @IonicPage()
 @Component({
   selector: 'page-login',
