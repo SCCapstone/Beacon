@@ -12,6 +12,7 @@ import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@io
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
 
 /**
  * Generated class for the CreatePostPage page.
@@ -175,7 +176,10 @@ userEmail: Observable<any>;
     }
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+
+      let data = normalizeURL(imageData);
+      this.postImgURL = 'data:image/jpeg;base64' + data;
+      //this.postImgURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
     });
@@ -183,7 +187,6 @@ userEmail: Observable<any>;
 
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    //const filename = Math.floor(Date.now() / 1000);
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
     //might want to include user id in file name as well incase multiple users create a post at exact same time
     //its unlikely but good practice I would think

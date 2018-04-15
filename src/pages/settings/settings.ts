@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
 
 /**
  * Generated class for the SettingsPage page.
@@ -160,7 +161,10 @@ export class SettingsPage {
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      let data = normalizeURL(imageData);
+      this.capturedDataURL = 'data:image/jpeg;base64' + data;
+
+      //this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
     },
     (err) => {
       // Handle error

@@ -98,10 +98,13 @@
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you during emergencies."
       },
-      "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": "your usage message",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "your usage message"
+      }
     },
     "platforms": [
       "ios",
