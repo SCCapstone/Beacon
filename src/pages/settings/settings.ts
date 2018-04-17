@@ -38,8 +38,7 @@ export class SettingsPage {
   public passwordForm;
 
   public capturedDataURL; //user's newly uploaded (taken or selected image)
-  public ppURL; //profile picture
-
+  public ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85"
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
    public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
   	this.menuCtrl.enable(true, 'navMenu');
@@ -153,7 +152,7 @@ export class SettingsPage {
 
   async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
-        quality: 100,
+        quality: 40,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
@@ -172,7 +171,7 @@ export class SettingsPage {
 
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
-        quality: 100,
+        quality: 40,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false,

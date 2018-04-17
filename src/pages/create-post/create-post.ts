@@ -72,10 +72,9 @@ userEmail: Observable<any>;
   longitude;
 
   //setting postImgURL as a defualt blank image
-  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/ionicdbtest1.appspot.com/o/images%2FBlank.jpg?alt=media&token=72dcbb74-8a6a-4799-ad4b-af06ca3d4bda"; //the image in the content of the post
+  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
   //public postImgURL;
-  public ppURL;  //user's profile picture
- 
+  public ppURL;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
@@ -145,6 +144,12 @@ userEmail: Observable<any>;
     this.latitude = latitude;
     this.longitude = longitude;
    }
+   
+   let storageRef = firebase.storage().ref();
+   const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+   const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+   imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
+  
    const item = {
     
  		message: theirMessage, //works
@@ -153,21 +158,17 @@ userEmail: Observable<any>;
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
-   
     ppURL: this.ppURL,  //profile picture url
     postImgURL: this.postImgURL,   //post image url
 
    // username: this.name
    latitude: parseFloat(this.latitude),
    longitude: parseFloat(this.longitude),
-   // image: theirImage
-   // userImage : userImageSrc
+  
  	 }
     this.itemsRef.push(item);
     this.navCtrl.setRoot(FeedPage); 
    }
-
-
 
 //functions for future adaptation
  updateItem(key: string, newText: string) {
@@ -193,7 +194,7 @@ userEmail: Observable<any>;
 /**  All code below added by Amanda for image features */
   async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
-        quality: 100,
+        quality: 40,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
@@ -211,7 +212,7 @@ userEmail: Observable<any>;
 
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
-        quality: 100,
+        quality: 40,
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false,
@@ -225,6 +226,7 @@ userEmail: Observable<any>;
     });
   }
 
+/**
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
@@ -233,6 +235,7 @@ userEmail: Observable<any>;
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
+*/
 
 /**
   //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
@@ -250,7 +253,6 @@ ionViewWillEnter(){
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
     });
-
 }
 
 
