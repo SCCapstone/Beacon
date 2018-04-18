@@ -55,19 +55,16 @@ export class FeedPage {
 
 		this.menuCtrl.enable(true, 'navMenu');
 		this.options = {
-    enableHighAccuracy : false
-    };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-
-        this.currentPos = pos;
-        this.latitude = pos.coords.latitude;
-        this.longitude = pos.coords.longitude;    
-        console.log(pos);
-
-    },(err : PositionError)=>{
-        console.log("error : " + err.message);
-    ;
-    })
+    		enableHighAccuracy : false
+    	};
+    	this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+        	this.currentPos = pos;
+        	this.latitude = pos.coords.latitude;
+        	this.longitude = pos.coords.longitude;    
+        	console.log(pos);
+    	},(err : PositionError)=>{
+        	console.log("error : " + err.message);
+    	})
 		var UID = firebase.auth().currentUser.uid;
     	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
     	currentUserDB.once('value', userInfo => {

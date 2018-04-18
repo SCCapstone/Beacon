@@ -72,9 +72,9 @@ userEmail: Observable<any>;
   longitude;
 
   //setting postImgURL as a defualt blank image
-  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
-  //public postImgURL;
-  public ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
+  public postImgURL = null;
+  public ppURL;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
