@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import firebase from 'firebase';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
+import { FeedPage } from '../feed/feed';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
@@ -40,7 +41,7 @@ export class SettingsPage {
   public capturedDataURL; //user's newly uploaded (taken or selected image)
   public ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85"
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
-   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
+   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera, private alertCtrl: AlertController) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 
     this.UID = firebase.auth().currentUser.uid
@@ -105,6 +106,12 @@ export class SettingsPage {
      phone: this.phone});
     firebase.auth().currentUser.updateEmail(this.email);
     // An error happened.
+        let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
   }
 
   updateOrganization()
@@ -115,6 +122,12 @@ export class SettingsPage {
       address: this.address,
       organization: this.organization});
     firebase.auth().currentUser.updateEmail(this.email);
+        let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
   }
 
   updatePassword()
@@ -194,6 +207,13 @@ export class SettingsPage {
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
 
     this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+    let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile picture has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    this.navCtrl.setRoot(FeedPage); 
   }
 
 //pull profile pick in when page is fully loaded

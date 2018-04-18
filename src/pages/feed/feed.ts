@@ -91,9 +91,6 @@ export class FeedPage {
 	    });
 	    
     	
-	  	//this.itemsRef = fdb.list('/messages');
-	    //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-	    //this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); 
 	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');//.startAt(this.latitude,'latitude').endAt(50, 'latitude').orderByChild('timestamp');
 	    //this.postRef.orderByChild('latitude')startAt(this.latitude,'latitude').endAt(50, 'latitude');//creating a database reference
 	    //filter this.postRef by latitude and longitude (50 miles)
@@ -102,13 +99,23 @@ export class FeedPage {
           postList.forEach( post => {
           	if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
             		posts.push(post.val());
-          	}
-          	//this filters the posts so that only posts within 50 miles longitude and 50 latitude are selected
+          	}//this filters the posts so that only posts within 50 miles longitude and 50 latitude are selected
             return false;
           });
           this.postList = posts;
           this.loadedPostList = posts;
+
+		  if(posts.length == 0){
+	    	let alert = this.alertCtrl.create({
+		    title: 'No Posts',
+		    subTitle: 'There are no posts within your area. We have limited the posts to 50 miles within your location.',
+		    buttons: ['Dismiss']
+		  });
+		  alert.present();
+	   	  }
         });
+	    
+
   	}
 
 
