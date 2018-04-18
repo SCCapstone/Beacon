@@ -74,7 +74,7 @@ userEmail: Observable<any>;
   //setting postImgURL as a defualt blank image
   public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
   //public postImgURL;
-  public ppURL;
+  public ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
@@ -145,11 +145,12 @@ userEmail: Observable<any>;
     this.longitude = longitude;
    }
    
+   /**
    let storageRef = firebase.storage().ref();
    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  
+  */
    const item = {
     
  		message: theirMessage, //works
@@ -226,7 +227,7 @@ userEmail: Observable<any>;
     });
   }
 
-/**
+
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
@@ -235,7 +236,7 @@ userEmail: Observable<any>;
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
-*/
+
 
 /**
   //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
@@ -252,6 +253,9 @@ ionViewWillEnter(){
   var filename = this.UID;
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
+    },
+      (err) => { 
+        this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
     });
 }
 
