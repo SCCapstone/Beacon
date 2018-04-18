@@ -73,7 +73,7 @@ export class FeedPage {
     	currentUserDB.once('value', userInfo => {
         	var organization = userInfo.val().organization;
         	var approvedOrg = userInfo.val().approved;
-        	var admin = userInfo.val().username;
+        	var admin = userInfo.val().email;
         	if(organization != null )
 	    	{
 	       		this.isOrganization = true;
@@ -83,7 +83,7 @@ export class FeedPage {
 	    		this.isApprovedOrg = true;
 	    		this.isOrganization = false;
 	    	}
-	    	if(admin == "Ryan Roe")
+	    	if(admin == "ryanroe559@gmail.com")
 	    	{
 	       		this.isAdmin = true;
 	    	}
