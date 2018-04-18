@@ -70,7 +70,8 @@ userEmail: Observable<any>;
   public check: number;
   latitude;
   longitude;
-
+  assignedlat;
+  assignedlong;
   //setting postImgURL as a defualt blank image
   public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
   //public postImgURL;
@@ -99,9 +100,11 @@ userEmail: Observable<any>;
       this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
           this.currentPos = pos;     
-
-          console.log(pos);
-
+          this.latitude = pos.coords.latitude;
+          this.longitude = pos.coords.longitude; 
+          console.log(pos + "constructor function");
+          console.log("constructor lat = " + this.latitude);
+          console.log("constuctor long = " + this.longitude);
       },(err : PositionError)=>{
           console.log("error : " + err.message);
       ;
@@ -117,6 +120,14 @@ userEmail: Observable<any>;
     })*/
 
 }
+  //added by Ryan to begin to fix the getUserPosition function. the user's position is asked for once in the feed, once in this constructor, and then everytime 
+  assignUserPosition(){
+    this.assignedlat = this.latitude;
+    this.assignedlong = this.latitude 
+    console.log("assigned long = " + this.assignedlong);      
+    console.log("assigned lat = " + this.assignedlat);
+  }
+
   getUserPosition(){
     this.options = {
     enableHighAccuracy : false
@@ -127,13 +138,15 @@ userEmail: Observable<any>;
         this.latitude = pos.coords.latitude;
         this.longitude = pos.coords.longitude;    
 
-        console.log(pos);
-
+        console.log(pos + "getUserPostion function");
+        console.log(this.latitude);
+        console.log(this.longitude);
     },(err : PositionError)=>{
         console.log("error : " + err.message);
     ;
     })
-    this.check = 1;
+    this.check = 1; //Mason this will not work if the user checks the box and then unchecks the box. There is a way to tell whether the box is checked or not. onclick is not the proper function in the html - Ryan
+
   }
 
  chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
@@ -160,10 +173,8 @@ userEmail: Observable<any>;
     organization: this.organization,  
     ppURL: this.ppURL,  //profile picture url
     postImgURL: this.postImgURL,   //post image url
-
-   // username: this.name
-   latitude: parseFloat(this.latitude),
-   longitude: parseFloat(this.longitude),
+    latitude: parseFloat(this.latitude),
+    longitude: parseFloat(this.longitude),
   
  	 }
     this.itemsRef.push(item);
@@ -248,10 +259,13 @@ userEmail: Observable<any>;
 */
 
 //pull profile pick in when page is fully loaded
+//Amanda this will not work because this picture is already 
 ionViewWillEnter(){
   var filename = this.UID;
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
+    }, (err) => { 
+        this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
     });
 }
 

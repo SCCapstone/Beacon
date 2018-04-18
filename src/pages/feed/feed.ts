@@ -61,8 +61,9 @@ export class FeedPage {
 
         this.currentPos = pos;
         this.latitude = pos.coords.latitude;
-        this.longitude = pos.coords.longitude;    
-        console.log(pos);
+        this.longitude = pos.coords.longitude;  
+        console.log(pos);  
+        console.log("feed page constructor pos = " + this.currentPos);
 
     },(err : PositionError)=>{
         console.log("error : " + err.message);
