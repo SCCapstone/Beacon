@@ -84,7 +84,7 @@ export class FeedPage {
 	    		this.isApprovedOrg = true;
 	    		this.isOrganization = false;
 	    	}
-	    	if(admin == "ryanroe559@gmail.com")
+	    	if(admin == "ryanroe559@gmail.com" || admin == "amandamb@email.sc.edu")
 	    	{
 	       		this.isAdmin = true;
 	    	}
