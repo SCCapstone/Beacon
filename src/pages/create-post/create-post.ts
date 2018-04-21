@@ -117,6 +117,18 @@ userEmail: Observable<any>;
     })*/
 
 }
+
+//pull profile pick in when page is fully loaded
+ionViewWillEnter(){
+  var filename = this.UID;
+  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+    this.ppURL = url;
+  },
+  (err) => { 
+    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  });
+}
+
   getUserPosition(){
     this.options = {
     enableHighAccuracy : false
@@ -228,8 +240,6 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-    //might want to include user id in file name as well incase multiple users create a post at exact same time
-    //its unlikely but good practice I would think
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
@@ -245,16 +255,7 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
   }
 */
 
-//pull profile pick in when page is fully loaded
-ionViewWillEnter(){
-  var filename = this.UID;
-  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-    this.ppURL = url;
-  },
-  (err) => { 
-    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
-  });
-}
+
 
 
 }

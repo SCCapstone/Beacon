@@ -168,16 +168,17 @@ export class SettingsPage {
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
       //this.ppURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
       // Handle error
     });
-    //uploading the picture
-    let storageRef = firebase.storage().ref();
-    const filename = this.email; //naming the file to match the current user's email
-    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
-    this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+   
   }
 
   async getPhoto(){ //pulls from library
@@ -193,16 +194,17 @@ export class SettingsPage {
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
       //this.ppURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
       // Handle error
     });
-    //uploading the picture
-    let storageRef = firebase.storage().ref();
-    const filename = String(this.email); //naming the file to match the current user's email
-    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
-    this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+   
   }
 
 /**
