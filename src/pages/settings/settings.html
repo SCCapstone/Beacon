@@ -125,16 +125,11 @@
 
 
   <ion-list>
-    <!--Added 4/10-->
-
     <ion-label>
         <h2>Profile Picture</h2>
-      </ion-label>
-         <!--
-        <img src = "{{ capturedDataURL }}" >  
-        -->
-        <img src = "{{ ppURL }}" hieght ="300" width="275"> 
-
+    </ion-label>
+  
+    <img src = "{{ ppURL }}" hieght ="300" width="275"> 
 
         <ion-item>
           <button ion-button block type (click)="takePhoto()"> Take Photo </button>
@@ -144,7 +139,6 @@
           <button ion-button block type (click)="getPhoto()"> Choose Photo </button>
         </ion-item>
 
-       
         <ion-item color="none" >
           <button ion-button block color="positive" (click)="uploadPic()"> Save Photo </button> <!-- picture is uploading, but not displaying on feed-->
         </ion-item>
