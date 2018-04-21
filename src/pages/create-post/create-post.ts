@@ -136,7 +136,7 @@ userEmail: Observable<any>;
     this.check = 1;
   }
 
- chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
+chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
  	 console.log(this.organization);
    if(this.check > 0){
    }
@@ -152,24 +152,21 @@ userEmail: Observable<any>;
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
    const item = {
-    
- 		message: theirMessage, //works
- 		title: theirTitle,     //works
- 		timestamp: Date.now() * -1, //works, but needs filtering
-    PostType: this.typeofPost,  //works
-    email: this.email, 
-    organization: this.organization,  
-    ppURL: this.ppURL,  //profile picture url
-    postImgURL: this.postImgURL,   //post image url
-
-   // username: this.name
-   latitude: parseFloat(this.latitude),
-   longitude: parseFloat(this.longitude),
-  
+ 	   message: theirMessage, //works
+ 		 title: theirTitle,     //works
+ 		 timestamp: Date.now() * -1, //works, but needs filtering
+     PostType: this.typeofPost,  //works
+     email: this.email, 
+     organization: this.organization,  
+     ppURL: this.ppURL,  //profile picture url
+     postImgURL: this.postImgURL,   //post image url
+     // username: this.name
+     latitude: parseFloat(this.latitude),
+     longitude: parseFloat(this.longitude),
  	 }
-    this.itemsRef.push(item);
-    this.navCtrl.setRoot(FeedPage); 
-   }
+   this.itemsRef.push(item);
+   this.navCtrl.setRoot(FeedPage); 
+}
 
 //functions for future adaptation
  updateItem(key: string, newText: string) {
@@ -251,12 +248,12 @@ userEmail: Observable<any>;
 //pull profile pick in when page is fully loaded
 ionViewWillEnter(){
   var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    },
-      (err) => { 
-        this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
-    });
+  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+    this.ppURL = url;
+  },
+  (err) => { 
+    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  });
 }
 
 

@@ -189,7 +189,8 @@ export class SettingsPage {
 
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    const filename = this.UID; //naming the file to match the current user
+    //const filename = this.UID; //naming the file to match the current user's email
+    const filename = this.email; //naming the file to match the current user's email
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
 
@@ -198,9 +199,12 @@ export class SettingsPage {
 
 //pull profile pick in when page is fully loaded
 ionViewDidLoad(){
-  var filename = this.UID;
+  var filename = this.email;
     firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
+    }, 
+    (err) => { 
+      this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
     });
 }
 

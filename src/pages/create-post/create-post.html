@@ -50,11 +50,11 @@
           </button>
       </ion-item>
       <ion-item>
-          <img src = "{{ postImgURL }}" width="200" height="300" *ngIf="postImageURL != null">  <!--to disply photo-->
+          <img *ngIf="postImageURL != false" src = "{{ postImgURL }}" width="200" height="300" >  <!--to disply photo-->
       </ion-item>
   
       <ion-item color="none" >
-          <button ion-button block color="positive"  *ngIf="postImageURL != null"  (click)="uploadPic()"> Upload Photo </button>
+          <button ion-button block color="positive"  *ngIf="postImageURL != false"  (click)="uploadPic()"> Upload Photo </button>
       </ion-item>
   
     </ion-list>
