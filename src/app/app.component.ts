@@ -63,12 +63,20 @@ export class MyApp { //this is template for the root component that is set in mo
     //Angular’s change detection is triggered
     this.zone = new NgZone({});
     const config = {
+      /**
         apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
         authDomain: "ionicdbtest1.firebaseapp.com",
         databaseURL: "https://ionicdbtest1.firebaseio.com",
         projectId: "ionicdbtest1",
         storageBucket: "ionicdbtest1.appspot.com",
         messagingSenderId: "207415494381"
+        */
+        apiKey: "AIzaSyBpEoYX0R1FH7_UxYCfiDOejAewqGj4Lg8",
+        authDomain: "beacon-7a98f.firebaseapp.com",
+        databaseURL: "https://beacon-7a98f.firebaseio.com",
+        projectId: "beacon-7a98f",
+        storageBucket: "beacon-7a98f.appspot.com",
+        messagingSenderId: "969938786472"
       };
 
 
