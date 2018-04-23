@@ -14,8 +14,7 @@ import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
 import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
-import {OrgApprovalPage} from '../pages/org-approval/org-approval';
-
+import { OrgApprovalPage } from '../pages/org-approval/org-approval';
 
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
@@ -27,8 +26,12 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { Facebook } from '@ionic-native/facebook';
 
+import { storage } from 'firebase'; //added 3/31 by Amanda
+import { Camera } from '@ionic-native/camera'; //added 3/31 by Amanda
+import { normalizeURL } from 'ionic-angular';
 
     //Initialize Firebase for feed, yes it is also in app.component.ts, but I cannot seem to import config from app.component.ts without an error appearing upon the first load of ionic serve, the second load works. For now this code must stay.
+ /**
  const config = {
     apiKey: "AIzaSyADsKzb4ersqTMGiWPGJZeYXMNWb1ClUj4",
     authDomain: "ionicdbtest1.firebaseapp.com",
@@ -36,6 +39,15 @@ import { Facebook } from '@ionic-native/facebook';
     projectId: "ionicdbtest1",
     storageBucket: "ionicdbtest1.appspot.com",
     messagingSenderId: "207415494381"
+  };
+*/
+const config = {
+    apiKey: "AIzaSyBpEoYX0R1FH7_UxYCfiDOejAewqGj4Lg8",
+    authDomain: "beacon-7a98f.firebaseapp.com",
+    databaseURL: "https://beacon-7a98f.firebaseio.com",
+    projectId: "beacon-7a98f",
+    storageBucket: "beacon-7a98f.appspot.com",
+    messagingSenderId: "969938786472"
   };
 
 //this is the root module, it controls the rest of the app
@@ -77,7 +89,8 @@ import { Facebook } from '@ionic-native/facebook';
     SMS,
     LocationProvider, //adding providers into bootstrap means that one instance is created for all components
     Geolocation,
-    Facebook
+    Facebook,
+    Camera, //for image upload
   ]
 })
 export class AppModule {}

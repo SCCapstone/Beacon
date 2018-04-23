@@ -103,12 +103,7 @@ h1 {
   border: none;
   -webkit-transition: -webkit-box-shadow .3s;
   transition:box-shadow .3s;
-  &:hover, &:focus {
-    box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px darken(#FF1D74, 5%);
-    @include transition-timing-function(cubic-bezier(.6,4,.3,.8));
-    @include animation (jelly .5s 1);
   }
-}
 /**
 .btn-secondary {
   background:$color-btn-secondary;
@@ -129,73 +124,3 @@ h1 {
     box-shadow: 0 0 0 2px $color-bg, 0 0 0 4px darken($color-btn-active, 5%);
   }
 
-/**
- * $keyframes jelly bounce effect
- **/
-@keyframes jelly{
-  from,to{
-    -webkit-transform:scale(1, 1);
-    transform:scale(1, 1)
-  }
-  25%{
-    -webkit-transform:scale(.9, 1.1);
-    transform:scale(.9, 1.1)
-  }
-  50%{
-    -webkit-transform:scale(1.1, .9);
-    transform:scale(1.1, .9)
-  }
-  75%{
-    -webkit-transform:scale(.95, 1.05);
-    transform:scale(.95, 1.05)
-  }
-  from,to{
-    -webkit-transform:scale(1, 1);
-    transform:scale(1, 1)
-  }
-  25%{
-    -webkit-transform:scale(.9, 1.1);
-    transform:scale(.9, 1.1)
-  }
-  50%{
-    -webkit-transform:scale(1.1, .9);
-    transform:scale(1.1, .9)
-  }75%{
-    -webkit-transform:scale(.95, 1.05);
-    transform:scale(.95, 1.05)
-  }
-}
-
-@-webkit-keyframes jelly{
-  from,to{
-    -webkit-transform:scale(1, 1);
-    transform:scale(1, 1)
-  }
-  25%{
-    -webkit-transform:scale(.9, 1.1);
-    transform:scale(.9, 1.1)
-  }
-  50%{
-    -webkit-transform:scale(1.1, .9);
-    transform:scale(1.1, .9)
-  }
-  75%{
-    -webkit-transform:scale(.95, 1.05);
-    transform:scale(.95, 1.05)
-  }
-  from,to{
-    -webkit-transform:scale(1, 1);
-    transform:scale(1, 1)
-  }
-  25%{
-    -webkit-transform:scale(.9, 1.1);
-    transform:scale(.9, 1.1)
-  }
-  50%{
-    -webkit-transform:scale(1.1, .9);
-    transform:scale(1.1, .9)
-  }75%{
-    -webkit-transform:scale(.95, 1.05);
-    transform:scale(.95, 1.05)
-  }
-}
