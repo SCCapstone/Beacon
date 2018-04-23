@@ -1,3 +1,13 @@
+## About Us
+
+Ryan Roe
+
+Amanda Brummet
+
+Khory Kotowski
+
+Mason Eckley
+
 ## Unit Testing by Sarah and Ryan and Behavioral Testing by Khory
 
 
