@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
@@ -41,7 +41,7 @@ export class SettingsPage {
   public ppURL;
 
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
-   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera) {
+   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera, public alertCtrl: AlertController) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 
     this.UID = firebase.auth().currentUser.uid
@@ -83,15 +83,25 @@ export class SettingsPage {
   }
 
   //pull profile pick in when page is fully loaded
-  ionViewDidLoad(){
-    var filename = this.email;
+  ionViewDidEnter(){
+    var filename = firebase.auth().currentUser.email;
     firebase.storage().ref().child('/profilePics/' + filename + '.jpg').getDownloadURL().then((url)=>{
       this.ppURL = url;
-    }, 
+    },
       (err) => { 
         this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
-    });
+        /**
+        let alert = this.alertCtrl.create({
+          title: 'Sorry!',
+          subTitle: 'There was an error loading your profile picture.',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      */
+     });
   }
+
+
   isOrganization()
   {
     if(this.organization != null)
@@ -167,7 +177,6 @@ export class SettingsPage {
     }
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
-      //this.ppURL = 'data:image/jpeg;base64,' + imageData;
       //uploading the picture
       let storageRef = firebase.storage().ref();
       const filename = this.email; //naming the file to match the current user's email
@@ -181,6 +190,7 @@ export class SettingsPage {
    
   }
 
+
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
         quality: 40,
@@ -193,7 +203,6 @@ export class SettingsPage {
     // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
-      //this.ppURL = 'data:image/jpeg;base64,' + imageData;
       //uploading the picture
       let storageRef = firebase.storage().ref();
       const filename = this.email; //naming the file to match the current user's email

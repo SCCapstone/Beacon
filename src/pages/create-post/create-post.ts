@@ -120,7 +120,7 @@ userEmail: Observable<any>;
 
 //pull profile pick in when page is fully loaded
 ionViewWillEnter(){
-  var filename = this.UID;
+  var filename = firebase.auth().currentUser.email;
   firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
     this.ppURL = url;
   },
@@ -215,6 +215,10 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
       //let data = normalizeURL(imageData);
       //this.postImgURL = data;
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      let storageRef = firebase.storage().ref();
+      const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+      const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
     });
@@ -231,19 +235,23 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      let storageRef = firebase.storage().ref();
+      const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+      const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
     });
   }
 
-
+/**
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
-
+*/
 
 /**
   //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
@@ -254,8 +262,5 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     });
   }
 */
-
-
-
 
 }
