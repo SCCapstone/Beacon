@@ -48,10 +48,6 @@ To run the behavioral tests, while in the roof directory run the command:
 "protractor"
 
 
-## Beacon
-
-
-
 ## Tested and working, Built for osx platform
 
 ### Instructions for Viewing on osx
