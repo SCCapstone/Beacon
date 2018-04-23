@@ -8,6 +8,8 @@ Khory Kotowski - https://www.linkedin.com/in/khory-kotowski/
 
 Mason Eckley - https://www.linkedin.com/in/mason-eckley-725684100/
 
+(https://sccapstone.github.io/Beacon/about.html "About")
+
 
 
 # Why Use the Application
