@@ -19,6 +19,7 @@ export class UserSignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
+  public capturedDataURL;
   public ppURL;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public loadingCtrl: LoadingController, 
@@ -77,11 +78,20 @@ export class UserSignupPage {
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      this.ppURL = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.signupForm.value.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
+      // Handle error
     });
+   
   }
+
 
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
@@ -89,26 +99,24 @@ export class UserSignupPage {
         destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         saveToPhotoAlbum: false,
-        correctOrientation: true
+        correctOrientation: true 
     }
+    
     // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
-      this.ppURL = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.signupForm.value.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
+      // Handle error
     });
+   
   }
-
-
-  public uploadPic(){ //uploads image to firebase storage
-    let storageRef = firebase.storage().ref();
-    const filename = this.signupForm.value.email;
-    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.ppURL, firebase.storage.StringFormat.DATA_URL);
-  }
-
-
-
 
 
 }
