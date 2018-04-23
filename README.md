@@ -1,12 +1,23 @@
-## About Us
+# About Us
 
-Ryan Roe
+Ryan Roe - https://www.linkedin.com/in/ryan-roe-439ab689/
 
-Amanda Brummet
+Amanda Brummett - https://www.linkedin.com/in/amanda-brummett-28855a130/
 
-Khory Kotowski
+Khory Kotowski - https://www.linkedin.com/in/khory-kotowski/
 
-Mason Eckley
+Mason Eckley - https://www.linkedin.com/in/mason-eckley-725684100/
+
+
+
+# Why Use the Application
+
+This application is built for people that are in emergency situations. The hope for this application is that it will allow those involved in an emergency situation, especially natural disasters to be better informed and know where they can go for help and also know where they can go to offer help. 
+
+It is really simple to use with a feed that shows the charities, first responders and emergency services that are available and what they are offering along with any supplies that they may be asking for. There is also a map that includes pins to show where the different organizations are located/posting from. 
+
+
+
 
 ## Unit Testing by Sarah and Ryan and Behavioral Testing by Khory
 
