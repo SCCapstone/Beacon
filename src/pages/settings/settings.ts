@@ -39,9 +39,10 @@ export class SettingsPage {
   public passwordForm;
 
   public capturedDataURL; //user's newly uploaded (taken or selected image)
-  public ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85"
+  public ppURL;
+
   constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
-   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera, private alertCtrl: AlertController) {
+   public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera, public alertCtrl: AlertController) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 
     this.UID = firebase.auth().currentUser.uid
@@ -82,11 +83,26 @@ export class SettingsPage {
 
   }
 
-  /**
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
+  //pull profile pick in when page is fully loaded
+  ionViewDidEnter(){
+    var filename = firebase.auth().currentUser.email;
+    firebase.storage().ref().child('/profilePics/' + filename + '.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    },
+      (err) => { 
+        this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+        /**
+        let alert = this.alertCtrl.create({
+          title: 'Sorry!',
+          subTitle: 'There was an error loading your profile picture.',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      */
+     });
   }
-  */
+
+
   isOrganization()
   {
     if(this.organization != null)
@@ -173,14 +189,20 @@ export class SettingsPage {
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      let data = normalizeURL(imageData);
-      this.capturedDataURL = 'data:image/jpeg;base64' + data;
-      //this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
       // Handle error
     });
+   
   }
+
 
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
@@ -191,21 +213,28 @@ export class SettingsPage {
         correctOrientation: true 
     }
     
-    // code from ionic documentation and Maballo Net: pick from gallary
+    // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
+      //uploading the picture
+      let storageRef = firebase.storage().ref();
+      const filename = this.email; //naming the file to match the current user's email
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
+      this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
       // Handle error
     });
+   
   }
 
+/**
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
-    const filename = this.UID; //naming the file to match the current user
+    const filename = this.email; //naming the file to match the current user's email
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
-
     this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     let alert = this.alertCtrl.create({
         title: 'Success!',
@@ -215,13 +244,7 @@ export class SettingsPage {
       alert.present();
     this.navCtrl.setRoot(FeedPage); 
   }
+*/
 
-//pull profile pick in when page is fully loaded
-ionViewDidLoad(){
-  var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    });
-}
 
 }

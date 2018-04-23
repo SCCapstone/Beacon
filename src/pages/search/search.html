@@ -41,7 +41,7 @@
       <ion-card-content>
         <a href="#">{{item.name}}</a>
         <p>{{item.message}}</p>
-        <img src="{{item.postImgURL}}" height ="300" width="240" > 
+        <img *ngIf="postImageURL != null" src="{{item.postImgURL}}"  height ="300" width="240" > 
       </ion-card-content>
       <!--Creates the likes, comments, and time since post-->
 

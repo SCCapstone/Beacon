@@ -73,8 +73,8 @@ userEmail: Observable<any>;
   assignedlat;
   assignedlong;
   //setting postImgURL as a defualt blank image
-  public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
-  //public postImgURL;
+  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
+  public postImgURL = null;
   public ppURL;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
@@ -120,6 +120,19 @@ userEmail: Observable<any>;
     })*/
 
 }
+
+
+//pull profile pick in when page is fully loaded
+ionViewWillEnter(){
+  var filename = firebase.auth().currentUser.email;
+  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+    this.ppURL = url;
+  },
+  (err) => { 
+    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  });
+}
+
   //added by Ryan to begin to fix the getUserPosition function. the user's position is asked for once in the feed, once in this constructor, and then everytime 
   assignUserPosition(){
     this.assignedlat = this.latitude;
@@ -127,6 +140,7 @@ userEmail: Observable<any>;
     console.log("assigned long = " + this.assignedlong);      
     console.log("assigned lat = " + this.assignedlat);
   }
+
 
   getUserPosition(){
     this.options = {
@@ -149,7 +163,7 @@ userEmail: Observable<any>;
 
   }
 
- chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
+chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
  	 console.log(this.organization);
    if(this.check > 0){
    }
@@ -158,13 +172,13 @@ userEmail: Observable<any>;
     this.longitude = longitude;
    }
    
+   /**
    let storageRef = firebase.storage().ref();
    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  
+  */
    const item = {
-    
  		message: theirMessage, //works
  		title: theirTitle,     //works
  		timestamp: Date.now() * -1, //works, but needs filtering
@@ -175,11 +189,10 @@ userEmail: Observable<any>;
     postImgURL: this.postImgURL,   //post image url
     latitude: parseFloat(this.latitude),
     longitude: parseFloat(this.longitude),
-  
  	 }
-    this.itemsRef.push(item);
-    this.navCtrl.setRoot(FeedPage); 
-   }
+   this.itemsRef.push(item);
+   this.navCtrl.setRoot(FeedPage); 
+}
 
 //functions for future adaptation
  updateItem(key: string, newText: string) {
@@ -216,6 +229,10 @@ userEmail: Observable<any>;
       //let data = normalizeURL(imageData);
       //this.postImgURL = data;
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      let storageRef = firebase.storage().ref();
+      const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+      const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
     });
@@ -232,6 +249,10 @@ userEmail: Observable<any>;
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
+      let storageRef = firebase.storage().ref();
+      const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+      const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
     });
@@ -241,8 +262,6 @@ userEmail: Observable<any>;
   public uploadPic(){ //uploads image to firebase storage
     let storageRef = firebase.storage().ref();
     const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-    //might want to include user id in file name as well incase multiple users create a post at exact same time
-    //its unlikely but good practice I would think
     const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   }
@@ -257,17 +276,5 @@ userEmail: Observable<any>;
     });
   }
 */
-
-//pull profile pick in when page is fully loaded
-//Amanda this will not work because this picture is already 
-ionViewWillEnter(){
-  var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    }, (err) => { 
-        this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
-    });
-}
-
 
 }
