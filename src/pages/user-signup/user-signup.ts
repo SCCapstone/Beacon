@@ -37,6 +37,13 @@ export class UserSignupPage {
     });
   }
 
+  
+ //pull profile pick in when page is fully loaded
+  ionViewDidEnter(){
+    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  }
+
+
   signupUser(){
     if (!this.signupForm.valid){
       console.log(this.signupForm.value);
