@@ -6,6 +6,7 @@ import { PasswordValidator } from '../../validators/password';
 import firebase from 'firebase';
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
+import { FeedPage } from '../feed/feed';
 
 import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
@@ -121,6 +122,12 @@ export class SettingsPage {
      phone: this.phone});
     firebase.auth().currentUser.updateEmail(this.email);
     // An error happened.
+        let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
   }
 
   updateOrganization()
@@ -131,6 +138,12 @@ export class SettingsPage {
       address: this.address,
       organization: this.organization});
     firebase.auth().currentUser.updateEmail(this.email);
+        let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
   }
 
   updatePassword()
@@ -223,6 +236,13 @@ export class SettingsPage {
     const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
     imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
     this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+    let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile picture has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
+    this.navCtrl.setRoot(FeedPage); 
   }
 */
 

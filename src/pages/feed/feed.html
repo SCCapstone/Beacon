@@ -72,27 +72,13 @@
        <img *ngIf="item.postImgURL" src="{{item.postImgURL}}" height ="300" width="240" >  
       </ion-card-content>
       <!--Creates the likes, comments, and time since post-->
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>0 Likes</div>
-        </button>
-      </ion-col>
-
-      <ion-col>
-        <button ion-button icon-left clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>0 Comments</div>
-        </button>
-      </ion-col>
 
       <ion-col center text-center>
         <ion-note>
           <!--11h ago-->
         </ion-note>
       </ion-col>
-    </ion-row>
+    
 
   </ion-card>
 </ion-list>
