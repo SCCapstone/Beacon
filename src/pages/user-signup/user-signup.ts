@@ -32,7 +32,7 @@ export class UserSignupPage {
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])],
-      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
       
     });
   }

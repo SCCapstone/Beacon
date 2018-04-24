@@ -61,13 +61,13 @@ export class SettingsPage {
       organization: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
       address: ['', Validators.required]
     });
 
     this.userForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])]
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])]
     });
 
     this.passwordForm = formBuilder.group({
