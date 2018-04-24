@@ -2,14 +2,17 @@
 ### [About Page](https://sccapstone.github.io/Beacon/about.html)
 
 <div>
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/homepage.png" style="float:left; width: 200px">
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png" style="float:left; width: 200px">
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/homepage.png" style="float:left; width: 50%">
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png" style="float:left; width: 50%">
+</div>
+<div>
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/mappage.png" style="float:left; width: 50%">
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png" style="float:left; width: 50%">
+</div>
+<div>
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png" style="float:left; width: 50%">
 </div>
 
-![feedpage](https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png)
-![mappage](https://sccapstone.github.io/Beacon/beacon_screenshots/mappage.png)
-![createpostpage](https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png)
-![settingspage](https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png)
 # Why Use the Application
 
 This application is built for people that are in emergency situations. The hope for this application is that it will allow those involved in an emergency situation, especially natural disasters to be better informed and know where they can go for help and also know where they can go to offer help. 
