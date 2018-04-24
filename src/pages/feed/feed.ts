@@ -53,20 +53,41 @@ export class FeedPage {
 
 		this.menuCtrl.enable(true, 'navMenu');
 		this.options = {
-    enableHighAccuracy : false
-    };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+	    enableHighAccuracy : false
+	    };
+	   	this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');
+	    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
-        this.currentPos = pos;
-        this.latitude = pos.coords.latitude;
-        this.longitude = pos.coords.longitude;  
-        console.log(pos);  
-        console.log("feed page constructor pos = " + this.currentPos);
+	        this.currentPos = pos;
+	        this.latitude = pos.coords.latitude;
+	        this.longitude = pos.coords.longitude;  
+	        console.log(pos);  
+	        console.log("feed page constructor pos = " + this.currentPos);	        
+		    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
+	          let posts = [];
+	          postList.forEach( post => {
+	          	if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
+	            		posts.push(post.val());
+	          	}//this filters the posts so that only posts within 50 miles longitude and 50 latitude are selected
+	            return false;
+	          });
+	          this.postList = posts;
+	          this.loadedPostList = posts;
 
-    },(err : PositionError)=>{
-        console.log("error : " + err.message);
-    ;
-    })
+			  if(posts.length == 0){
+		    	let alert = this.alertCtrl.create({
+			    title: 'No Posts',
+			    subTitle: 'There are no posts within your area. We have limited the posts to 50 miles within your location.',
+			    buttons: ['Dismiss']
+			  });
+			  alert.present();
+		   	  }
+        	});
+
+	    },(err : PositionError)=>{
+	        console.log("error : " + err.message);
+	    ;
+	    });
 		var UID = firebase.auth().currentUser.uid;
     	var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
     	currentUserDB.once('value', userInfo => {
@@ -87,31 +108,6 @@ export class FeedPage {
 	       		this.isAdmin = true;
 	    	}
 	    });
-	    
-    	
-	    this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');//.startAt(this.latitude,'latitude').endAt(50, 'latitude').orderByChild('timestamp');
-	    //this.postRef.orderByChild('latitude')startAt(this.latitude,'latitude').endAt(50, 'latitude');//creating a database reference
-	    //filter this.postRef by latitude and longitude (50 miles)
-	    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
-          let posts = [];
-          postList.forEach( post => {
-          	if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
-            		posts.push(post.val());
-          	}//this filters the posts so that only posts within 50 miles longitude and 50 latitude are selected
-            return false;
-          });
-          this.postList = posts;
-          this.loadedPostList = posts;
-
-		  /*if(posts.length == 0){
-	    	let alert = this.alertCtrl.create({
-		    title: 'No Posts',
-		    subTitle: 'There are no posts within your area. We have limited the posts to 50 miles within your location.',
-		    buttons: ['Dismiss']
-		  });
-		  alert.present();
-	   	  } */
-        });
 	    
 	    this.events.subscribe('user_posted', (post) => {
 	    	this.doRefresh(null);
@@ -167,9 +163,11 @@ export class FeedPage {
 	    console.log('Begin async operation');
 	   	this.postRef.limitToFirst(this.postsToLoad).once('value', postList => { //value event is used to read a static snapshot of the contents at a given database path, as they existed at the time of the read event. It is triggered once with the initial data and again every time the data changes.
 		 	let posts = [];  //store Firebase data temporarily
-		  	postList.forEach( item => { 
+		  	postList.forEach( post => { 
 		  		
-		    	posts.push(item.val()); //returns the value attribute of item
+		    	if(this.latitude+.724 > post.val().latitude && this.latitude-.724 < post.val().latitude && this.longitude+.724 > post.val().longitude && this.longitude-.724 < post.val().longitude){
+            		posts.push(post.val());
+          	}
 	   	 		return false;
 
 	 		});
