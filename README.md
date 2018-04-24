@@ -9,26 +9,26 @@ It is really simple to use with a feed that shows the charities, first responder
 
 <div>
   <div style="float:left; width: 50%">
-    <h3> Home Page </h3>
+    <h3 style="text-align: center;"> Home Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/homepage.png">
   </div>
   <div style="float:left; width: 50%">
-    <h3> Home Page </h3>
+    <h3 style="text-align: center;"> Home Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png">
   </div>
 </div>
 <div>
   <div style="float:left; width: 50%">
-    <h3> Map Page </h3>
+    <h3 style="text-align: center;"> Map Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/mappage.png">
   </div>
   <div style="float:left; width: 50%">
-    <h3> Create Post Page </h3>
+    <h3 style="text-align: center;"> Create Post Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png">
   </div> 
 </div>
 <div style="width: 50%;">
-    <h3> Settings Page </h3>
+    <h3 style="text-align: center;"> Settings Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png">
 </div>
 
