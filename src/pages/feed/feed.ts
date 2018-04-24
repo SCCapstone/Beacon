@@ -1,6 +1,6 @@
 import { Component, Pipe } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController, Events } from 'ionic-angular';
 
 import { CreatePostPage } from '../create-post/create-post';
 import {LoginPage} from '../login/login';
@@ -50,7 +50,7 @@ export class FeedPage {
 	//longitude : Number;
 
 
-	constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
+	constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation: Geolocation) { 
 
 		this.menuCtrl.enable(true, 'navMenu');
@@ -115,13 +115,16 @@ export class FeedPage {
 	   	  }
         });
 	    
+	    this.events.subscribe('user_posted', (post) => {
+	    	this.doRefresh(null);
+	    })
 
   	}
 
 
   	ionViewDidLoad() {
   	 	console.log('ionViewDidLoad FeedPage');
-  		 this.doRefresh(null);
+  		 //this.doRefresh(null);
    	     //Search Constructor: pulls data from Firebase into postList array everytime the data changes	 
    	     this.menuCtrl.enable(true, 'navMenu');
   	}

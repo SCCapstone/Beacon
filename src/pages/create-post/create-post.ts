@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController, Events } from 'ionic-angular';
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -77,7 +77,7 @@ userEmail: Observable<any>;
   public postImgURL = null;
   public ppURL;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
+  constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
    public camera: Camera, public loadingCtrl: LoadingController) {
   
@@ -191,6 +191,9 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     longitude: parseFloat(this.longitude),
  	 }
    this.itemsRef.push(item);
+   //event to notify feed to refresh
+   this.events.publish('user_posted', item);
+
    this.navCtrl.setRoot(FeedPage); 
 }
 
