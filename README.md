@@ -14,20 +14,23 @@ It is really simple to use with a feed that shows the charities, first responder
   </div>
   <div style="float:left; width: 50%">
     <h3> Home Page </h3>
-    <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png" style="float:left; width: 50%">
+    <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/feedpage.png">
   </div>
 </div>
 <div>
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/mappage.png" style="float:left; width: 50%">
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png" style="float:left; width: 50%">
+  <div style="float:left; width: 50%">
+    <h3> Map Page </h3>
+    <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/mappage.png">
+  </div>
+  <div style="float:left; width: 50%">
+    <h3> Create Post Page </h3>
+    <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png">
+  </div> 
 </div>
-<div>
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png" style=" margin-left: auto;
-    margin-right: auto; width: 50%;">
+<div style="float:left; width: 50%; display: flex; justify-content: center;">
+    <h3> Settings Page </h3>
+    <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png">
 </div>
-
-
-
 
 ## Unit Testing by Sarah and Ryan and Behavioral Testing by Khory
 
