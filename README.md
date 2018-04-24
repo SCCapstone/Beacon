@@ -5,6 +5,12 @@ This application is built for people that are in emergency situations. The hope 
 
 It is really simple to use with a feed that shows the charities, first responders and emergency services that are available and what they are offering along with any supplies that they may be asking for. There is also a map that includes pins to show where the different organizations are located/posting from. 
 
+# Video
+[![Beacon Video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VY7-0lh58cQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
 # How do you use Beacon?  
 There are two different types of accounts in Beacon: the first is the individual user. Individual users are people looking to help volunteer, looking for supplies, or interested in donating supplies.
 
@@ -55,3 +61,5 @@ We hope Beacon will help in a time of need!
     <h3 style="text-align: center;"> Settings Page </h3>
     <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png">
 </div>
+
+
