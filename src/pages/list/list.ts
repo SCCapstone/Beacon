@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
@@ -10,6 +10,7 @@ import firebase from 'firebase';
 
 declare var google;
 
+@IonicPage()
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
