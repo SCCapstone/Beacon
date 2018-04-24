@@ -1,18 +1,16 @@
-import { Component, Pipe } from '@angular/core';
+import { Component } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController, AlertController, Events } from 'ionic-angular';
 
 import { CreatePostPage } from '../create-post/create-post';
-import {LoginPage} from '../login/login';
 import {SearchPage} from '../search/search';
 import {OrgApprovalPage} from '../org-approval/org-approval';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
-import LocationProvider from '../../providers/location/location';
 
 
 /**
@@ -50,7 +48,7 @@ export class FeedPage {
 	//longitude : Number;
 
 
-	constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
+	constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation: Geolocation) { 
 
 		this.menuCtrl.enable(true, 'navMenu');
@@ -105,14 +103,14 @@ export class FeedPage {
           this.postList = posts;
           this.loadedPostList = posts;
 
-		  if(posts.length == 0){
+		  /*if(posts.length == 0){
 	    	let alert = this.alertCtrl.create({
 		    title: 'No Posts',
 		    subTitle: 'There are no posts within your area. We have limited the posts to 50 miles within your location.',
 		    buttons: ['Dismiss']
 		  });
 		  alert.present();
-	   	  }
+	   	  } */
         });
 	    
 	    this.events.subscribe('user_posted', (post) => {
@@ -127,6 +125,10 @@ export class FeedPage {
   		 //this.doRefresh(null);
    	     //Search Constructor: pulls data from Firebase into postList array everytime the data changes	 
    	     this.menuCtrl.enable(true, 'navMenu');
+  	}
+
+  	ngOnInit() {
+  		this.doRefresh(null);
   	}
 
 	btnCreateClicked(){

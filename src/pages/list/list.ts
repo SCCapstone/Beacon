@@ -1,18 +1,12 @@
-import { Component, ViewChild, ElementRef, Pipe } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
-
-import { CreatePostPage } from '../create-post/create-post';
-import {LoginPage} from '../login/login';
-import {SearchPage} from '../search/search';
-import {OrgApprovalPage} from '../org-approval/org-approval';
+import { NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
-import LocationProvider from '../../providers/location/location';
 
 declare var google;
 
@@ -43,8 +37,8 @@ export class ListPage {
   //public latitude: number;
   //public longitude: number;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
-    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation : Geolocation) { 
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
+    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation) { 
 
     /*this.menuCtrl.enable(true, 'navMenu');
 

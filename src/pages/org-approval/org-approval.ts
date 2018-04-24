@@ -24,15 +24,9 @@ public postRef;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-  	var UID = firebase.auth().currentUser.uid;
-    var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
    
   	this.postRef = firebase.database().ref('/userProfile');//.orderByChild('email'); //creating a database reference
-
-  	
-
-	this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
+	  this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
       let posts = [];
       	postList.forEach( post => {
      		if (post.val().approved == "not approved"){

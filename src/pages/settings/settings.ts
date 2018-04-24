@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ToastController, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import firebase from 'firebase';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
-import { AngularFireAuth } from 'angularfire2/auth';
-import { FeedPage } from '../feed/feed';
 
-import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
-import { normalizeURL } from 'ionic-angular';
 
 /**
  * Generated class for the SettingsPage page.
@@ -41,7 +36,7 @@ export class SettingsPage {
   public capturedDataURL; //user's newly uploaded (taken or selected image)
   public ppURL;
 
-  constructor(public toastCtrl: ToastController, private fdb: AngularFireDatabase, public menuCtrl: MenuController,
+  constructor(public toastCtrl: ToastController, public menuCtrl: MenuController,
    public navCtrl: NavController, public navParams: NavParams,  public formBuilder: FormBuilder, public camera: Camera, public alertCtrl: AlertController) {
   	this.menuCtrl.enable(true, 'navMenu');
     //goes directly to the entry for the user based off of the USER ID. 

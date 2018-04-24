@@ -6,7 +6,6 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 
-import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 import firebase from 'firebase';
 

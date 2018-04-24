@@ -7,12 +7,9 @@ import firebase from 'firebase';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
-import { LocationProvider } from '../../providers/location/location';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
 
-import { storage } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
-import { normalizeURL } from 'ionic-angular';
 
 /**
  * Generated class for the CreatePostPage page.
@@ -21,9 +18,6 @@ import { normalizeURL } from 'ionic-angular';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-declare var google;
-
 @IonicPage()
 @Component({
   selector: 'page-create-post',
@@ -78,7 +72,7 @@ userEmail: Observable<any>;
   public ppURL;
 
   constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
-   private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
+   public fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController,
    public camera: Camera, public loadingCtrl: LoadingController) {
   
     this.UID = firebase.auth().currentUser.uid

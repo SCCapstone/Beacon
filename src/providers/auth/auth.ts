@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-import {FormGroup, FormControl, Validators} from "@angular/forms";
-
 import { Facebook } from '@ionic-native/facebook'
 
 @Injectable()
@@ -10,8 +8,8 @@ export class AuthProvider {
 
 
   constructor(public facebook: Facebook) {
-  var approved = "not approved";
   }
+  
   /*
    * facebookLogin does not take in any arguments. It opens up the native facebook application or a 
    * pseudo in app browser if the application is not downloaded. It asks for permissions and then 
