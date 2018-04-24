@@ -50,13 +50,13 @@
           </button>
       </ion-item>
       <ion-item>
-          <img *ngIf="postImageURL != false" src = "{{ postImgURL }}" width="200" height="300" >  <!--to disply photo-->
+            <img *ngIf="postImgURL" src="{{postImgURL}}" height ="300" width="240" > 
       </ion-item>
-  
+  <!--
       <ion-item color="none" >
           <button ion-button block color="positive"  *ngIf="postImageURL != false"  (click)="uploadPic()"> Upload Photo </button>
       </ion-item>
-  
+  -->
     </ion-list>
   </ion-card>
   <!--<form id="newPost-form13">-->
