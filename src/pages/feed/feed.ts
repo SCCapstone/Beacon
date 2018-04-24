@@ -121,7 +121,7 @@ export class FeedPage {
 
   	ionViewDidLoad() {
   	 	console.log('ionViewDidLoad FeedPage');
-  		 this.doRefresh(null);
+  		 //this.doRefresh(null);
    	     //Search Constructor: pulls data from Firebase into postList array everytime the data changes	 
    	     this.menuCtrl.enable(true, 'navMenu');
   	}
