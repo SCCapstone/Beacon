@@ -19,7 +19,8 @@ It is really simple to use with a feed that shows the charities, first responder
   <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/createpostpage.png" style="float:left; width: 50%">
 </div>
 <div>
-  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png" style="float:left; width: 50%" align=center>
+  <img src="https://sccapstone.github.io/Beacon/beacon_screenshots/settingspage.png" style=" margin-left: auto;
+    margin-right: auto; width: 50%;">
 </div>
 
 
