@@ -53,14 +53,16 @@ export class FeedPage {
 
 		this.menuCtrl.enable(true, 'navMenu');
 		this.options = {
-	    enableHighAccuracy : false
+	    enableHighAccuracy : false,
+	    timeout: 20000
 	    };
 	   	this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');
 	    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
 	        this.currentPos = pos;
 	        this.latitude = pos.coords.latitude;
-	        this.longitude = pos.coords.longitude;  
+	        this.longitude = pos.coords.longitude; 
+ 
 	        console.log(pos);  
 	        console.log("feed page constructor pos = " + this.currentPos);	        
 		    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
@@ -200,20 +202,17 @@ export class FeedPage {
         });
     }
     getUserPosition(){
-    this.options = {
-    enableHighAccuracy : false
-    };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
+	    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
-        this.currentPos = pos;
-        this.latitude = pos.coords.latitude;
-        this.longitude = pos.coords.longitude;    
-        console.log(pos);
+	        this.currentPos = pos;
+	        this.latitude = pos.coords.latitude;
+	        this.longitude = pos.coords.longitude;    
+	        console.log(pos);
 
-    },(err : PositionError)=>{
-        console.log("error : " + err.message);
-    ;
-    })
+	    },(err : PositionError)=>{
+	        console.log("error : " + err.message);
+	    ;
+	    });
   	}
 
 }
