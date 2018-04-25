@@ -1,14 +1,14 @@
-webpackJsonp([9],{
+webpackJsonp([10],{
 
-/***/ 349:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FeedPageModule", function() { return FeedPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreatePostPageModule", function() { return CreatePostPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__feed__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__create_post__ = __webpack_require__(116);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,25 +18,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var FeedPageModule = (function () {
-    function FeedPageModule() {
+var CreatePostPageModule = (function () {
+    function CreatePostPageModule() {
     }
-    return FeedPageModule;
+    return CreatePostPageModule;
 }());
-FeedPageModule = __decorate([
+CreatePostPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__feed__["a" /* FeedPage */],
+            __WEBPACK_IMPORTED_MODULE_2__create_post__["a" /* CreatePostPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__feed__["a" /* FeedPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__create_post__["a" /* CreatePostPage */]),
         ],
     })
-], FeedPageModule);
+], CreatePostPageModule);
 
-//# sourceMappingURL=feed.module.js.map
+//# sourceMappingURL=create-post.module.js.map
 
 /***/ })
 
 });
-//# sourceMappingURL=9.js.map
+//# sourceMappingURL=10.js.map

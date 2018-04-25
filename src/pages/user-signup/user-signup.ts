@@ -38,8 +38,8 @@ export class UserSignupPage {
 
   
  //pull profile pick in when page is fully loaded
-  ionViewDidEnter(){
-    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  ionViewWillEnter(){
+    this.ppURL = "assets/imgs/blank-profile-picture.jpg";
   }
 
 
@@ -93,7 +93,13 @@ export class UserSignupPage {
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
-      // Handle error
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
    
   }
@@ -119,7 +125,13 @@ export class UserSignupPage {
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
-      // Handle error
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
    
   }

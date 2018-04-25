@@ -117,13 +117,13 @@ userEmail: Observable<any>;
 
 
 //pull profile pick in when page is fully loaded
-ionViewWillEnter(){
+ionViewDidEnter(){
   var filename = firebase.auth().currentUser.email;
   firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
     this.ppURL = url;
   },
   (err) => { 
-    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+   this.ppURL = "assets/imgs/blank-profile-picture.jpg";
   });
 }
 
@@ -166,12 +166,6 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     this.longitude = longitude;
    }
    
-   /**
-   let storageRef = firebase.storage().ref();
-   const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-   const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-   imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  */
    const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
@@ -223,8 +217,6 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      //let data = normalizeURL(imageData);
-      //this.postImgURL = data;
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
       let storageRef = firebase.storage().ref();
       const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
@@ -232,6 +224,13 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
@@ -252,26 +251,15 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
-/**
-  public uploadPic(){ //uploads image to firebase storage
-    let storageRef = firebase.storage().ref();
-    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  }
-*/
-
-/**
-  //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
-  public getProfilePic(){ 
-    var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    });
-  }
-*/
 
 }
