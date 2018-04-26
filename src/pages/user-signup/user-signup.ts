@@ -32,11 +32,10 @@ export class UserSignupPage {
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])],
       phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
-      
+      //ppURL: ['']
     });
   }
 
-  
  //pull profile pick in when page is fully loaded
   ionViewWillEnter(){
     this.ppURL = "assets/imgs/blank-profile-picture.jpg";
@@ -45,7 +44,44 @@ export class UserSignupPage {
 
   signupUser(){
     if (!this.signupForm.valid){
+         /**
+         //user feed back  
+      if (this.signupForm.value.name = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a name. Please enter a name to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+      else if (this.signupForm.value.email = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter an email address. Please enter an email address to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+      else if (this.signupForm.value.phone = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a phone number. Please enter a name to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+      else if (this.signupForm.value.password = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a password. Please enter a password to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+      */
       console.log(this.signupForm.value);
+
+
     } else {
       this.authProvider.signupUser(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.phone)
       .then(() => {
@@ -74,6 +110,7 @@ export class UserSignupPage {
   }
 
   /**  All code below added by Amanda for image features */
+  
   async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
         quality: 40,
@@ -91,6 +128,13 @@ export class UserSignupPage {
       const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
       imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+        //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile picture has been set.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     },
     (err) => {
       //user feed back
@@ -101,10 +145,10 @@ export class UserSignupPage {
       });
       alert.present();
     });
-   
   }
 
 
+  
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
         quality: 40,
@@ -120,9 +164,16 @@ export class UserSignupPage {
       //uploading the picture
       let storageRef = firebase.storage().ref();
       const filename = this.signupForm.value.email; //naming the file to match the current user's email
-      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+      const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with user's email as name of file
       imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile picture has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     },
     (err) => {
       //user feed back
@@ -133,7 +184,6 @@ export class UserSignupPage {
       });
       alert.present();
     });
-   
   }
 
 

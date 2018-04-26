@@ -60,6 +60,58 @@ export class OrgSignupPage {
 
   signupOrganization(){
     if (!this.signupForm.valid){
+      //user feed back
+      /**
+      if (this.signupForm.value.email = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter an email address. Please enter an email address to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+      else if (this.signupForm.value.name = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a name. Please enter a name to sign up.',
+          buttons: ['Dismiss']
+        });
+        //alert.present(); 
+      }
+      else if (this.signupForm.value.phone = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a phone number. Please enter a name to sign up.',
+          buttons: ['Dismiss']
+        });
+        //alert.present(); 
+      }
+      else if (this.signupForm.value.organization = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter an organization name. Please enter an organization name to sign up.',
+          buttons: ['Dismiss']
+        });
+        //alert.present(); 
+      }
+      else if (this.signupForm.value.address = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter an address. Please enter an address to sign up.',
+          buttons: ['Dismiss']
+        });
+        //alert.present(); 
+      }
+      else if (this.signupForm.value.password = ' '){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'You did not enter a password. Please enter a password to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+  */
+
       console.log(this.signupForm.value);
     } else {
 
@@ -123,7 +175,6 @@ export class OrgSignupPage {
       });
       alert.present();
     });
-   
   }
 
 
@@ -135,7 +186,6 @@ export class OrgSignupPage {
         saveToPhotoAlbum: false,
         correctOrientation: true 
     }
-    
     // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
@@ -155,9 +205,7 @@ export class OrgSignupPage {
       });
       alert.present();
     });
-   
   }
-
 
 
 }

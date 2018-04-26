@@ -66,8 +66,7 @@ userEmail: Observable<any>;
   longitude;
   assignedlat;
   assignedlong;
-  //setting postImgURL as a defualt blank image
-  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
+  
   public postImgURL = null;
   public ppURL;
 

@@ -85,16 +85,7 @@ export class SettingsPage {
       this.ppURL = url;
     },
       (err) => { 
-        //this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
         this.ppURL = "assets/imgs/blank-profile-picture.jpg";
-        /**
-        let alert = this.alertCtrl.create({
-          title: 'Sorry!',
-          subTitle: 'There was an error loading your profile picture.',
-          buttons: ['Dismiss']
-        });
-        alert.present();
-      */
      });
   }
 
@@ -192,9 +183,22 @@ export class SettingsPage {
       const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
       imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Success!',
+        subTitle: 'Your profile picture has been updated.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     },
     (err) => {
-      // Handle error
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem updating you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
    
   }
@@ -208,7 +212,6 @@ export class SettingsPage {
         saveToPhotoAlbum: false,
         correctOrientation: true 
     }
-    
     // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
@@ -235,25 +238,7 @@ export class SettingsPage {
       });
       alert.present();
     });
-   
   }
-
-/**
-  public uploadPic(){ //uploads image to firebase storage
-    let storageRef = firebase.storage().ref();
-    const filename = this.email; //naming the file to match the current user's email
-    const imageRef = storageRef.child('profilePics/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.capturedDataURL, firebase.storage.StringFormat.DATA_URL);
-    this.ppURL = this.capturedDataURL;//updates photo url to new photo url
-    let alert = this.alertCtrl.create({
-        title: 'Success!',
-        subTitle: 'Your profile picture has been updated.',
-        buttons: ['Dismiss']
-      });
-      alert.present();
-    this.navCtrl.setRoot(FeedPage); 
-  }
-*/
 
 
 }
