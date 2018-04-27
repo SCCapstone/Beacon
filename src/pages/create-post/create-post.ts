@@ -183,6 +183,7 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     postImgURL: this.postImgURL,   //post image url
     latitude: parseFloat(this.latitude),
     longitude: parseFloat(this.longitude),
+    postPhone: this.phone
  	 }
    this.itemsRef.push(item);
    //event to notify feed to refresh
