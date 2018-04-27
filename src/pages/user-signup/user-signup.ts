@@ -32,7 +32,6 @@ export class UserSignupPage {
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])],
       phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
-      //ppURL: ['']
     });
   }
 
@@ -41,44 +40,17 @@ export class UserSignupPage {
     this.ppURL = "assets/imgs/blank-profile-picture.jpg";
   }
 
-
   signupUser(){
-    if (!this.signupForm.valid){
-         /**
-         //user feed back  
-      if (this.signupForm.value.name = ' '){
+    if (!this.signupForm.valid){   
+      //user feed back  
+      if (this.signupForm.value.name == '' || this.signupForm.value.email == '' || this.signupForm.value.phone == '' || this.signupForm.value.password == ''){
         let alert = this.alertCtrl.create({
           title: 'Error!',
-          subTitle: 'You did not enter a name. Please enter a name to sign up.',
+          subTitle: 'We are still missing some of your infomation. Please make sure to provide all of the information in order to sign up.',
           buttons: ['Dismiss']
         });
         alert.present(); 
       }
-      else if (this.signupForm.value.email = ' '){
-        let alert = this.alertCtrl.create({
-          title: 'Error!',
-          subTitle: 'You did not enter an email address. Please enter an email address to sign up.',
-          buttons: ['Dismiss']
-        });
-        alert.present(); 
-      }
-      else if (this.signupForm.value.phone = ' '){
-        let alert = this.alertCtrl.create({
-          title: 'Error!',
-          subTitle: 'You did not enter a phone number. Please enter a name to sign up.',
-          buttons: ['Dismiss']
-        });
-        alert.present(); 
-      }
-      else if (this.signupForm.value.password = ' '){
-        let alert = this.alertCtrl.create({
-          title: 'Error!',
-          subTitle: 'You did not enter a password. Please enter a password to sign up.',
-          buttons: ['Dismiss']
-        });
-        alert.present(); 
-      }
-      */
       console.log(this.signupForm.value);
 
 
