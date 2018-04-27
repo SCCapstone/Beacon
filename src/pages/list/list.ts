@@ -155,7 +155,6 @@ export class ListPage {
                     length = 0;
                   }
                 }
-                let content = post.val().organization + ": " + post.val().message;
                 let marker = new google.maps.Marker({
                   map: this.map,
                   animation: google.maps.Animation.DROP,
