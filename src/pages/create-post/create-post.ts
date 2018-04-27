@@ -159,6 +159,16 @@ ionViewWillEnter(){
 
   }
 
+  getLatLong(addr){
+    this.nativeGeocoder.forwardGeocode(addr).then((coords: NativeGeocoderForwardResult) => {
+      console.log('nativeGeocoder:' + coords);
+      this.latitude = parseFloat(coords.latitude);
+      this.longitude = parseFloat(coords.longitude);
+    }).catch((err)=> {
+      console.log(err);
+    })
+  }
+
 chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
  	 console.log(this.organization);
    /*if(this.check > 0){
@@ -174,14 +184,11 @@ chatSend(theirTitle: string, theirMessage: string, address: string, city: string
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
+  this.latitude = 0;
+  this.longitude = 0;
   this.addr = address + ", " + city + ", " + state;
-  this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
-    console.log(coords);
-    this.latitude = parseFloat(coords.latitude);
-    this.longitude = parseFloat(coords.longitude);
-  }).catch((err)=> {
-    console.log(err);
-  })
+  this.getLatLong(this.addr);
+   console.log(this.latitude);
    const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
@@ -191,8 +198,8 @@ chatSend(theirTitle: string, theirMessage: string, address: string, city: string
     organization: this.organization,  
     ppURL: this.ppURL,  //profile picture url
     postImgURL: this.postImgURL, //post image url 
-    //latitude: parseFloat(this.latitude),
-    //longitude: parseFloat(this.longitude),
+    latitude: parseFloat(this.latitude),
+    longitude: parseFloat(this.longitude),
     postPhone: this.phone,
     address: this.addr
  	 }
