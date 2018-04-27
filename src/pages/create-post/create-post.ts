@@ -191,8 +191,8 @@ chatSend(theirTitle: string, theirMessage: string, address: string, city: string
     organization: this.organization,  
     ppURL: this.ppURL,  //profile picture url
     postImgURL: this.postImgURL, //post image url 
-    latitude: parseFloat(this.latitude),
-    longitude: parseFloat(this.longitude),
+    //latitude: parseFloat(this.latitude),
+    //longitude: parseFloat(this.longitude),
     postPhone: this.phone,
     address: this.addr
  	 }
