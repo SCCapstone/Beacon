@@ -159,7 +159,7 @@ ionViewWillEnter(){
 
   }
 
-chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
+chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
  	 console.log(this.organization);
    /*if(this.check > 0){
    }
@@ -174,7 +174,7 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
-  this.addr = this.address + ", " + this.city + ", " + this.state;
+  this.addr = address + ", " + city + ", " + state;
   this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
     console.log(coords);
     this.latitude = parseFloat(coords.latitude);
