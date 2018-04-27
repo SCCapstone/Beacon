@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
-
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult} from '@ionic-native/native-geocoder';
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 
 /**
@@ -54,7 +54,8 @@ userEmail: Observable<any>;
   public username;
   public email;
   public phone;
-  public address;
+  public addr;
+  public addr2;
 
   public organizationForm;
   public userForm;
@@ -73,7 +74,7 @@ userEmail: Observable<any>;
 
   constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
    public fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController,
-   public camera: Camera, public loadingCtrl: LoadingController) {
+   public camera: Camera, public loadingCtrl: LoadingController, public nativeGeocoder: NativeGeocoder) {
   
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
@@ -85,10 +86,10 @@ userEmail: Observable<any>;
         this.email = userInfo.val().email;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
-        this.address = userInfo.val().address;
+        this.addr2 = userInfo.val().address;
 
      });
-    this.options = {
+    /*this.options = {
         enableHighAccuracy : false
       };
       this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
@@ -103,6 +104,7 @@ userEmail: Observable<any>;
           console.log("error : " + err.message);
       ;
       })
+      */
     /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
      this.options = {
         enableHighAccuracy: false
@@ -159,12 +161,12 @@ ionViewWillEnter(){
 
 chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
  	 console.log(this.organization);
-   if(this.check > 0){
+   /*if(this.check > 0){
    }
    else{
     this.latitude = latitude;
     this.longitude = longitude;
-   }
+   }*/
    
    /**
    let storageRef = firebase.storage().ref();
@@ -172,6 +174,14 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
+  this.addr = this.address + ", " + this.city + ", " + this.state;
+  this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
+    console.log(coords);
+    this.latitude = parseFloat(coords.latitude);
+    this.longitude = parseFloat(coords.longitude);
+  }).catch((err)=> {
+    console.log(err);
+  })
    const item = {
  		message: theirMessage, //works
  		title: theirTitle,     //works
@@ -180,7 +190,8 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     email: this.email, 
     organization: this.organization,  
     ppURL: this.ppURL,  //profile picture url
-    postImgURL: this.postImgURL,   //post image url
+    postImgURL: this.postImgURL, //post image url
+    address: this.addr, 
     latitude: parseFloat(this.latitude),
     longitude: parseFloat(this.longitude),
     postPhone: this.phone
