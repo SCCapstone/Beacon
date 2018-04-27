@@ -190,11 +190,11 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     email: this.email, 
     organization: this.organization,  
     ppURL: this.ppURL,  //profile picture url
-    postImgURL: this.postImgURL, //post image url
-    address: this.addr, 
+    postImgURL: this.postImgURL, //post image url 
     latitude: parseFloat(this.latitude),
     longitude: parseFloat(this.longitude),
-    postPhone: this.phone
+    postPhone: this.phone,
+    address: this.addr
  	 }
    this.itemsRef.push(item);
    //event to notify feed to refresh
