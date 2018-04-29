@@ -154,6 +154,12 @@ userEmail: Observable<any>;
     //this.getLatLong(this.addr);
     //this.sleep(1000);
     //if lat and long can't be gotten from address...
+    let alert = this.alertCtrl.create({
+        title: 'Posting...',
+        subTitle: '',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
       console.log('nativeGeocoder:' + coords);
       this.latitude = parseFloat(coords.latitude);
@@ -179,7 +185,12 @@ userEmail: Observable<any>;
       this.navCtrl.setRoot(FeedPage); 
 
     }).catch((err)=> {
-      console.log(err);
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'We could not find that address.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     })
     /*if(this.latitude == 0 && this.longitude == 0){
       const item = {
