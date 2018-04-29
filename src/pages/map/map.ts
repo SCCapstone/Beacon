@@ -12,10 +12,10 @@ declare var google;
 
 @IonicPage()
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-map',
+  templateUrl: 'map.html'
 })
-export class ListPage {
+export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;

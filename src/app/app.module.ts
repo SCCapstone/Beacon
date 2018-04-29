@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SMS } from '@ionic-native/sms'
 import { MyApp } from './app.component'; //this imports the firebase config which is part of the exported class in app.component.ts
-import { ListPage } from '../pages/list/list';
+import { MapPage } from '../pages/map/map';
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { CreatePostPage } from '../pages/create-post/create-post';
 import { SettingsPage } from '../pages/settings/settings';
@@ -48,7 +48,7 @@ const config = {
 @NgModule({
   declarations: [
     MyApp, //sets root component
-    ListPage,
+    MapPage,
     FeedPage,
     CreatePostPage,
     SettingsPage,
@@ -67,7 +67,7 @@ const config = {
   bootstrap: [IonicApp], 
   entryComponents: [ //The entryComponents array is used to define only components that are not found in html and created dynamically
     MyApp,
-    ListPage,
+    MapPage,
     FeedPage,
     CreatePostPage, 
     SettingsPage,
