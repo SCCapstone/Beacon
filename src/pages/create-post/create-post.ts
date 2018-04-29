@@ -151,8 +151,8 @@ userEmail: Observable<any>;
     this.latitude = 0;
     this.longitude = 0;
     this.addr = address + ", " + city + ", " + state;
-    this.getLatLong(this.addr);
-    this.sleep(1000);
+    //this.getLatLong(this.addr);
+    //this.sleep(1000);
     //if lat and long can't be gotten from address...
     this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
       console.log('nativeGeocoder:' + coords);
