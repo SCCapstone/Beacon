@@ -169,30 +169,41 @@ ionViewWillEnter(){
     })
   }
 
+  sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
  	 console.log(this.organization);
-   /*if(this.check > 0){
-   }
-   else{
-    this.latitude = latitude;
-    this.longitude = longitude;
-   }*/
-   
-   /**
-   let storageRef = firebase.storage().ref();
-   const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-   const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-   imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  */
   this.latitude = 0;
   this.longitude = 0;
   this.addr = address + ", " + city + ", " + state;
   this.getLatLong(this.addr);
-   console.log(this.latitude);
-   const item = {
- 		message: theirMessage, //works
- 		title: theirTitle,     //works
- 		timestamp: Date.now() * -1, //works, but needs filtering
+  this.sleep(1000);
+   if(this.latitude == 0 && this.longitude == 0){
+    const item = {
+    message: theirMessage, //works
+    title: theirTitle,     //works
+    timestamp: Date.now() * -1, //works, but needs filtering
+    PostType: this.typeofPost,  //works
+    email: this.email, 
+    organization: this.organization,  
+    ppURL: this.ppURL,  //profile picture url
+    postImgURL: this.postImgURL, //post image url 
+    postPhone: this.phone,
+    address: this.addr
+   }
+ }
+   else{
+    const item = {
+    message: theirMessage, //works
+    title: theirTitle,     //works
+    timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
@@ -202,7 +213,9 @@ chatSend(theirTitle: string, theirMessage: string, address: string, city: string
     longitude: parseFloat(this.longitude),
     postPhone: this.phone,
     address: this.addr
- 	 }
+    }
+
+   }
    this.itemsRef.push(item);
    //event to notify feed to refresh
    this.events.publish('user_posted', item);

@@ -41,49 +41,6 @@ export class ListPage {
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
     public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation) { 
 
-    /*this.menuCtrl.enable(true, 'navMenu');
-
-    var UID = firebase.auth().currentUser.uid;
-      var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
-      currentUserDB.once('value', userInfo => {
-          var organization = userInfo.val().organization;
-          var approvedOrg = userInfo.val().approved;
-          var admin = userInfo.val().username;
-          if(organization != null )
-        {
-            this.isOrganization = true;
-            this.isUser = false;
-        }
-        if(approvedOrg == "approved"){
-          this.isApprovedOrg = true;
-          this.isOrganization = false;
-        }
-        if(admin == "Ryan Roe")
-        {
-            this.isAdmin = true;
-        }
-      });*/
-
-      //this.itemsRef = fdb.list('/messages');
-      //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-      /*this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
-
-      this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
-          let posts = [];
-          postList.forEach( post => {
-            posts.push(post.val());
-            this.latitude = post.val().latitude;
-            this.longitude = post.val().longitude;
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-            return false;
-          });
-          this.postList = posts;
-          this.loadedPostList = posts;
-        });
-      */
       this.options = {
         enableHighAccuracy : false
       };
