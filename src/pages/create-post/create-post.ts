@@ -35,12 +35,6 @@ createPostMessage : any = "original messsage";
 testingPostsArr : any = [];
 locationprovidermessage;
 typeofPost;
-//msglat = LocationProvider.lat;
-//msglon = LocationProvider.lon;
-//second firebase messaging try variable
-//items: any; //type of any, fetches chat items from fb project
- // name: any;
-//  msgVal: string = '';
 
 user: Observable<firebase.User>;
 
@@ -86,23 +80,20 @@ userEmail: Observable<any>;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
         this.addr2 = userInfo.val().address;
-
-     });
-
-
-}
+    });
+  }
 
 
 //pull profile pick in when page is fully loaded
-ionViewDidEnter(){
-  var filename = firebase.auth().currentUser.email;
-  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-    this.ppURL = url;
-  },
-  (err) => { 
-   this.ppURL = "assets/imgs/blank-profile-picture.jpg";
-  });
-}
+  ionViewDidEnter(){
+    var filename = firebase.auth().currentUser.email;
+    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+      this.ppURL = url;
+    },
+    (err) => { 
+      this.ppURL = "assets/imgs/blank-profile-picture.jpg";
+    });
+  }
 
 
   //added by Ryan to begin to fix the getUserPosition function. the user's position is asked for once in the feed, once in this constructor, and then everytime 
@@ -132,6 +123,7 @@ ionViewDidEnter(){
     this.check = 1; //Mason this will not work if the user checks the box and then unchecks the box. There is a way to tell whether the box is checked or not. onclick is not the proper function in the html - Ryan
   }
 
+  //converts address to latitude and longitude
   getLatLong(addr){
     this.nativeGeocoder.forwardGeocode(addr).then((coords: NativeGeocoderForwardResult) => {
       console.log('nativeGeocoder:' + coords);
@@ -143,6 +135,7 @@ ionViewDidEnter(){
   }
 
 
+  //used to give nativeGeocoder time to work
   sleep(milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
@@ -152,6 +145,7 @@ ionViewDidEnter(){
     }
   }
 
+  //pushes the post to the database
   chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
     console.log(this.organization);
     this.latitude = 0;
@@ -159,6 +153,7 @@ ionViewDidEnter(){
     this.addr = address + ", " + city + ", " + state;
     this.getLatLong(this.addr);
     this.sleep(1000);
+    //if lat and long can't be gotten from address...
     if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
@@ -173,6 +168,7 @@ ionViewDidEnter(){
         address: this.addr
       }
     }
+    //if lat and long can be gotten from address
     else{
       const item = {
         message: theirMessage, //works
@@ -200,17 +196,15 @@ ionViewDidEnter(){
   updateItem(key: string, newText: string) {
     this.itemsRef.update(key, { text: newText });
   }
+
   deleteItem(key: string) {    
     this.itemsRef.remove(key); 
   }
+
   deleteEverything() {
     this.itemsRef.remove();
   }
-  /**
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreatePostPage');
-  }
-  */
+
   showSelected(mySelect : string) {
     console.log(mySelect);
     this.typeofPost = mySelect;
@@ -220,12 +214,12 @@ ionViewDidEnter(){
 /**  All code below added by Amanda for image features */
   async takePhoto(){ //takes image with camera
     const options: CameraOptions = {
-        quality: 40,
-        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
-        saveToPhotoAlbum: true, //saving picture to library  
-        correctOrientation: true 
+      quality: 40,
+      destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE, //only looks for pictures
+      saveToPhotoAlbum: true, //saving picture to library  
+      correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
@@ -247,11 +241,11 @@ ionViewDidEnter(){
 
   async getPhoto(){ //pulls from library
     const options: CameraOptions = {
-        quality: 40,
-        destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        saveToPhotoAlbum: false,
-        correctOrientation: true
+      quality: 40,
+      destinationType: this.camera.DestinationType.DATA_URL, //gives image back as base 64 image
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
     }
     // code from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
@@ -271,6 +265,5 @@ ionViewDidEnter(){
       alert.present();
     });
   }
-
 
 }

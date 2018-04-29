@@ -35,47 +35,26 @@ export class MapPage {
   public isTest = true;
   public isUser = true;
   public isApprovedOrg = false;
-  //public latitude: number;
-  //public longitude: number;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
     public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation) { 
-
-      this.options = {
-        enableHighAccuracy : false
-      };
-      this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-
-        this.currentPos = pos;     
-
-        console.log(pos);
-        this.initializeMap(pos.coords.latitude,pos.coords.longitude);
-
-      },(err : PositionError)=>{
-        console.log("error : " + err.message);
-      ;
-      })
-    }
-  //constructor(public navCtrl: NavController,private geolocation : Geolocation) {}
-  ionViewDidLoad() {    
-  }
-  /*getUserPosition(){
     this.options = {
-    enableHighAccuracy : false
+      enableHighAccuracy : false
     };
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-
-        this.currentPos = pos;     
-
-        console.log(pos);
-        this.initializeMap(pos.coords.latitude,pos.coords.longitude);
-
+      this.currentPos = pos;     
+      console.log(pos);
+      this.initializeMap(pos.coords.latitude,pos.coords.longitude);
     },(err : PositionError)=>{
-        console.log("error : " + err.message);
-    ;
+      console.log("error : " + err.message);
+      ;
     })
-  }*/
-  
+  }
+
+  ionViewDidLoad() {    
+  }
+
+  //builds map
   initializeMap(lat, long) {
     let letLng = new google.maps.LatLng(lat, long);
     let mapOptions = {
@@ -86,74 +65,46 @@ export class MapPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     this.addMarker(lat, long);
   }
+
+  //adds markers to map
   addMarker(lat, long) {
     this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
-
-      this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
-          let posts = [];
-
-          postList.forEach( post => {
-            //posts.push(post.val());
-            if(lat+.724 > post.val().latitude && lat-.724 < post.val().latitude && long+.724 > post.val().longitude && long-.724 < post.val().longitude){
-                posts.push(post.val());
-                let latitude = post.val().latitude;
-                let longitude = post.val().longitude;
-                let content = post.val().message;
-                let content2 = post.val().organization + ": " + '<br/>';
-                while(length > 0){
-                  console.log("inside")
-                  if(length >= 40){
-                    content2 = content2 + content.substring(0,40) + '<br/>';
-                    content = content.substring(40,length-1);
-                    length = length-40; 
-                  }
-                  else{
-                    content2 = content2 + content.substring(0,length) + '<br/>';
-                    length = 0;
-                  }
-                }
-                let marker = new google.maps.Marker({
-                  map: this.map,
-                  animation: google.maps.Animation.DROP,
-                  position: { lat: latitude, lng: longitude },
-                title: content
-                })
-                this.addInfoWindow(marker, content);
-      //let content = `<h1>Hospital</h1>`;
-                //this.addInfoWindow(marker, content);
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-                //return false;
+    this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
+      let posts = [];
+      postList.forEach( post => {
+        if(lat+.724 > post.val().latitude && lat-.724 < post.val().latitude && long+.724 > post.val().longitude && long-.724 < post.val().longitude){
+          posts.push(post.val());
+          let latitude = post.val().latitude;
+          let longitude = post.val().longitude;
+          let content = post.val().message;
+          let content2 = post.val().organization + ": " + '<br/>';
+          while(length > 0){
+            if(length >= 40){
+              content2 = content2 + content.substring(0,40) + '<br/>';
+              content = content.substring(40,length-1);
+              length = length-40; 
             }
-            /*let latitude = post.val().latitude;
-            let longitude = post.val().longitude;
-            let content = post.val().organization + ": " + post.val().message;
-            let marker = new google.maps.Marker({
-              map: this.map,
-              animation: google.maps.Animation.DROP,
-              position: { lat: latitude, lng: longitude },
-              title: content
-            })
-      //let content = `<h1>Hospital</h1>`;
-            this.addInfoWindow(marker, content);
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;*/
-            //this.addInfoWindow(marker, content);
-            return false;
-          });
-          this.postList = posts;
-          this.loadedPostList = posts;
-        });
-    /*let marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-      position: { lat: latitude, lng: longitude },
-      //position: { lat: latitude, lng: longitude },
-      title: 'Hospital'
-    })
-    let content = `<h1>Hospital</h1>`;
-    this.addInfoWindow(marker, content);*/
+            else{
+              content2 = content2 + content.substring(0,length) + '<br/>';
+              length = 0;
+            }
+          }
+          let marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: { lat: latitude, lng: longitude },
+            title: content
+          })
+          this.addInfoWindow(marker, content);
+        }
+        return false;
+      });
+      this.postList = posts;
+      this.loadedPostList = posts;
+    });
   }
+
+  //adds the infor window when marker is selected
   addInfoWindow(marker, content) {
     let infoWindow = new google.maps.InfoWindow({
       content: content
