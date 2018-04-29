@@ -154,7 +154,34 @@ userEmail: Observable<any>;
     this.getLatLong(this.addr);
     this.sleep(1000);
     //if lat and long can't be gotten from address...
-    if(this.latitude == 0 && this.longitude == 0){
+    this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
+      console.log('nativeGeocoder:' + coords);
+      this.latitude = parseFloat(coords.latitude);
+      this.longitude = parseFloat(coords.longitude);
+      const item = {
+        message: theirMessage, //works
+        title: theirTitle,     //works
+        timestamp: Date.now() * -1, //works, but needs filtering
+        PostType: this.typeofPost,  //works
+        email: this.email, 
+        organization: this.organization,  
+        ppURL: this.ppURL,  //profile picture url
+        postImgURL: this.postImgURL, //post image url 
+        latitude: parseFloat(this.latitude),
+        longitude: parseFloat(this.longitude),
+        postPhone: this.phone,
+        address: this.addr
+      }
+      this.itemsRef.push(item);
+      //event to notify feed to refresh
+      this.events.publish('user_posted', item);
+
+      this.navCtrl.setRoot(FeedPage); 
+
+    }).catch((err)=> {
+      console.log(err);
+    })
+    /*if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
         title: theirTitle,     //works
@@ -189,7 +216,7 @@ userEmail: Observable<any>;
     //event to notify feed to refresh
     this.events.publish('user_posted', item);
 
-    this.navCtrl.setRoot(FeedPage); 
+    this.navCtrl.setRoot(FeedPage); */
   }
 
 //functions for future adaptation
