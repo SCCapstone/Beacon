@@ -67,8 +67,7 @@ userEmail: Observable<any>;
   longitude;
   assignedlat;
   assignedlong;
-  //setting postImgURL as a defualt blank image
-  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
+  
   public postImgURL = null;
   public ppURL;
 
@@ -89,17 +88,22 @@ userEmail: Observable<any>;
         this.addr2 = userInfo.val().address;
 
      });
-  }
-  //pull profile pick in when page is fully loaded
-  ionViewWillEnter(){
-    var filename = firebase.auth().currentUser.email;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    },
-    (err) => { 
-      this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
-    });
-  }
+
+
+}
+
+
+//pull profile pick in when page is fully loaded
+ionViewDidEnter(){
+  var filename = firebase.auth().currentUser.email;
+  firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
+    this.ppURL = url;
+  },
+  (err) => { 
+   this.ppURL = "assets/imgs/blank-profile-picture.jpg";
+  });
+}
+
 
   //added by Ryan to begin to fix the getUserPosition function. the user's position is asked for once in the feed, once in this constructor, and then everytime 
   assignUserPosition(){
@@ -137,6 +141,7 @@ userEmail: Observable<any>;
       console.log(err);
     })
   }
+
 
   sleep(milliseconds) {
     var start = new Date().getTime();
@@ -223,8 +228,6 @@ userEmail: Observable<any>;
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      //let data = normalizeURL(imageData);
-      //this.postImgURL = data;
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
       let storageRef = firebase.storage().ref();
       const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
@@ -232,6 +235,13 @@ userEmail: Observable<any>;
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
@@ -252,26 +262,15 @@ userEmail: Observable<any>;
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
-/**
-  public uploadPic(){ //uploads image to firebase storage
-    let storageRef = firebase.storage().ref();
-    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  }
-*/
-
-/**
-  //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
-  public getProfilePic(){ 
-    var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    });
-  }
-*/
 
 }
