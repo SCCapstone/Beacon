@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController,AlertController, MenuController } from 'ionic-angular';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
@@ -53,6 +53,17 @@ export class MapPage {
 
       },(err : PositionError)=>{
         console.log("error : " + err.message);
+        let alert = this.alertCtrl.create({
+          title: 'Unable to load map',
+          subTitle: 'Could not find geolocation.',
+          buttons: ['Dismiss']
+        });
+        alert.present();
+      }
+
+
+
+
       ;
       })
     }
