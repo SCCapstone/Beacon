@@ -142,23 +142,54 @@ ionViewDidEnter(){
     })
   }
 
-
-  sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
+  assignUserPosition(){
+    this.assignedlat = this.latitude;
+    this.assignedlong = this.latitude 
+    console.log("assigned long = " + this.assignedlong);      
+    console.log("assigned lat = " + this.assignedlat);
   }
 
-  chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
+
+chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
+   console.log(this.organization);
+   if(this.check > 0){
+   }
+   else{
+    this.latitude = latitude;
+    this.longitude = longitude;
+   }
+   
+   /**
+   let storageRef = firebase.storage().ref();
+   const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
+   const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
+   imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
+  */
+   const item = {
+    message: theirMessage, //works
+    title: theirTitle,     //works
+    timestamp: Date.now() * -1, //works, but needs filtering
+    PostType: this.typeofPost,  //works
+    email: this.email, 
+    organization: this.organization,  
+    ppURL: this.ppURL,  //profile picture url
+    postImgURL: this.postImgURL,   //post image url
+    latitude: parseFloat(this.latitude),
+    longitude: parseFloat(this.longitude),
+   }
+   this.itemsRef.push(item);
+   this.navCtrl.setRoot(FeedPage); 
+}
+
+  /*async chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
     console.log(this.organization);
     this.latitude = 0;
     this.longitude = 0;
     this.addr = address + ", " + city + ", " + state;
     this.getLatLong(this.addr);
-    this.sleep(1000);
+    while(this.latitude == 0 && this.longitude == 0){
+
+    }
     if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
@@ -194,7 +225,7 @@ ionViewDidEnter(){
     this.events.publish('user_posted', item);
 
     this.navCtrl.setRoot(FeedPage); 
-  }
+  }*/
 
 //functions for future adaptation
   updateItem(key: string, newText: string) {
