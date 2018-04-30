@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, MenuController } from 'ionic-angular';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
@@ -39,7 +39,7 @@ export class MapPage {
   //public longitude: number;
 
   constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
-    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation) { 
+    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation, private alertCtrl: AlertController) { 
 
       this.options = {
         enableHighAccuracy : false
@@ -53,6 +53,12 @@ export class MapPage {
 
       },(err : PositionError)=>{
         console.log("error : " + err.message);
+        let alert = this.alertCtrl.create({
+        title: 'Unable to load map',
+        subTitle: 'Could not find geolocation',
+        buttons: ['Dismiss']
+      });
+      alert.present();
       ;
       })
     }
@@ -98,10 +104,11 @@ export class MapPage {
                 posts.push(post.val());
                 let latitude = post.val().latitude;
                 let longitude = post.val().longitude;
-                let content = post.val().message;
-                let content2 = post.val().organization + ": " + '<br/>';
+                //let content = post.val().message;
+                let content2 = post.val().organization + ":" + '<br/>' + post.val().title + '<br/>' + post.val().PostType;
+
+                /*let length = content.length;
                 while(length > 0){
-                  console.log("inside")
                   if(length >= 40){
                     content2 = content2 + content.substring(0,40) + '<br/>';
                     content = content.substring(40,length-1);
@@ -111,14 +118,14 @@ export class MapPage {
                     content2 = content2 + content.substring(0,length) + '<br/>';
                     length = 0;
                   }
-                }
+                }*/
                 let marker = new google.maps.Marker({
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   position: { lat: latitude, lng: longitude },
-                title: content
+                  title: content2
                 })
-                this.addInfoWindow(marker, content);
+                this.addInfoWindow(marker, content2);
       //let content = `<h1>Hospital</h1>`;
                 //this.addInfoWindow(marker, content);
             //latitude = post.val().latitude;
