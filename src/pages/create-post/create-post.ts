@@ -154,12 +154,6 @@ userEmail: Observable<any>;
     //this.getLatLong(this.addr);
     //this.sleep(1000);
     //if lat and long can't be gotten from address...
-    let alert = this.alertCtrl.create({
-        title: 'Posting...',
-        subTitle: '',
-        buttons: ['Dismiss']
-      });
-      alert.present();
     this.nativeGeocoder.forwardGeocode(this.addr).then((coords: NativeGeocoderForwardResult) => {
       console.log('nativeGeocoder:' + coords);
       this.latitude = parseFloat(coords.latitude);
@@ -180,9 +174,6 @@ userEmail: Observable<any>;
       }
       this.itemsRef.push(item);
       //event to notify feed to refresh
-      this.events.publish('user_posted', item);
-
-      this.navCtrl.setRoot(FeedPage); 
 
     }).catch((err)=> {
       let alert = this.alertCtrl.create({
@@ -192,6 +183,9 @@ userEmail: Observable<any>;
       });
       alert.present();
     })
+    this.events.publish('user_posted', item);
+
+    this.navCtrl.setRoot(FeedPage); 
     /*if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
