@@ -115,7 +115,6 @@ ionViewDidEnter(){
 
 
   getUserPosition(){
-    if(this.check == 0){
       this.options = {
       enableHighAccuracy : false
     };
@@ -136,7 +135,7 @@ ionViewDidEnter(){
       alert.present();
     ;
     })
-    }
+    
     this.check = this.check + 1; //Mason this will not work if the user checks the box and then unchecks the box. There is a way to tell whether the box is checked or not. onclick is not the proper function in the html - Ryan
   }
 
@@ -153,7 +152,7 @@ ionViewDidEnter(){
 
  chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
     console.log(this.organization);
-    if(this.check % 2 == 0){
+    if(this.check > 0){
     }
     else{
      this.latitude = latitude;
