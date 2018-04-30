@@ -12,7 +12,7 @@ import { CreatePostPage } from '../pages/create-post/create-post';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
 import { OrgApprovalPage } from '../pages/org-approval/org-approval';
-import { NativeGeocoder, /*NativeGeocoderReverseResult*/, NativeGeocoderForwardResult} from '@ionic-native/native-geocoder';
+import { NativeGeocoder, /*NativeGeocoderReverseResult,*/ NativeGeocoderForwardResult} from '@ionic-native/native-geocoder';
 import { AngularFireModule } from "angularfire2"; //ryan
 import { AngularFireDatabaseModule } from "angularfire2/database"; //ryan
 import { AngularFireAuthModule } from 'angularfire2/auth'; //might need to import AngularFireAuth
