@@ -178,7 +178,7 @@ userEmail: Observable<any>;
     }).catch((err)=> {
       let alert = this.alertCtrl.create({
         title: 'Error!',
-        subTitle: 'We could not find that address.',
+        subTitle: 'Unable to Post. Could not find the address.',
         buttons: ['Dismiss']
       });
       alert.present();
