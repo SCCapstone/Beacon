@@ -157,6 +157,34 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
+  if(!theirTitle){
+        let alert = this.alertCtrl.create({
+        title: 'Message Error',
+        subTitle: 'There is no post title. Please enter a title for your post.',
+        buttons: ['Dismiss']
+        });
+        alert.present();
+        return;
+    }
+    if (!theirMessage){
+        let alert = this.alertCtrl.create({
+        title: 'Message Error',
+        subTitle: 'There is no post message. Please enter content for your post.',
+        buttons: ['Dismiss']
+        });
+        alert.present();
+        return;
+    }
+    if(!this.typeofPost){
+        let alert = this.alertCtrl.create({
+        title: 'Message Error',
+        subTitle: 'There is no post title. Please enter a title for your post.',
+        buttons: ['Dismiss']
+        });
+        alert.present();
+        return;
+    }
+  
    const item = {
     message: theirMessage, //works
     title: theirTitle,     //works
