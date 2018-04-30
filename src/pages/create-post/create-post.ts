@@ -174,6 +174,7 @@ userEmail: Observable<any>;
       }
       this.itemsRef.push(item);
       //event to notify feed to refresh
+      this.events.publish('user_posted', item);
 
     }).catch((err)=> {
       let alert = this.alertCtrl.create({
@@ -183,7 +184,6 @@ userEmail: Observable<any>;
       });
       alert.present();
     })
-    this.events.publish('user_posted', item);
 
     this.navCtrl.setRoot(FeedPage); 
     /*if(this.latitude == 0 && this.longitude == 0){
