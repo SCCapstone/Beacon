@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
 
-import { ListPage } from '../pages/list/list';
+import { MapPage } from '../pages/map/map';
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
 import { AuthProvider } from '../providers/auth/auth';
 import { SettingsPage } from '../pages/settings/settings';
@@ -73,7 +73,7 @@ export class MyApp { //this is template for the root component that is set in mo
 
     this.pages = [
       {title: 'Beacon Feed', component: FeedPage },
-      { title: 'Map', component: ListPage },
+      { title: 'Map', component: MapPage },
     ];
     
     //initialize Firebase with app, angularfiremodule is initialized in module.

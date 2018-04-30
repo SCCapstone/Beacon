@@ -79,22 +79,41 @@
         </ion-option>
       </ion-select>
     </ion-item>
-    <ion-item id="newPost-input13">
-          <ion-label></ion-label>
-          <ion-input type="number" [(ngModel)]="latitude" placeholder="Latitude..."></ion-input>
-        </ion-item>
-    <ion-item id="newPost-input10">
-          <ion-label></ion-label>
-          <ion-input type="number" [(ngModel)]="longitude" placeholder="Longitude..."></ion-input>
-        </ion-item>
-    <ion-item id="newPost-checkbox1">
-      <ion-label>
+
+    <ion-item id="newPost-input25">
+      <ion-label></ion-label>
+      <ion-input type="text" [(ngModel)]="address" placeholder="Address"></ion-input>
+    </ion-item>
+
+    <ion-item id="newPost-input26">
+      <ion-label></ion-label>
+      <ion-input type="text" [(ngModel)]="city" placeholder="City"></ion-input>
+    </ion-item>
+
+    <ion-item id="newPost-input27">
+      <ion-label></ion-label>
+      <ion-input type="text" [(ngModel)]="state" placeholder="State"></ion-input>
+    </ion-item>
+
+    <ion-item id="newPost-input28">
+      <ion-label></ion-label>
+      <ion-input type="number" [(ngModel)]="zipcode" placeholder="Zip Code"></ion-input>
+    </ion-item>
+
+    <ion-item id="newPost-input29">
+      <ion-label></ion-label>
+      <ion-input type="text" [(ngModel)]="country" placeholder="Country"></ion-input>
+    </ion-item>
+
+    <!--  <ion-label> 
         Use Current Location
       </ion-label>
       <ion-checkbox (click)="getUserPosition()"></ion-checkbox>
     </ion-item>
+    
+    -->
     <ion-item>
-      <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend( postTitle, postContent, latitude, longitude)">
+      <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend( postTitle, postContent, address, city, state)">
       Create Post  
       </button>
     </ion-item>
