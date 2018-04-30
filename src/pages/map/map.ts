@@ -116,7 +116,7 @@ export class MapPage {
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   position: { lat: latitude, lng: longitude },
-                title: content
+                  title: content2
                 })
                 this.addInfoWindow(marker, content);
       //let content = `<h1>Hospital</h1>`;
