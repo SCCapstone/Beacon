@@ -176,6 +176,8 @@ userEmail: Observable<any>;
       //event to notify feed to refresh
       this.events.publish('user_posted', item);
 
+      this.navCtrl.setRoot(FeedPage);
+
     }).catch((err)=> {
       let alert = this.alertCtrl.create({
         title: 'Error!',
@@ -185,7 +187,7 @@ userEmail: Observable<any>;
       alert.present();
     })
 
-    this.navCtrl.setRoot(FeedPage); 
+    //this.navCtrl.setRoot(FeedPage); 
     /*if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
