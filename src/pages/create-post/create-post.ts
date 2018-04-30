@@ -151,6 +151,9 @@ userEmail: Observable<any>;
     this.latitude = 0;
     this.longitude = 0;
     this.addr = address + ", " + city + ", " + state;
+    console.log("Testing ChatSend Message, Address:" + address + ", city: " + city + ", state: " + state);
+    console.log("Testing this.addr:" + this.addr);
+
     //this.getLatLong(this.addr);
     //this.sleep(1000);
     //if lat and long can't be gotten from address...
@@ -167,8 +170,8 @@ userEmail: Observable<any>;
         organization: this.organization,  
         ppURL: this.ppURL,  //profile picture url
         postImgURL: this.postImgURL, //post image url 
-        latitude: parseFloat(this.latitude),
-        longitude: parseFloat(this.longitude),
+        latitude: this.latitude,
+        longitude: this.longitude,
         postPhone: this.phone,
         address: this.addr
       }
