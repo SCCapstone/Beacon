@@ -6,20 +6,11 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import firebase from 'firebase';
-import { AngularFireModule } from "angularfire2" //ryan
 
-import { ListPage } from '../pages/list/list';
-
-//import { LoginPage } from '../pages/login/login'; // added by Amanda
-import { OrgSignupPage } from '../pages/org-signup/org-signup'; // added by Amanda
+import { MapPage } from '../pages/map/map';
 import { FeedPage } from '../pages/feed/feed'; // added by Ryan
-//import { CreatePostPage } from '../pages/create-post/create-post';
-import { SignupChoicePage } from '../pages/signup-choice/signup-choice';
-
 import { AuthProvider } from '../providers/auth/auth';
-import { UserSignupPage } from '../pages/user-signup/user-signup';
 import { SettingsPage } from '../pages/settings/settings';
-import { OrgApprovalPage } from '../pages/org-approval/org-approval';
 
 
 
@@ -82,7 +73,7 @@ export class MyApp { //this is template for the root component that is set in mo
 
     this.pages = [
       {title: 'Beacon Feed', component: FeedPage },
-      { title: 'Map', component: ListPage },
+      { title: 'Map', component: MapPage },
     ];
     
     //initialize Firebase with app, angularfiremodule is initialized in module.
@@ -96,8 +87,6 @@ export class MyApp { //this is template for the root component that is set in mo
           this.rootPage = FeedPage;
           this.normalUser = user.providerData[0].providerId != "facebook.com";
 
-         
-          var email = user.email;
         }
       });
     });

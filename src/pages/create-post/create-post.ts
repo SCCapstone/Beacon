@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, MenuController, LoadingController, Events } from 'ionic-angular';
 //import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,12 +7,9 @@ import firebase from 'firebase';
 //import {firebase} from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { FeedPage } from '../feed/feed';
-import { LocationProvider } from '../../providers/location/location';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
-
-import { storage } from 'firebase'; //added 3/31 by amanda
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult} from '@ionic-native/native-geocoder';
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
-import { normalizeURL } from 'ionic-angular';
 
 /**
  * Generated class for the CreatePostPage page.
@@ -21,9 +18,6 @@ import { normalizeURL } from 'ionic-angular';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-declare var google;
-
 @IonicPage()
 @Component({
   selector: 'page-create-post',
@@ -60,7 +54,8 @@ userEmail: Observable<any>;
   public username;
   public email;
   public phone;
-  public address;
+  public addr;
+  public addr2;
 
   public organizationForm;
   public userForm;
@@ -72,14 +67,13 @@ userEmail: Observable<any>;
   longitude;
   assignedlat;
   assignedlong;
-  //setting postImgURL as a defualt blank image
-  //public postImgURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/images%2FBlank.jpg?alt=media&token=0d5f1c31-a1e2-45a1-91d3-fac8af207813"; //the image in the content of the post
+  
   public postImgURL = null;
   public ppURL;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
-   private fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController, private locationProvider : LocationProvider,
-   public camera: Camera, public loadingCtrl: LoadingController) {
+  constructor(public events: Events, public menuCtrl: MenuController, public navCtrl: NavController, private geolocation: Geolocation,  public navParams: NavParams, 
+   public fdb: AngularFireDatabase,afAuth: AngularFireAuth, public alertCtrl: AlertController,
+   public camera: Camera, public loadingCtrl: LoadingController, public nativeGeocoder: NativeGeocoder) {
   
     this.UID = firebase.auth().currentUser.uid
     this.currentUserDB = firebase.database().ref('/userProfile/'+ this.UID);
@@ -91,47 +85,25 @@ userEmail: Observable<any>;
         this.email = userInfo.val().email;
         this.phone = userInfo.val().phone;
         this.organization = userInfo.val().organization;
-        this.address = userInfo.val().address;
+        this.addr2 = userInfo.val().address;
 
      });
-    this.options = {
-        enableHighAccuracy : false
-      };
-      this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
 
-          this.currentPos = pos;     
-          this.latitude = pos.coords.latitude;
-          this.longitude = pos.coords.longitude; 
-          console.log(pos + "constructor function");
-          console.log("constructor lat = " + this.latitude);
-          console.log("constuctor long = " + this.longitude);
-      },(err : PositionError)=>{
-          console.log("error : " + err.message);
-      ;
-      })
-    /*Mason I coded this function out because it was returning an error everytime the page loaded. "Uncaught (in promise): [object PositionError]" -Ryan  
-     this.options = {
-        enableHighAccuracy: false
-       };
-    this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-      this.currentPos = pos;
-      console.log(pos);
-      //this.chatSend(theirTitle, theirMessage, pos.coords.latitude, pos.coords.longitude, theirImage, theirUser, userImageSrc);
-    })*/
 
 }
 
 
 //pull profile pick in when page is fully loaded
-ionViewWillEnter(){
+ionViewDidEnter(){
   var filename = firebase.auth().currentUser.email;
   firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
     this.ppURL = url;
   },
   (err) => { 
-    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+   this.ppURL = "assets/imgs/blank-profile-picture.jpg";
   });
 }
+
 
   //added by Ryan to begin to fix the getUserPosition function. the user's position is asked for once in the feed, once in this constructor, and then everytime 
   assignUserPosition(){
@@ -147,24 +119,31 @@ ionViewWillEnter(){
     enableHighAccuracy : false
     };
     this.geolocation.getCurrentPosition(this.options).then((pos : Geoposition) => {
-
-        this.currentPos = pos;
-        this.latitude = pos.coords.latitude;
-        this.longitude = pos.coords.longitude;    
-
-        console.log(pos + "getUserPostion function");
-        console.log(this.latitude);
-        console.log(this.longitude);
+      this.currentPos = pos;
+      this.latitude = pos.coords.latitude;
+      this.longitude = pos.coords.longitude;    
+      console.log(pos + "getUserPostion function");
+      console.log(this.latitude);
+      console.log(this.longitude);
     },(err : PositionError)=>{
-        console.log("error : " + err.message);
+      console.log("error : " + err.message);
     ;
     })
     this.check = 1; //Mason this will not work if the user checks the box and then unchecks the box. There is a way to tell whether the box is checked or not. onclick is not the proper function in the html - Ryan
+  }
 
+  getLatLong(addr){
+    this.nativeGeocoder.forwardGeocode(addr).then((coords: NativeGeocoderForwardResult) => {
+      console.log('nativeGeocoder:' + coords);
+      this.latitude = parseFloat(coords.latitude);
+      this.longitude = parseFloat(coords.longitude);
+    }).catch((err)=> {
+      console.log(err);
+    })
   }
 
 chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
- 	 console.log(this.organization);
+   console.log(this.organization);
    if(this.check > 0){
    }
    else{
@@ -179,9 +158,9 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
   */
    const item = {
- 		message: theirMessage, //works
- 		title: theirTitle,     //works
- 		timestamp: Date.now() * -1, //works, but needs filtering
+    message: theirMessage, //works
+    title: theirTitle,     //works
+    timestamp: Date.now() * -1, //works, but needs filtering
     PostType: this.typeofPost,  //works
     email: this.email, 
     organization: this.organization,  
@@ -189,13 +168,59 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
     postImgURL: this.postImgURL,   //post image url
     latitude: parseFloat(this.latitude),
     longitude: parseFloat(this.longitude),
- 	 }
+   }
    this.itemsRef.push(item);
    this.navCtrl.setRoot(FeedPage); 
 }
 
+  /*async chatSend(theirTitle: string, theirMessage: string, address: string, city: string, state: string) {
+    console.log(this.organization);
+    this.latitude = 0;
+    this.longitude = 0;
+    this.addr = address + ", " + city + ", " + state;
+    this.getLatLong(this.addr);
+    while(this.latitude == 0 && this.longitude == 0){
+
+    }
+    if(this.latitude == 0 && this.longitude == 0){
+      const item = {
+        message: theirMessage, //works
+        title: theirTitle,     //works
+        timestamp: Date.now() * -1, //works, but needs filtering
+        PostType: this.typeofPost,  //works
+        email: this.email, 
+        organization: this.organization,  
+        ppURL: this.ppURL,  //profile picture url
+        postImgURL: this.postImgURL, //post image url 
+        postPhone: this.phone,
+        address: this.addr
+      }
+    }
+    else{
+      const item = {
+        message: theirMessage, //works
+        title: theirTitle,     //works
+        timestamp: Date.now() * -1, //works, but needs filtering
+        PostType: this.typeofPost,  //works
+        email: this.email, 
+        organization: this.organization,  
+        ppURL: this.ppURL,  //profile picture url
+        postImgURL: this.postImgURL, //post image url 
+        latitude: parseFloat(this.latitude),
+        longitude: parseFloat(this.longitude),
+        postPhone: this.phone,
+        address: this.addr
+      }
+    }
+    this.itemsRef.push(item);
+    //event to notify feed to refresh
+    this.events.publish('user_posted', item);
+
+    this.navCtrl.setRoot(FeedPage); 
+  }*/
+
 //functions for future adaptation
- updateItem(key: string, newText: string) {
+  updateItem(key: string, newText: string) {
     this.itemsRef.update(key, { text: newText });
   }
   deleteItem(key: string) {    
@@ -226,8 +251,6 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
         correctOrientation: true 
     }
     this.camera.getPicture(options).then((imageData) => { 
-      //let data = normalizeURL(imageData);
-      //this.postImgURL = data;
       this.postImgURL = 'data:image/jpeg;base64,' + imageData;
       let storageRef = firebase.storage().ref();
       const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
@@ -235,6 +258,13 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
@@ -255,26 +285,15 @@ chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longit
       imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
     },
     (err) => {
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
   }
 
-/**
-  public uploadPic(){ //uploads image to firebase storage
-    let storageRef = firebase.storage().ref();
-    const filename = Date.now() * -1; //naming the file to match the current time stamp so it can match post
-    const imageRef = storageRef.child('images/' + filename + '.jpg'); //places picture ref in folder of profile pics with UID as name of file
-    imageRef.putString(this.postImgURL, firebase.storage.StringFormat.DATA_URL);
-  }
-*/
-
-/**
-  //WORKING! Pulls url in storage and places it in ppURL variable, now working on placing function call somewhere to call when page loads
-  public getProfilePic(){ 
-    var filename = this.UID;
-    firebase.storage().ref().child('/profilePics/' + filename +'.jpg').getDownloadURL().then((url)=>{
-      this.ppURL = url;
-    });
-  }
-*/
 
 }

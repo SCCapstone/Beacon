@@ -50,13 +50,13 @@
           </button>
       </ion-item>
       <ion-item>
-          <img *ngIf="postImageURL != false" src = "{{ postImgURL }}" width="200" height="300" >  <!--to disply photo-->
+            <img *ngIf="postImgURL" src="{{postImgURL}}" height ="300" width="240" > 
       </ion-item>
-  
+  <!--
       <ion-item color="none" >
           <button ion-button block color="positive"  *ngIf="postImageURL != false"  (click)="uploadPic()"> Upload Photo </button>
       </ion-item>
-  
+  -->
     </ion-list>
   </ion-card>
   <!--<form id="newPost-form13">-->
@@ -79,20 +79,24 @@
         </ion-option>
       </ion-select>
     </ion-item>
-    <ion-item id="newPost-input13">
-          <ion-label></ion-label>
-          <ion-input type="number" [(ngModel)]="latitude" placeholder="Latitude..."></ion-input>
-        </ion-item>
-    <ion-item id="newPost-input10">
-          <ion-label></ion-label>
-          <ion-input type="number" [(ngModel)]="longitude" placeholder="Longitude..."></ion-input>
-        </ion-item>
-    <ion-item id="newPost-checkbox1">
-      <ion-label>
+
+    <ion-item id="newPost-input28">
+      <ion-label></ion-label>
+      <ion-input type="number" [(ngModel)]="latitude" placeholder="Latitude"></ion-input>
+    </ion-item>
+
+    <ion-item id="newPost-input29">
+      <ion-label></ion-label>
+      <ion-input type="number" [(ngModel)]="longitude" placeholder="Longitude"></ion-input>
+    </ion-item>
+
+    <!--  <ion-label> 
         Use Current Location
       </ion-label>
       <ion-checkbox (click)="getUserPosition()"></ion-checkbox>
     </ion-item>
+    
+    -->
     <ion-item>
       <button id="newPost-button9" ion-button block color="positive"  (click)="chatSend( postTitle, postContent, latitude, longitude)">
       Create Post  

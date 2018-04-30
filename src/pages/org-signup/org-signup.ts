@@ -6,7 +6,6 @@ import { EmailValidator } from '../../validators/email';
 import { PasswordValidator } from '../../validators/password';
 import { FeedPage } from '../feed/feed';
 
-import { storage, initializeApp } from 'firebase'; //added 3/31 by amanda
 import { Camera , CameraOptions} from '@ionic-native/camera'; //added 3/31 by Amanda
 import firebase from 'firebase';
 
@@ -40,7 +39,7 @@ export class OrgSignupPage {
   	  organization: ['', Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      phone: ['', Validators.compose([Validators.minLength(9), Validators.required])],
+      phone: ['', Validators.compose([Validators.minLength(10), Validators.maxLength(10), Validators.required])],
       address: ['', Validators.required],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(6), Validators.required, PasswordValidator.passwordsMatch])]
@@ -48,11 +47,9 @@ export class OrgSignupPage {
 
   }
 
-
-
   //pull profile pick in when page is fully loaded
-  ionViewDidEnter(){
-    this.ppURL = "https://firebasestorage.googleapis.com/v0/b/beacon-7a98f.appspot.com/o/profilePics%2Fblank-profile-picture.jpg?alt=media&token=831ee3b5-7941-4aa0-a07d-8b736967fa85";
+  ionViewWillEnter(){
+   this.ppURL = "assets/imgs/blank-profile-picture.jpg";
   }
 
 
@@ -63,6 +60,19 @@ export class OrgSignupPage {
 
   signupOrganization(){
     if (!this.signupForm.valid){
+      //user feed back
+      if (this.signupForm.value.name == '' || this.signupForm.value.email == '' || 
+        this.signupForm.value.phone == '' || this.signupForm.value.password == '' || this.signupForm.value.organization == '' ||
+        this.signupForm.value.address == ''
+        ){
+        let alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'We are still missing some of your infomation. Please make sure to provide all of the information in order to sign up.',
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+      }
+
       console.log(this.signupForm.value);
     } else {
 
@@ -118,9 +128,14 @@ export class OrgSignupPage {
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
-      // Handle error
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
-   
   }
 
 
@@ -132,7 +147,6 @@ export class OrgSignupPage {
         saveToPhotoAlbum: false,
         correctOrientation: true 
     }
-    
     // code modified from ionic documentation and Maballo Net: pick from gallary
     this.camera.getPicture(options).then((imageData) => { 
       this.capturedDataURL = 'data:image/jpeg;base64,' + imageData;
@@ -144,11 +158,15 @@ export class OrgSignupPage {
       this.ppURL = this.capturedDataURL;//updates photo url to new photo url
     },
     (err) => {
-      // Handle error
+      //user feed back
+      let alert = this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'There was a problem uplaoding you picture. Please try again.',
+        buttons: ['Dismiss']
+      });
+      alert.present();
     });
-   
   }
-
 
 
 }

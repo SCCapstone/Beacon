@@ -1,26 +1,21 @@
-import { Component, ViewChild, ElementRef, Pipe } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation'; 
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher, AlertController } from 'ionic-angular';
-
-import { CreatePostPage } from '../create-post/create-post';
-import {LoginPage} from '../login/login';
-import {SearchPage} from '../search/search';
-import {OrgApprovalPage} from '../org-approval/org-approval';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController } from 'ionic-angular';
 
 //import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
+import { AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
 import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
-import LocationProvider from '../../providers/location/location';
 
 declare var google;
 
+@IonicPage()
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-map',
+  templateUrl: 'map.html'
 })
-export class ListPage {
+export class MapPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -43,52 +38,9 @@ export class ListPage {
   //public latitude: number;
   //public longitude: number;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
-    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private alertCtrl: AlertController, private geolocation : Geolocation) { 
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
+    public authProvider: AuthProvider, public loadingCtrl: LoadingController, private geolocation : Geolocation) { 
 
-    /*this.menuCtrl.enable(true, 'navMenu');
-
-    var UID = firebase.auth().currentUser.uid;
-      var currentUserDB = firebase.database().ref('/userProfile/'+ UID);
-      currentUserDB.once('value', userInfo => {
-          var organization = userInfo.val().organization;
-          var approvedOrg = userInfo.val().approved;
-          var admin = userInfo.val().username;
-          if(organization != null )
-        {
-            this.isOrganization = true;
-            this.isUser = false;
-        }
-        if(approvedOrg == "approved"){
-          this.isApprovedOrg = true;
-          this.isOrganization = false;
-        }
-        if(admin == "Ryan Roe")
-        {
-            this.isAdmin = true;
-        }
-      });*/
-
-      //this.itemsRef = fdb.list('/messages');
-      //this.items = this.itemsRef.valueChanges(); //valueChanges returns an observable which is necessary for async
-      /*this.postRef = firebase.database().ref('/messages').orderByChild('timestamp'); //creating a database reference
-
-      this.postRef.limitToFirst(this.postsToLoad).once('value', postList => {
-          let posts = [];
-          postList.forEach( post => {
-            posts.push(post.val());
-            this.latitude = post.val().latitude;
-            this.longitude = post.val().longitude;
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-            //latitude = post.val().latitude;
-            //longitude = post.val().longitude;
-            return false;
-          });
-          this.postList = posts;
-          this.loadedPostList = posts;
-        });
-      */
       this.options = {
         enableHighAccuracy : false
       };
@@ -146,12 +98,25 @@ export class ListPage {
                 posts.push(post.val());
                 let latitude = post.val().latitude;
                 let longitude = post.val().longitude;
-                let content = post.val().organization + ": " + post.val().message;
+                let content = post.val().message;
+                let content2 = post.val().organization + ": " + '<br/>';
+                while(length > 0){
+                  console.log("inside")
+                  if(length >= 40){
+                    content2 = content2 + content.substring(0,40) + '<br/>';
+                    content = content.substring(40,length-1);
+                    length = length-40; 
+                  }
+                  else{
+                    content2 = content2 + content.substring(0,length) + '<br/>';
+                    length = 0;
+                  }
+                }
                 let marker = new google.maps.Marker({
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   position: { lat: latitude, lng: longitude },
-                title: content
+                  title: content2
                 })
                 this.addInfoWindow(marker, content);
       //let content = `<h1>Hospital</h1>`;

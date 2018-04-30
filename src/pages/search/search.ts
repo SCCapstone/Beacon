@@ -1,11 +1,8 @@
-import { Component, Pipe } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, MenuController, Refresher  } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, LoadingController, MenuController  } from 'ionic-angular';
 
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database"; //apparently AngularFire has been outdated
-import { Observable } from 'rxjs/Observable';
 import { AuthProvider } from '../../providers/auth/auth';
 import firebase from 'firebase';
-import LocationProvider from '../../providers/location/location';
 
 /**
  * Generated class for the SearchPage page.
@@ -28,7 +25,7 @@ export class SearchPage {
 	public postsToLoad: number = 10;
 	public isOrganization;
 
-  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, private fdb: AngularFireDatabase, 
+  constructor(public menuCtrl: MenuController, public navCtrl: NavController, public navParams: NavParams, 
 		public authProvider: AuthProvider, public loadingCtrl: LoadingController) {
 
   	this.postRef = firebase.database().ref('/messages').orderByChild('timestamp');
