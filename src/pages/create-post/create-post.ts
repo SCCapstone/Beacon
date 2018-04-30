@@ -154,8 +154,8 @@ userEmail: Observable<any>;
     this.addr = address + ", " + city + ", " + state;
     this.getLatLong(this.addr);
     this.sleep(1000);
-    if(this.latitude == 0 && this.longitude == 0){
-      const item = {
+    item;
+    const item = {
         message: theirMessage, //works
         title: theirTitle,     //works
         timestamp: Date.now() * -1, //works, but needs filtering
@@ -167,8 +167,7 @@ userEmail: Observable<any>;
         postPhone: this.phone,
         address: this.addr
       }
-    }
-    else{
+    if(this.latitude == 0 && this.longitude == 0){
       const item = {
         message: theirMessage, //works
         title: theirTitle,     //works
