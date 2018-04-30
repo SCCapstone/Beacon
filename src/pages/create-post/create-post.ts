@@ -142,14 +142,6 @@ ionViewDidEnter(){
     })
   }
 
-  assignUserPosition(){
-    this.assignedlat = this.latitude;
-    this.assignedlong = this.latitude 
-    console.log("assigned long = " + this.assignedlong);      
-    console.log("assigned lat = " + this.assignedlat);
-  }
-
-
 chatSend(theirTitle: string, theirMessage: string, latitude: Geoposition, longitude: Geoposition) {
    console.log(this.organization);
    if(this.check > 0){
