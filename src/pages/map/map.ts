@@ -118,7 +118,7 @@ export class MapPage {
                   position: { lat: latitude, lng: longitude },
                   title: content2
                 })
-                this.addInfoWindow(marker, content);
+                this.addInfoWindow(marker, content2);
       //let content = `<h1>Hospital</h1>`;
                 //this.addInfoWindow(marker, content);
             //latitude = post.val().latitude;
